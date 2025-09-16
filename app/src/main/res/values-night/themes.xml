@@ -1,7 +1,94 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.FinanceTrackerApplication" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Base.Theme.FinanceTrackerApplication" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+
+    <style name="Theme.FinanceTrackerApplication" parent="Base.Theme.FinanceTrackerApplication" />
+
+
+    <!-- 🔹 Heading / Title -->
+    <style name="TextHeadingAppBarTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_heading</item>
+    </style>
+
+    <style name="TextSectionTitle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_section_title</item>
+    </style>
+
+    <style name="TextCardTitle" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_card_title</item>
+    </style>
+
+    <!-- 🔹 Body Text -->
+    <style name="TextBodyMain" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_body</item>
+    </style>
+
+    <style name="TextBodySecondary" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!-- 🔹 Data Angka -->
+    <style name="TextSaldoUtama" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_balance</item>
+    </style>
+
+    <style name="TextNominalTransaksi" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_income</item>
+    </style>
+
+    <style name="TextDetailKecil" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_detail</item>
+    </style>
+
+    <!-- 🔹 Button / Action -->
+    <style name="TextButtonPrimary" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_button_primary</item>
+    </style>
+
+    <style name="TextButtonSecondary" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_button_secondary</item>
+    </style>
+
+    <!-- 🔹 Form -->
+    <style name="TextFormLabel" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_form_label</item>
+    </style>
+
+    <style name="TextFormInput" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_form_input</item>
+    </style>
+
+    <style name="TextFormHint" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_form_hint</item>
+    </style>
+
+
+    <!--    ICON 24 DP-->
+    <style name="Icon24dp">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+    </style>
+
 </resources>

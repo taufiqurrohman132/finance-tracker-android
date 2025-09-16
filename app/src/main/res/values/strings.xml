@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">FinanceTrackerApplication</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
+    <string name="bookmark">bookmark\n</string>
+
+    <string name="web_client_id">342754437727-iarsc7ss50onc50ca44gi4rtjisbv4p0.apps.googleusercontent.com</string>
+    <string name="settings">Settings</string>
+    <string name="transaksi">Transaksi</string>
+    <string name="next">next</string>
+    <string name="tampilan">Tampilan</string>
+    <string name="bahasa">Bahasa</string>
+    <string name="notifikasi">Notifikasi</string>
+    <string name="informasi_amp_dukungan">Informasi &amp; Dukungan</string>
+    <string name="hapus_cache">Hapus Cache</string>
+    <string name="bantuan_amp_dukungan"><![CDATA[Bantuan & Dukungan]]></string>
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="preferensi_aplikasi">Preferensi Aplikasi</string>
 </resources>

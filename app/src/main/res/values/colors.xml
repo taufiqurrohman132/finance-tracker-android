@@ -1,5 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
+       Ukuran + 🎨 Warna Teks Fintech
+    🔹 Heading / Title
+    Ukuran: 20sp – 22sp
+    Warna: Hitam pekat (#000000) atau Dark Gray (#212121 / #1C1C1C)
+    🔹 Section Title / Judul Halaman / Kategori
+    Ukuran: 18sp – 20sp
+    Warna: Hitam pekat (#000000)
+    🔹 Card / List Title
+    Ukuran: 16sp – 18sp
+    Warna: Hitam pekat (#212121)
+    🔹 Body utama (deskripsi / teks isi)
+    Ukuran: 14sp – 16sp
+    Warna: Abu-abu gelap (#333333 / #424242)
+    🔹 Secondary text / Keterangan tambahan
+    Ukuran: 12sp – 14sp
+    Warna: Abu-abu medium (#666666 / #757575)
+    🔹 Data angka penting (Saldo utama, angka besar)
+    Ukuran: 22sp – 28sp (tebal / bold)
+    Warna:
+    Default → Hitam pekat (#000000)
+    Bisa pakai warna brand → contoh: Biru DANA (#108EE9), Hijau OVO (#00A859)
+    🔹 Nominal transaksi dalam list
+    Ukuran: 16sp – 18sp
+    Warna:
+    Hijau (#2E7D32 / #4CAF50) → untuk pemasukan
+    Merah (#C62828 / #E53935) → untuk pengeluaran
+    Style: Medium / Semi-bold
+    🔹 Detail kecil (tanggal, catatan transaksi)
+    Ukuran: 12sp – 14sp
+    Warna: Abu-abu terang (#9E9E9E / #B0B0B0)
+    🔹 Button text (CTA, contoh: "Transfer", "Bayar")
+    Ukuran: 14sp – 16sp (Bold)
+    Warna: Putih (#FFFFFF) di atas background brand
+    🔹 Secondary button / Link kecil
+    Ukuran: 12sp – 14sp
+    Warna: Warna brand (misal biru, hijau, ungu)
+    🔹 Form (label & input text)
+    Label
+    Ukuran: 12sp – 14sp
+    Warna: Abu-abu medium (#757575)
+    Input text (yang diketik user)
+    Ukuran: 14sp – 16sp
+    Warna: Hitam pekat (#212121)
+    Hint text (placeholder)
+    Ukuran: 12sp – 14sp
+    Warna: Abu-abu terang (#9E9E9E)-->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="color_primary">#2383FC</color> <!-- contoh biru DANA -->
+    <color name="color_primary_gradiant">#442DB2</color>
+<!--    <color name="color_primary_dark">#0D6EBD</color> &lt;!&ndash; lebih gelap &ndash;&gt;-->
+<!--    <color name="color_primary_light">#64B5F6</color> &lt;!&ndash; lebih terang &ndash;&gt;-->
+
+    <!-- 🔹 Heading / Title -->
+    <color name="text_heading">#000000</color>
+    <color name="text_heading_dark">#212121</color>
+    <color name="text_heading_alt">#1C1C1C</color>
+
+    <!-- 🔹 Section Title -->
+    <color name="text_section_title">#000000</color>
+
+    <!-- 🔹 Card / List Title -->
+    <color name="text_card_title">#212121</color>
+
+    <!-- 🔹 Body utama -->
+    <color name="text_body">#333333</color>
+    <color name="text_body_alt">#424242</color>
+
+    <!-- 🔹 Secondary text -->
+    <color name="text_secondary">#666666</color>
+    <color name="text_secondary_alt">#757575</color>
+
+    <!-- 🔹 Data angka penting -->
+    <color name="text_balance">#000000</color>
+    <color name="text_balance_dana">#108EE9</color>
+    <color name="text_balance_ovo">#00A859</color>
+
+    <!-- 🔹 Nominal transaksi -->
+    <color name="text_income">#2E7D32</color>
+    <color name="text_income_alt">#4CAF50</color>
+    <color name="text_expense">#C62828</color>
+    <color name="text_expense_alt">#E53935</color>
+
+    <!-- 🔹 Detail kecil -->
+    <color name="text_detail">#9E9E9E</color>
+    <color name="text_detail_alt">#B0B0B0</color>
+
+    <!-- 🔹 Button -->
+    <color name="text_button_primary">#FFFFFF</color>
+    <color name="text_button_secondary">#108EE9</color> <!-- contoh biru brand -->
+
+    <!-- 🔹 Form -->
+    <color name="text_form_label">#757575</color>
+    <color name="text_form_input">#212121</color>
+    <color name="text_form_hint">#9E9E9E</color>
+
+
 </resources>
