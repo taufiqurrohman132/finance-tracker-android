@@ -27,8 +27,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
@@ -63,7 +65,7 @@ class SettingsFragment : Fragment() {
     private fun setupListener(){
         binding.btnSignin.setOnClickListener { signIn() }
 
-        binding.btnLogout.setOnClickListener {  }
+        binding.btnLogout.setOnClickListener { viewModel.logout() }
     }
 
     private fun signIn() {

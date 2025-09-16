@@ -7,5 +7,4 @@ interface AuthRepository {
     suspend fun isUserLoggedIn(): Boolean
     suspend fun isAnonymousUser(): Boolean
     fun signOut()
-
 }

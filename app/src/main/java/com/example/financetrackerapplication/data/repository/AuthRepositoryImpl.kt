@@ -4,13 +4,14 @@ import android.util.Log
 import com.example.financetrackerapplication.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class AuthRepositoryImpl(
+class AuthRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : AuthRepository {
 
     override suspend fun signInAnonymously(): Result<Unit> = try {
-        Lzog.d("AuthRepository", "Mulai login anonymous...")
+        Log.d("AuthRepository", "Mulai login anonymous...")
         firebaseAuth.signInAnonymously().await()
         Log.d("AuthRepository", "Berhasil login anonymous")
         Result.success(Unit)
