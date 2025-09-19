@@ -5,7 +5,7 @@ import com.example.financetrackerapplication.domain.repository.AuthRepository
 
 class SignInAnonymouslyUseCase(private val repo: AuthRepository) {
     suspend operator fun invoke(): Result<Unit> {
-        Log.d("SignInAnonUseCase", "Menjalankan use case login anonymous")
+        Log.d("SignInAnonUseCase",   "Menjalankan use case login anonymous")
         return repo.signInAnonymously()
     }
 }

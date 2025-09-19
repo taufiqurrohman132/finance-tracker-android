@@ -1,8 +1,8 @@
 package com.example.financetrackerapplication.ui.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +12,19 @@ import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
 import androidx.credentials.exceptions.GetCredentialException
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.financetrackerapplication.R
-import com.example.financetrackerapplication.databinding.FragmentDashboardBinding
+import com.example.financetrackerapplication.databinding.BottomSheetAuthLayoutBinding
 import com.example.financetrackerapplication.databinding.FragmentSettingsBinding
 import com.example.financetrackerapplication.domain.model.UserStatus
+import com.example.financetrackerapplication.ui.auth.SignInLinkEmailActivity
+import com.example.financetrackerapplication.utils.Extention.setupStyle
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Firebase
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
@@ -53,22 +57,36 @@ class SettingsFragment : Fragment() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
+        initView()
         setupListener()
         observer()
 
     }
 
-    private fun initView(){
-
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
-    private fun setupListener(){
-        binding.btnSignin.setOnClickListener { signIn() }
+
+    private fun initView() {
+        viewModel.loadUserStatus()
+        viewModel.loginGuest()
+    }
+
+    private fun setupListener() {
+        binding.btnSignin.setOnClickListener { showRegisterOptions() }
 
         binding.btnLogout.setOnClickListener { viewModel.logout() }
+
+        binding.btnGuest.setOnClickListener {
+            val intent = Intent(requireActivity(), SignInLinkEmailActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    private fun signIn() {
+    private fun signInWithGoogle() {
+        // UI dialog untuk pilih akun Google, passkey, atau password.
         val credentialManager = CredentialManager.create(requireContext())
 
         val googleIdOption = GetGoogleIdOption.Builder()
@@ -86,22 +104,23 @@ class SettingsFragment : Fragment() {
                     request = request,
                     context = requireContext()
                 )
-                handleSignIn(result)
+                handleSignInWithGoogle(result)
             } catch (e: GetCredentialException) { //import from androidx.CredentialManager
                 Log.d("Error", e.message.toString())
             }
         }
     }
 
-    private fun handleSignIn(result: GetCredentialResponse) {
-        when(val credential = result.credential){
+    private fun handleSignInWithGoogle(result: GetCredentialResponse) {
+        when (val credential = result.credential) {
             is CustomCredential -> {
                 if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
                     // Process Login dengan Firebase Auth
                     try {
-                        val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
-                        firebaseAuthWithGoogle(googleIdTokenCredential.idToken)
-                    }catch (e: GoogleIdTokenParsingException) {
+                        val googleIdTokenCredential =
+                            GoogleIdTokenCredential.createFrom(credential.data)
+                        viewModel.signInWithGoogle(googleIdTokenCredential.idToken)
+                    } catch (e: GoogleIdTokenParsingException) {
                         Log.e(TAG, "Received an invalid google id token response", e)
                     }
                 } else {
@@ -109,6 +128,7 @@ class SettingsFragment : Fragment() {
                     Log.e(TAG, "Unexpected type of credential")
                 }
             }
+
             else -> {
                 // Catch any unrecognized credential type here.
                 Log.e(TAG, "Unexpected type of credential")
@@ -116,36 +136,23 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun observer(){
+    private fun observer() {
         // perubahan status user
-        viewModel.userStatus.observe(viewLifecycleOwner){ status ->
+        viewModel.userStatus.observe(viewLifecycleOwner) { status ->
             when (status) {
                 UserStatus.LoggedOut -> {
                     Log.d("SettingsActivity", "UI update: Belum login")
                 }
+
                 UserStatus.Guest -> {
                     Log.d("SettingsActivity", "UI update: Guest")
                 }
+
                 UserStatus.LoggedIn -> {
                     Log.d("SettingsActivity", "UI update: Logged-in")
                 }
             }
         }
-    }
-
-    private fun firebaseAuthWithGoogle(idToken: String){
-        val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(requireActivity()) {task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithCredential:success")
-                    val user: FirebaseUser? = auth.currentUser
-                    updateUI(user)
-                } else {
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    updateUI(null)
-                }
-            }
     }
 
     private fun updateUI(currentUser: FirebaseUser?) {
@@ -154,12 +161,34 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    private fun showRegisterOptions() {
+        val bottomSheetDialog = BottomSheetDialog(requireActivity())
+        val bindingBottomSheet = BottomSheetAuthLayoutBinding.inflate(layoutInflater)
+        bottomSheetDialog.apply {
+            setContentView(bindingBottomSheet.root)
+            setupStyle(16, 16, 16)// setup radius
+            show()
+        }
+        Log.d("Auth", "Show register opstions")
+
+        bindingBottomSheet.apply {
+            bottsheetWithGoogle.setOnClickListener {
+                Log.d("Auth", "Login dengan Google dipilih")
+                signInWithGoogle()
+                bottomSheetDialog.dismiss()
+            }
+            bottsheetWithEmailPass.setOnClickListener {
+                Log.d("Auth", "Login dengan Email dipilih")
+                bottomSheetDialog.dismiss()
+            }
+            bottsheetWithPasskey.setOnClickListener {
+                Log.d("Auth", "Login dengan Email dipilih")
+                bottomSheetDialog.dismiss()
+            }
+        }
     }
 
-    companion object{
+    companion object {
         private val TAG = SettingsFragment::class.java.simpleName
     }
 }
