@@ -26,10 +26,8 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Firebase
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -70,8 +68,7 @@ class SettingsFragment : Fragment() {
 
 
     private fun initView() {
-        viewModel.loadUserStatus()
-        viewModel.loginGuest()
+//        viewModel.loginGuest()
     }
 
     private fun setupListener() {
@@ -80,8 +77,7 @@ class SettingsFragment : Fragment() {
         binding.btnLogout.setOnClickListener { viewModel.logout() }
 
         binding.btnGuest.setOnClickListener {
-            val intent = Intent(requireActivity(), SignInLinkEmailActivity::class.java)
-            startActivity(intent)
+
         }
     }
 
@@ -144,7 +140,7 @@ class SettingsFragment : Fragment() {
                     Log.d("SettingsActivity", "UI update: Belum login")
                 }
 
-                UserStatus.Guest -> {
+                UserStatus.Anonymous -> {
                     Log.d("SettingsActivity", "UI update: Guest")
                 }
 
@@ -183,6 +179,8 @@ class SettingsFragment : Fragment() {
             }
             bottsheetWithPasskey.setOnClickListener {
                 Log.d("Auth", "Login dengan Email dipilih")
+                val intent = Intent(requireActivity(), SignInLinkEmailActivity::class.java)
+                startActivity(intent)
                 bottomSheetDialog.dismiss()
             }
         }

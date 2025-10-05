@@ -49,8 +49,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-
-    fun loadUserStatus() {
+    private fun loadUserStatus() {
         viewModelScope.launch {
             _userStatus.value = getUserStatusUseCase()
             Log.d("SettingsVM", "Load user status... ${_userStatus.value}")

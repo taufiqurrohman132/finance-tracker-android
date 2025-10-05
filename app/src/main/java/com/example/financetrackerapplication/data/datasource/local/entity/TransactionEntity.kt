@@ -12,6 +12,7 @@ data class TransactionEntity(
     val type: String, // "INCOME" atau "EXPENSE"
     val date: Long, // Simpan sebagai timestamp (Long) agar mudah di-query
     val description: String?, // Catatan, bisa null
+    val synced: Boolean = false, // 👈 tanda sinkronisasi
 
     // Foreign Key (Kunci Asing) yang menghubungkan ke tabel lain
     val categoryId: Long,

@@ -60,11 +60,20 @@ dependencies {
     implementation(libs.googleid)
     implementation(libs.play.services.auth)
 
+    // segmented button
+    implementation("com.github.addisonelliott:SegmentedButton:3.1.9")
+
     // room
     implementation("androidx.room:room-runtime:2.7.2")
     ksp("androidx.room:room-compiler:2.7.2")
     implementation("androidx.room:room-ktx:2.7.2")
     implementation("androidx.room:room-paging:2.7.2")
+
+    // splash
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
+    // datastore
+    implementation("androidx.datastore:datastore-preferences:1.1.7")
 
     // hilt
     implementation("com.google.dagger:hilt-android:2.56.2")

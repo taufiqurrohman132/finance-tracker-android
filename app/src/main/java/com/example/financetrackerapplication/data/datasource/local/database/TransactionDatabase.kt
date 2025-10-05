@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.financetrackerapplication.data.datasource.local.dao.TransactionDao
 import com.example.financetrackerapplication.data.datasource.local.entity.AccountEntity
 
 @Database(
@@ -12,6 +13,7 @@ import com.example.financetrackerapplication.data.datasource.local.entity.Accoun
     exportSchema = false
 )
 abstract class TransactionDatabase : RoomDatabase() {
+    abstract fun transactionDao(): TransactionDao
 
     companion object{
         @Volatile
