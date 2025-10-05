@@ -75,4 +75,4 @@ Fokus hanya pada 4 pilar fungsionalitas ini untuk versi pertama:
 ## 🚀 Strategi Pasca-Rilis
 
 * **Update:** Iteratif. Rilis v1.1 dengan fitur **Statistik** dalam **1-2 bulan** setelah rilis awal.
-* **Monetisasi (Iklan):** **TUNDA.** Jangan pasang iklan sampai aplikasi memiliki basis pengguna yang sehat (minimal **1.000+ pengguna aktif harian**) dan rating yang bagus (stabil di **4.5+ bintang**).
+* **Monetisasi (Iklan):** **TUNDA.** tidak pasang iklan sampai aplikasi memiliki basis pengguna yang sehat (minimal **1.000+ pengguna aktif harian**) dan rating yang bagus (stabil di **4.5+ bintang**).
