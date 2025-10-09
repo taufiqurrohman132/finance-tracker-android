@@ -19,8 +19,7 @@ class DashboardAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-
-
+        TODO("Not yet implemented")
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {

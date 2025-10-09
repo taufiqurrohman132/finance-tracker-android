@@ -9,7 +9,6 @@ data class CategoryEntity (
     val id: Long = 0,
 
     val name: String, // "Gaji", "Makanan", "Transportasi"
-    val type: String, // "INCOME" atau "EXPENSE" agar mudah difilter
     val iconName: String?, // Opsional: nama ikon untuk ditampilkan di UI
     val colorHex: String? // Opsional: kode warna hex untuk UI
 )
