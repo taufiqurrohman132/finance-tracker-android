@@ -15,4 +15,9 @@
         android:name="com.example.financetrackerapplication.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/navigation_aset"
+        android:name="com.example.financetrackerapplication.ui.aset.AsetFragment"
+        android:label="fragment_aset"
+        tools:layout="@layout/fragment_aset" />
 </navigation>

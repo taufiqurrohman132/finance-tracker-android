@@ -1,8 +1,32 @@
 package com.example.financetrackerapplication.ui.aset
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
+import com.example.financetrackerapplication.domain.repository.AsetRapository
+import com.example.financetrackerapplication.ui.aset.AddAsetActivity.Companion.TAG_ASET_ADD
+import kotlinx.coroutines.launch
 
 class AddAsetViewModel(
-
+    private val repository: AsetRapository
 ) : ViewModel() {
+
+    fun saveAset(
+        name: String,
+        initialBalance: Double,
+        groupAset: String,
+        iconName: String?
+    ){
+        val aset = AsetEntity(
+            name = name,
+            initialBalance = initialBalance,
+            iconName = iconName,
+            groupAset = groupAset
+        )
+        viewModelScope.launch {
+            Log.d(TAG_ASET_ADD, "saveAset: aset viewmodel a = $aset")
+            repository.insertAset(aset)
+        }
+    }
 }

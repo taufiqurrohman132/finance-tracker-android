@@ -7,9 +7,10 @@ import androidx.room.RoomDatabase
 import com.example.financetrackerapplication.data.datasource.local.dao.AsetDao
 import com.example.financetrackerapplication.data.datasource.local.dao.TransactionDao
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
+import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
 
 @Database(
-    entities = [AsetEntity::class],
+    entities = [AsetEntity::class, TransactionEntity::class],
     version = 1,
     exportSchema = false
 )

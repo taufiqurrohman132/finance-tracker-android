@@ -43,7 +43,7 @@
             app:hintTextColor="@color/color_primary">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add.asset.etUsername"
+                android:id="@+id/add.asset.et_grup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -64,7 +64,7 @@
             app:hintTextColor="@color/color_primary">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add.asset.etUsername8"
+                android:id="@+id/add.asset.et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -86,7 +86,7 @@
             app:hintTextColor="@color/color_primary">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add.asset.etUsername3"
+                android:id="@+id/add.asset.et_total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -124,7 +124,7 @@
                 app:hintTextColor="@color/color_primary">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add.asset.etUsername6"
+                    android:id="@+id/add.asset.et_deskripsi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />

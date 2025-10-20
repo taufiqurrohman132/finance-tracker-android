@@ -1,12 +1,9 @@
 package com.example.financetrackerapplication.ui.aset
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.ActivityAddAsetBinding
 
 class AddAsetActivity : AppCompatActivity() {
@@ -22,8 +19,35 @@ class AddAsetActivity : AppCompatActivity() {
 
     }
 
-    private fun setupListener(){
+    private fun observer(){
 
+    }
+
+    private fun setupListener() {
+        binding.apply {
+            addAssetBtnSave.setOnClickListener {
+                val total = addAssetEtTotal.text.toString().toDoubleOrNull() // null ketika tidak bisa di convert
+                if (total == null) {
+                    // toast
+                    Toast.makeText(
+                        this@AddAsetActivity,
+                        "mohon isi dengan nilai yang benar",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+                viewModel.saveAset(
+                    addAssetEtName.text.toString(),
+                    total,
+                    addAssetEtGrup.text.toString(),
+                    null
+                )
+            }
+        }
+    }
+
+    companion object {
+        val TAG_ASET_ADD: String = AddAsetActivity::class.java.simpleName
     }
 
 }

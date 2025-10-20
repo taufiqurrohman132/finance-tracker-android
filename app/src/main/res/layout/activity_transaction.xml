@@ -133,7 +133,8 @@
                 android:text="berulang/cicilan"
                 android:textSize="11sp"
                 android:layout_marginEnd="16dp"
-                app:icon="@drawable/ic_clear_cache"
+                app:icon="@drawable/ic_looping"
+                app:iconSize="20dp"
                 app:iconGravity="start"
                 android:paddingEnd="6dp"
                 android:paddingStart="10dp"
@@ -145,7 +146,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="Total"
             android:layout_marginBottom="4dp"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusTopEnd="16dp"
@@ -167,7 +168,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="Kategori"
             android:layout_marginBottom="4dp"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusTopEnd="16dp"
@@ -189,7 +190,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
+            android:hint="Aset"
             android:layout_marginBottom="4dp"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusTopEnd="16dp"
@@ -213,7 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="4dp"
-            android:hint="Username"
+            android:hint="Catatan"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
@@ -278,7 +279,8 @@
                     android:layout_height="64dp"
                     android:layout_marginEnd="16dp"
                     android:paddingStart="34dp"
-                    app:icon="@drawable/ic_about"/>
+                    app:icon="@drawable/ic_camera"
+                    app:iconSize="24dp"/>
             </LinearLayout>
 
 
