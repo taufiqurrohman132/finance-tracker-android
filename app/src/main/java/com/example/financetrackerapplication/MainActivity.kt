@@ -2,18 +2,14 @@ package com.example.financetrackerapplication
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.financetrackerapplication.databinding.ActivityMainBinding
 import com.example.financetrackerapplication.domain.model.UserStatus
-import com.example.financetrackerapplication.ui.settings.SettingsViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.financetrackerapplication.features.settings.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

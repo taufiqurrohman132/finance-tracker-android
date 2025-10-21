@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.ui.dashboard
+package com.example.financetrackerapplication.features.dashboard
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback

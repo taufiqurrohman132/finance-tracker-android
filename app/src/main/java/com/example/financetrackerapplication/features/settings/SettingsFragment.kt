@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.ui.settings
+package com.example.financetrackerapplication.features.settings
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,7 +19,7 @@ import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.BottomSheetAuthLayoutBinding
 import com.example.financetrackerapplication.databinding.FragmentSettingsBinding
 import com.example.financetrackerapplication.domain.model.UserStatus
-import com.example.financetrackerapplication.ui.auth.SignInLinkEmailActivity
+import com.example.financetrackerapplication.features.auth.SignInLinkEmailActivity
 import com.example.financetrackerapplication.utils.Extention.setupStyle
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential

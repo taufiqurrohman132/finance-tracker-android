@@ -14,19 +14,19 @@
         android:theme="@style/Theme.FinanceTrackerApplication"
         tools:targetApi="31">
         <activity
-            android:name=".ui.aset.AddAsetActivity"
+            android:name=".features.aset.AddAsetActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.auth.SignInLinkEmailActivity"
+            android:name=".features.auth.SignInLinkEmailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.auth.RegisterActivity"
+            android:name=".features.auth.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.auth.SignInActivity"
+            android:name=".features.auth.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.transaction.TransactionActivity"
+            android:name=".features.transaction.TransactionActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

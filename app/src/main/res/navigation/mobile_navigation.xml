@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.financetrackerapplication.ui.dashboard.DashboardFragment"
+        android:name="com.example.financetrackerapplication.features.dashboard.DashboardFragment"
         android:label="DashboardFragment"
         tools:layout="@layout/fragment_dashboard"/>
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.example.financetrackerapplication.ui.settings.SettingsFragment"
+        android:name="com.example.financetrackerapplication.features.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/navigation_aset"
-        android:name="com.example.financetrackerapplication.ui.aset.AsetFragment"
+        android:name="com.example.financetrackerapplication.features.aset.AsetFragment"
         android:label="fragment_aset"
         tools:layout="@layout/fragment_aset" />
 </navigation>

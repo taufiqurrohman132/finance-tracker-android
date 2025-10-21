@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.ui.settings
+package com.example.financetrackerapplication.features.settings
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.financetrackerapplication.domain.model.UserStatus
-import com.example.financetrackerapplication.domain.repository.AuthRepository
 import com.example.financetrackerapplication.domain.usecase.GetUserStatusUseCase
 import com.example.financetrackerapplication.domain.usecase.SignInAnonymouslyUseCase
 import com.example.financetrackerapplication.domain.usecase.SignInWithGoogleUseCase

@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.ui.transaction
+package com.example.financetrackerapplication.features.transaction
 
 import android.os.Bundle
 import androidx.activity.viewModels

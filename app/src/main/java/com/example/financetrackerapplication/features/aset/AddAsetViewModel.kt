@@ -1,11 +1,11 @@
-package com.example.financetrackerapplication.ui.aset
+package com.example.financetrackerapplication.features.aset
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
 import com.example.financetrackerapplication.domain.repository.AsetRapository
-import com.example.financetrackerapplication.ui.aset.AddAsetActivity.Companion.TAG_ASET_ADD
+import com.example.financetrackerapplication.features.aset.AddAsetActivity.Companion.TAG_ASET_ADD
 import kotlinx.coroutines.launch
 
 class AddAsetViewModel(

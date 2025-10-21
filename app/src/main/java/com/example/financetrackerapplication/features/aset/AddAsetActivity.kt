@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.ui.aset
+package com.example.financetrackerapplication.features.aset
 
 import android.os.Bundle
 import android.widget.Toast

@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.ui.dashboard
+package com.example.financetrackerapplication.features.aset
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,12 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.financetrackerapplication.R
-import com.example.financetrackerapplication.databinding.FragmentDashboardBinding
-import com.example.financetrackerapplication.ui.transaction.TransactionActivity
+import com.example.financetrackerapplication.databinding.FragmentAsetBinding
 
-class DashboardFragment : Fragment() {
-    private var _binding: FragmentDashboardBinding? = null
+class AsetFragment : Fragment() {
+
+    private var _binding: FragmentAsetBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,15 +18,15 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentAsetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tesss.setOnClickListener {
-            val intent = Intent(requireActivity(), TransactionActivity::class.java)
+        binding.btnAdd.setOnClickListener {
+            val intent = Intent(requireActivity(), AddAsetActivity::class.java)
             startActivity(intent)
         }
     }
@@ -37,7 +36,4 @@ class DashboardFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        private val TAG = DashboardFragment::class.java.simpleName
-    }
 }

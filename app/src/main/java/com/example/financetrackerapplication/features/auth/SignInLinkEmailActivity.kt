@@ -1,12 +1,8 @@
-package com.example.financetrackerapplication.ui.auth
+package com.example.financetrackerapplication.features.auth
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.ActivitySignInLinkEmailBinding
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.ui.auth
+package com.example.financetrackerapplication.features.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
