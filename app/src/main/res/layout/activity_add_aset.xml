@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="4dp"
-            android:hint="Username"
+            android:hint="Grup"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
@@ -46,14 +46,16 @@
                 android:id="@+id/add.asset.et_grup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:cursorVisible="false"
+                android:focusable="false" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="4dp"
-            android:hint="Username"
+            android:hint="Nama"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
@@ -67,6 +69,9 @@
                 android:id="@+id/add.asset.et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="4dp"
-            android:hint="Username"
+            android:hint="Total"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
@@ -89,7 +94,7 @@
                 android:id="@+id/add.asset.et_total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -113,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="30dp"
-                android:hint="Username"
+                android:hint="Deskripsi"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
@@ -140,9 +145,9 @@
                     android:id="@+id/add.asset.btn_save"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/cograd_blue_to_purple"
                     android:text="@string/simpan"
-                    app:cornerRadius="16dp" />
+                    app:backgroundTint="@null" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

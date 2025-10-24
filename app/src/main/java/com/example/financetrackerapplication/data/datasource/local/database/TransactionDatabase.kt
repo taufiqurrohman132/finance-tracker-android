@@ -18,15 +18,4 @@ abstract class TransactionDatabase : RoomDatabase() {
     abstract fun transactionDao(): TransactionDao
     abstract fun asetDao(): AsetDao
 
-    companion object{
-        @Volatile
-        private var instance: TransactionDatabase? = null
-
-        fun getInstance(context: Context): TransactionDatabase =
-            instance ?: Room.databaseBuilder(
-                context.applicationContext,
-                TransactionDatabase::class.java,
-                "transaction.database"
-            ).build()
-    }
 }

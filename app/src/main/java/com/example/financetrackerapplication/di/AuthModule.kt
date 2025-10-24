@@ -25,22 +25,6 @@ import javax.inject.Singleton
 object AuthModule {
 
     @Provides
-    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
-
-    @Provides
-    fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository = impl
-
-    @Provides
-    @Singleton
-    fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
-        context.dataStore
-
-    @Provides
-    @Singleton
-    fun provideSettingPreferences(dataStore: DataStore<Preferences>): SettingsPreferences =
-        SettingsPreferences(dataStore)
-
-    @Provides
     fun provideSignInAnonymouslyUseCase(repo: AuthRepository) =
         SignInAnonymouslyUseCase(repo)
 

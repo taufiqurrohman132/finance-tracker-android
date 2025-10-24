@@ -6,9 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
 import com.example.financetrackerapplication.domain.repository.AsetRapository
 import com.example.financetrackerapplication.features.aset.AddAsetActivity.Companion.TAG_ASET_ADD
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AddAsetViewModel(
+@HiltViewModel
+class AddAsetViewModel @Inject constructor(
     private val repository: AsetRapository
 ) : ViewModel() {
 

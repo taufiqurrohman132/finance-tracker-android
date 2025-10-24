@@ -19,4 +19,19 @@
     <string name="preferensi_aplikasi">Preferensi Aplikasi</string>
     <string name="simpan">Simpan</string>
     <string name="aset">Aset</string>
+    <string name="grup_aset">Grup Aset</string>
+
+    <string-array name="group_option_aset">
+        <item>Tunai</item>
+        <item>Bank</item>
+        <item>Kartu</item>
+        <item>Kartu Debit</item>
+        <item>Tabungan</item>
+        <item>Kartu Prabayar</item>
+        <item>Investasi</item>
+        <item>Rekening Mines</item>
+        <item>Pinjaman</item>
+        <item>Asuransi</item>
+        <item>Lainnya</item>
+    </string-array>
 </resources>

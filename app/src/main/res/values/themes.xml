@@ -91,4 +91,13 @@
         <item name="android:layout_height">24dp</item>
     </style>
 
+    <!--    alert dialog grup option-->
+    <style name="CustomAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceCornerMedium">@style/CustomDialogCorners</item>
+    </style>
+
+    <style name="CustomDialogCorners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
 </resources>
