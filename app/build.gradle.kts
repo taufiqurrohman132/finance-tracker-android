@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
     implementation(libs.play.services.auth)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
     // segmented button
     implementation("com.github.addisonelliott:SegmentedButton:3.1.9")

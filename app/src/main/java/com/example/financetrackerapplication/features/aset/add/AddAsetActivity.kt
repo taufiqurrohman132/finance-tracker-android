@@ -1,8 +1,8 @@
-package com.example.financetrackerapplication.features.aset
+package com.example.financetrackerapplication.features.aset.add
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -31,7 +31,7 @@ class AddAsetActivity : AppCompatActivity() {
 
     }
 
-    private fun init(){
+    private fun init() {
         items = resources.getStringArray(R.array.group_option_aset)
         binding.addAssetEtGrup.setText(items[selectedGroupIndex])
         showGroupOptionDialog()
@@ -39,35 +39,42 @@ class AddAsetActivity : AppCompatActivity() {
 
     private fun setupListener() {
         binding.apply {
-            addAssetBtnSave.setOnClickListener {
-                val total = addAssetEtTotal.text.toString().toDoubleOrNull() // null ketika tidak bisa di convert
-                if (total == null) {
-                    // toast
-                    Toast.makeText(
-                        this@AddAsetActivity,
-                        "mohon isi dengan nilai yang benar",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
-                viewModel.saveAset(
-                    addAssetEtName.text.toString(),
-                    total,
-                    addAssetEtGrup.text.toString(),
-                    null
-                )
-            }
+            addAssetBtnSave.setOnClickListener { saveAset() }
+            addAssetEtGrup.setOnClickListener { showGroupOptionDialog() }
 
-            addAssetEtGrup.setOnClickListener {
-                showGroupOptionDialog()
-            }
+
         }
     }
 
-    private fun showGroupOptionDialog(){
+    private fun saveAset() {
+        binding.apply {
+            val total = addAssetEtTotal.text.toString()
+                .toDoubleOrNull() // null ketika tidak bisa di convert
+            if (total == null) {
+                // toast
+                Toast.makeText(
+                    this@AddAsetActivity,
+                    "mohon isi dengan nilai yang benar",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return
+            }
+            viewModel.saveAset(
+                addAssetEtName.text.toString(),
+                total,
+                addAssetEtGrup.text.toString(),
+                null
+            )
+
+            Log.d(TAG_ASET_ADD, "saveAset: total edit teks = $total")
+            finish()
+        }
+    }
+
+    private fun showGroupOptionDialog() {
         MaterialAlertDialogBuilder(this, R.style.CustomAlertDialog)
             .setTitle(R.string.grup_aset)
-            .setSingleChoiceItems(items, selectedGroupIndex ) { dialog, which ->
+            .setSingleChoiceItems(items, selectedGroupIndex) { dialog, which ->
                 selectedGroupIndex = which
                 binding.addAssetEtGrup.setText(items[selectedGroupIndex])
                 dialog.dismiss()
@@ -78,7 +85,8 @@ class AddAsetActivity : AppCompatActivity() {
                     addAssetEtName.postDelayed({
                         addAssetEtName.isFocusableInTouchMode = true
                         addAssetEtName.requestFocus()
-                        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        val imm =
+                            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                         imm.hideSoftInputFromWindow(addAssetEtName.windowToken, 0)
                         imm.showSoftInput(addAssetEtName, InputMethodManager.SHOW_FORCED)
                     }, 300)

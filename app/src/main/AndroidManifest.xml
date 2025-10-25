@@ -14,7 +14,7 @@
         android:theme="@style/Theme.FinanceTrackerApplication"
         tools:targetApi="31">
         <activity
-            android:name=".features.aset.AddAsetActivity"
+            android:name=".features.aset.add.AddAsetActivity"
             android:exported="false" />
         <activity
             android:name=".features.auth.SignInLinkEmailActivity"

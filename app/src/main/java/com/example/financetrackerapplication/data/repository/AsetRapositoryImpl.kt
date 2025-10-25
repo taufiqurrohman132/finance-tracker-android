@@ -3,6 +3,7 @@ package com.example.financetrackerapplication.data.repository
 import com.example.financetrackerapplication.data.datasource.local.dao.AsetDao
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
 import com.example.financetrackerapplication.domain.repository.AsetRapository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class AsetRapositoryImpl @Inject constructor(
@@ -18,5 +19,9 @@ class AsetRapositoryImpl @Inject constructor(
 
     override suspend fun deleteAset(vararg aset: AsetEntity) {
         asetDao.deleteAset(*aset)
+    }
+
+    override fun getAset(): Flow<List<AsetEntity>> {
+        return asetDao.getAset()
     }
 }

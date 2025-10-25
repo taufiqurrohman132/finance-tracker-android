@@ -3,19 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.aset.AsetFragment">
+    tools:context=".features.aset.list.AsetFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/aset.rv_aset"/>
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_aset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="to Add"
-        android:id="@+id/btn_add"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_help_support"
+        android:contentDescription="Add Aset"
+        android:layout_margin="16dp"
         />
-
 </FrameLayout>
