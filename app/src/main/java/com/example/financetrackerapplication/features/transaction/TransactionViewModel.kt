@@ -14,7 +14,7 @@ class TransactionViewModel @Inject constructor(
     fun insertTransaction(
         amount: Double,
         type: String,
-        date: Long,
+        dateTimeMillis: Long,
         description: String,
         accountId: Long,
         categoryId: Long,
@@ -22,7 +22,7 @@ class TransactionViewModel @Inject constructor(
         val transaction = TransactionEntity(
             amount = amount,
             type = type,
-            date = date,
+            dateTimeMillis = dateTimeMillis,
             description = description,
             accountId = accountId,
             categoryId = categoryId
@@ -35,7 +35,7 @@ class TransactionViewModel @Inject constructor(
     fun updateTransaction(
         amount: Double,
         type: String,
-        date: Long,
+        dateTimeMillis: Long,
         description: String,
         accountId: Long,
         categoryId: Long,
@@ -43,7 +43,7 @@ class TransactionViewModel @Inject constructor(
         val transaction = TransactionEntity(
             amount = amount,
             type = type,
-            date = date,
+            dateTimeMillis = dateTimeMillis,
             description = description,
             accountId = accountId,
             categoryId = categoryId

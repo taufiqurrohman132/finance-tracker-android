@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.financetrackerapplication.databinding.FragmentDashboardBinding
 import com.example.financetrackerapplication.features.transaction.TransactionActivity
 
 class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var dashoardAdapter: DashboardAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,10 +28,29 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tesss.setOnClickListener {
-            val intent = Intent(requireActivity(), TransactionActivity::class.java)
-            startActivity(intent)
+        setupRecyclerView()
+        setupListener()
+    }
+
+    private fun setupRecyclerView(){
+        dashoardAdapter = DashboardAdapter(
+            onClickItemHeader = { transaction ->
+
+            },
+            onClickItemBody = { transaction ->
+
+            }
+        )
+
+        binding.dashRvTransaksi.apply {
+            adapter = dashoardAdapter
+            layoutManager = LinearLayoutManager(requireContext())
         }
+    }
+
+    // semua aksi listener di semua komponen
+    private fun setupListener(){
+
     }
 
     override fun onDestroy() {
