@@ -1,7 +1,9 @@
 package com.example.financetrackerapplication.features.transaction
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
 import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
 import com.example.financetrackerapplication.domain.repository.TransactionRepository
 import kotlinx.coroutines.launch
@@ -10,6 +12,9 @@ import javax.inject.Inject
 class TransactionViewModel @Inject constructor(
     private val repository: TransactionRepository
 ) : ViewModel() {
+
+    val listAsetOptions: LiveData<List<AsetEntity>> =
+        repository.
 
     fun insertTransaction(
         amount: Double,

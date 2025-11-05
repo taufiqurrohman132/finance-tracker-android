@@ -3,6 +3,7 @@ package com.example.financetrackerapplication.features.dashboard
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.liveData
 import androidx.room.PrimaryKey
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.domain.repository.TransactionRepository
@@ -17,6 +18,10 @@ class DashboardViewModel @Inject constructor(
     private val groupTransactionsUseCase: GroupTransactionsUseCase
 ) : ViewModel(){
 
-//    val listTransaction: LiveData<List<ItemTransaction>> =
-//        groupTransactionsUseCase.execute(repository.getAllTransaction())
+    val listTransaction: LiveData<List<ItemTransaction>> = liveData {
+        repository.getAllTransaction().collect{ transaction ->
+            emit(groupTransactionsUseCase.execute(transaction))
+        }
+    }
+
 }

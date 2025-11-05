@@ -6,15 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.financetrackerapplication.databinding.FragmentDashboardBinding
 import com.example.financetrackerapplication.features.transaction.TransactionActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var dashoardAdapter: DashboardAdapter
+    private val viewModel: DashboardViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +34,7 @@ class DashboardFragment : Fragment() {
 
         setupRecyclerView()
         setupListener()
+        observer()
     }
 
     private fun setupRecyclerView(){
@@ -51,6 +56,12 @@ class DashboardFragment : Fragment() {
     // semua aksi listener di semua komponen
     private fun setupListener(){
 
+    }
+
+    private fun observer(){
+        viewModel.listTransaction.observe(viewLifecycleOwner){ listItem ->
+            dashoardAdapter.submitList(listItem)
+        }
     }
 
     override fun onDestroy() {
