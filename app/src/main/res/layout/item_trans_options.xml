@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
+    android:orientation="horizontal"
     android:background="@drawable/cograd_stroke_blue_to_purple">
 
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:id="@+id/img_trans_options"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        />
+
     <TextView
-        android:id="@+id/tv_aset_options"
+        android:id="@+id/tv_trans_options"
         style="@style/TextBodyMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginVertical="16dp"
+        android:layout_marginEnd="16dp"
         android:paddingHorizontal="8dp"
         android:paddingVertical="2dp"
         android:text="Tabungan"
@@ -18,4 +28,4 @@
         android:textStyle="bold" />
 
 
-</FrameLayout>
+</LinearLayout>

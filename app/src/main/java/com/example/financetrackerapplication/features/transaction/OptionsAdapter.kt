@@ -2,28 +2,30 @@ package com.example.financetrackerapplication.features.transaction
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
-import com.example.financetrackerapplication.databinding.ItemAsetBinding
-import com.example.financetrackerapplication.databinding.ItemListAsetOptionsBinding
+import com.example.financetrackerapplication.databinding.ItemTransOptionsBinding
+import com.example.financetrackerapplication.domain.model.TransOptions
 import com.example.financetrackerapplication.utils.BaseDiffCallback
 
-class AsetOptionsAdapter(
-    private val onClickItem: (AsetEntity) -> Unit
-) : ListAdapter<AsetEntity, AsetOptionsAdapter.ItemViewHolder>(BaseDiffCallback { it.id }) {
+class OptionsAdapter<T: TransOptions> (
+    private val onClickItem: (T) -> Unit
+) : ListAdapter<T, OptionsAdapter.ItemViewHolder>(BaseDiffCallback { it.id }) {
     class ItemViewHolder(
-        private val binding: ItemListAsetOptionsBinding
+        private val binding: ItemTransOptionsBinding
     ) : ViewHolder(binding.root) {
-        fun bind(aset: AsetEntity){
+        fun bind(options: TransOptions){
             binding.apply {
-                tvAsetOptions.text = aset.name
+                tvTransOptions.text = options.name
+                imgTransOptions.setImageURI(options.iconName?.toUri())
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = ItemListAsetOptionsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = ItemTransOptionsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemViewHolder(view)
     }
 

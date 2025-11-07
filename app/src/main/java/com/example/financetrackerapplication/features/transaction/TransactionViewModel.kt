@@ -2,19 +2,29 @@ package com.example.financetrackerapplication.features.transaction
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
+import com.example.financetrackerapplication.data.datasource.local.entity.CategoryEntity
 import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
+import com.example.financetrackerapplication.domain.repository.AsetRapository
+import com.example.financetrackerapplication.domain.repository.CategoryRapository
 import com.example.financetrackerapplication.domain.repository.TransactionRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TransactionViewModel @Inject constructor(
-    private val repository: TransactionRepository
+    private val repoTransaction: TransactionRepository,
+    private val repoAset: AsetRapository,
+    private val repoCategory: CategoryRapository,
 ) : ViewModel() {
 
+    // untuk beberap opsi aset
     val listAsetOptions: LiveData<List<AsetEntity>> =
-        repository.
+        repoAset.getAset().asLiveData()
+
+    val listCategoryOptions: LiveData<List<CategoryEntity>> =
+        repoCategory.getCategory().asLiveData()
 
     fun insertTransaction(
         amount: Double,
@@ -33,7 +43,7 @@ class TransactionViewModel @Inject constructor(
             categoryId = categoryId
         )
         viewModelScope.launch {
-            repository.insertTransaction(transaction)
+            repoTransaction.insertTransaction(transaction)
         }
     }
 
@@ -54,13 +64,13 @@ class TransactionViewModel @Inject constructor(
             categoryId = categoryId
         )
         viewModelScope.launch {
-            repository.updateTransaction(transaction)
+            repoTransaction.updateTransaction(transaction)
         }
     }
 
     fun deleteTransaction(vararg transactionEntity: TransactionEntity) {
         viewModelScope.launch {
-            repository.deleteTransaction(*transactionEntity)
+            repoTransaction.deleteTransaction(*transactionEntity)
         }
     }
 
