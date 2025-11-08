@@ -16,11 +16,12 @@ class OptionsAdapter<T: TransOptions> (
     class ItemViewHolder(
         private val binding: ItemTransOptionsBinding
     ) : ViewHolder(binding.root) {
-        fun bind(options: TransOptions){
+        fun <T: TransOptions> bind (options: T, onClickItem: (T) -> Unit){
             binding.apply {
                 tvTransOptions.text = options.name
                 imgTransOptions.setImageURI(options.iconName?.toUri())
             }
+            itemView.setOnClickListener { onClickItem.invoke(options) }
         }
     }
 
@@ -31,6 +32,6 @@ class OptionsAdapter<T: TransOptions> (
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val aset = getItem(position)
-        holder.bind(aset)
+        holder.bind(aset, onClickItem)
     }
 }

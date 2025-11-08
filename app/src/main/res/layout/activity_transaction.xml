@@ -53,7 +53,7 @@
                 app:drawablePadding="20dp"
                 app:selectedTextColor="@color/white"
                 app:selectedDrawableTint="@color/white"
-                app:text="Aragorn"
+                app:text="Pendapatan"
                 app:selectedBackground="@drawable/cograd_blue_to_purple"
                 app:textColor="@color/black" />
 
@@ -69,7 +69,7 @@
                 app:selectedDrawableTint="@color/white"
                 app:selectedTextColor="@color/white"
                 app:selectedBackground="@drawable/cograd_blue_to_purple"
-                app:text="Gimli"
+                app:text="Pengeluaran"
                 app:textColor="@color/black" />
 
         </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>

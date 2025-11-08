@@ -16,8 +16,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.financetrackerapplication.R
-import com.example.financetrackerapplication.databinding.BottomSheetAuthLayoutBinding
 import com.example.financetrackerapplication.databinding.FragmentSettingsBinding
+import com.example.financetrackerapplication.databinding.SheetAuthLayoutBinding
 import com.example.financetrackerapplication.domain.model.UserStatus
 import com.example.financetrackerapplication.features.auth.SignInLinkEmailActivity
 import com.example.financetrackerapplication.utils.Extention.setupStyle
@@ -159,7 +159,7 @@ class SettingsFragment : Fragment() {
 
     private fun showRegisterOptions() {
         val bottomSheetDialog = BottomSheetDialog(requireActivity())
-        val bindingBottomSheet = BottomSheetAuthLayoutBinding.inflate(layoutInflater)
+        val bindingBottomSheet = SheetAuthLayoutBinding.inflate(layoutInflater)
         bottomSheetDialog.apply {
             setContentView(bindingBottomSheet.root)
             setupStyle(16, 16, 16)// setup radius

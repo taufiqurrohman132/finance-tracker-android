@@ -3,6 +3,7 @@ package com.example.financetrackerapplication.di
 import android.content.Context
 import androidx.room.Room
 import com.example.financetrackerapplication.data.datasource.local.dao.AsetDao
+import com.example.financetrackerapplication.data.datasource.local.dao.CategoryDao
 import com.example.financetrackerapplication.data.datasource.local.dao.TransactionDao
 import com.example.financetrackerapplication.data.datasource.local.database.TransactionDatabase
 import dagger.Module
@@ -29,6 +30,10 @@ object DatabaseModule {
     @Provides
     fun provideAsetDao(database: TransactionDatabase): AsetDao =
         database.asetDao()
+
+    @Provides
+    fun provideCategoryDao(database: TransactionDatabase): CategoryDao =
+        database.categoryDao()
 
     @Provides
     fun provideTransactionDao(database: TransactionDatabase): TransactionDao =

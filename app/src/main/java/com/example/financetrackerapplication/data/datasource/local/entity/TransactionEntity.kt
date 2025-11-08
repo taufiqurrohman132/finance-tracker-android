@@ -29,12 +29,12 @@ data class TransactionEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
 
-    val amount: Double, // Jumlah uang
+    val amount: Double = 0.00, // Jumlah uang
     val type: String, // "INCOME" atau "EXPENSE"
     val dateTimeMillis: Long, // Simpan sebagai timestamp (Long) agar mudah di-query
     val description: String?, // Catatan, bisa null
     val percentage: Double = 0.0, // 1.89
-    val synced: Boolean = false, // 👈 tanda sinkronisasi
+    val synced: Boolean = false, // tanda sinkronisasi
 
     val categoryId: Long,
     val accountId: Long

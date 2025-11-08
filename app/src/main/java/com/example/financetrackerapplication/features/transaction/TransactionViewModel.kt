@@ -10,21 +10,19 @@ import com.example.financetrackerapplication.data.datasource.local.entity.Transa
 import com.example.financetrackerapplication.domain.repository.AsetRapository
 import com.example.financetrackerapplication.domain.repository.CategoryRapository
 import com.example.financetrackerapplication.domain.repository.TransactionRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class TransactionViewModel @Inject constructor(
     private val repoTransaction: TransactionRepository,
     private val repoAset: AsetRapository,
     private val repoCategory: CategoryRapository,
 ) : ViewModel() {
-
-    // untuk beberap opsi aset
-    val listAsetOptions: LiveData<List<AsetEntity>> =
-        repoAset.getAset().asLiveData()
-
-    val listCategoryOptions: LiveData<List<CategoryEntity>> =
-        repoCategory.getCategory().asLiveData()
 
     fun insertTransaction(
         amount: Double,
@@ -74,5 +72,11 @@ class TransactionViewModel @Inject constructor(
         }
     }
 
+    // aset and category
+    suspend fun getAllAset(): List<AsetEntity> =
+        repoAset.getAset().first()
+
+    suspend fun getAllCategory(): List<CategoryEntity> =
+        repoCategory.getCategory().first()
 
 }
