@@ -8,6 +8,7 @@ import com.example.financetrackerapplication.databinding.ItemTransactionBinding
 import com.example.financetrackerapplication.databinding.ItemTransactionHeaderBinding
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.utils.BaseDiffCallback
+import com.example.financetrackerapplication.utils.TimeUtils
 
 class DashboardAdapter(
     private val onClickItemHeader: (ItemTransaction) -> Unit,
@@ -17,7 +18,9 @@ class DashboardAdapter(
         ViewHolder(binding.root) {
         fun bind(itemTransaction: ItemTransaction) {
             binding.apply {
-                itemTransHeaderTvDate.text = itemTransaction.date
+                itemTransaction.date?.let {
+                    itemTransHeaderTvDate.text = TimeUtils.getStyleDate(it)
+                }
                 itemTransHeaderTvDay.text = itemTransaction.day
                 itemTransHeaderTvIncome.text = itemTransaction.income.toString()
                 itemTransHeaderTvExpanse.text = itemTransaction.expense.toString()

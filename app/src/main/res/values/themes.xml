@@ -96,6 +96,10 @@
         <item name="shapeAppearanceCornerMedium">@style/CustomDialogCorners</item>
     </style>
 
+    <style name="CustomDatePickerDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="shapeAppearanceMediumComponent">@style/CustomDialogCorners</item>
+    </style>
+
     <style name="CustomDialogCorners" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>

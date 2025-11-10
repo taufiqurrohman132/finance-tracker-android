@@ -20,6 +20,7 @@ import com.example.financetrackerapplication.databinding.FragmentSettingsBinding
 import com.example.financetrackerapplication.databinding.SheetAuthLayoutBinding
 import com.example.financetrackerapplication.domain.model.UserStatus
 import com.example.financetrackerapplication.features.auth.SignInLinkEmailActivity
+import com.example.financetrackerapplication.features.settings.categorymanage.list.CategoryActivity
 import com.example.financetrackerapplication.utils.Extention.setupStyle
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -77,7 +78,8 @@ class SettingsFragment : Fragment() {
         binding.btnLogout.setOnClickListener { viewModel.logout() }
 
         binding.btnGuest.setOnClickListener {
-
+            val intent = Intent(requireActivity(), CategoryActivity::class.java)
+            startActivity(intent)
         }
     }
 

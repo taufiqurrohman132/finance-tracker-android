@@ -100,6 +100,8 @@
                     android:id="@+id/add.et_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -123,6 +125,8 @@
                     android:id="@+id/add.et_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -136,8 +140,10 @@
                 app:icon="@drawable/ic_looping"
                 app:iconSize="20dp"
                 app:iconGravity="start"
+                app:iconPadding="0dp"
+                android:maxLines="2"
                 android:paddingEnd="6dp"
-                android:paddingStart="10dp"
+                android:paddingStart="8dp"
                 app:cornerRadius="24dp"
                 />
         </LinearLayout>

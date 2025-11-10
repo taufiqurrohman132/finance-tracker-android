@@ -12,5 +12,5 @@ data class CategoryEntity (
     val categoryType: String, // "INCOME" atau "EXPENSE"
     override val name: String, // "Gaji", "Makanan", "Transportasi"
     override val iconName: String?, // Opsional: nama ikon untuk ditampilkan di UI
-    val colorHex: String? // Opsional: kode warna hex untuk UI
-): TransOptions
+): TransOptions{
+}
