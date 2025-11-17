@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.transaction.TransactionActivity">
@@ -14,260 +13,186 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:backgroundTint="@color/white"
-        app:title="Judul Activity"
-        app:titleTextColor="@android:color/black"
+        app:menu="@menu/transaction_app_bar_menu"
         app:navigationIcon="@drawable/ic_back"
-        app:menu="@menu/transaction_app_bar_menu" />
-    <LinearLayout
+        app:title="Judul Activity"
+        android:elevation="1dp"
+        app:titleTextColor="@android:color/black" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/trans_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:elevation="4dp"
-        android:background="@color/white"
-        android:paddingVertical="16dp"
-        >
-        <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
-            android:id="@+id/buttonGroup_type_transaction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_gravity="center_horizontal"
-            android:elevation="2dp"
-            android:layout_marginBottom="12dp"
-            app:borderColor="@color/white"
-            app:borderWidth="1dp"
-            app:position="0"
-            app:radius="30dp"
-            app:ripple="true"
-            app:selectionAnimationInterpolator="anticipateOvershoot"
-            app:rippleColor="@color/black">
-
-            <com.addisonelliott.segmentedbutton.SegmentedButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:rounded="true"
-                android:padding="10dp"
-                app:drawable="@drawable/ic_about"
-                app:drawableGravity="left"
-                app:drawablePadding="20dp"
-                app:selectedTextColor="@color/white"
-                app:selectedDrawableTint="@color/white"
-                app:text="Pendapatan"
-                app:selectedBackground="@drawable/cograd_blue_to_purple"
-                app:textColor="@color/black" />
-
-            <com.addisonelliott.segmentedbutton.SegmentedButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:rounded="true"
-                android:padding="10dp"
-                app:drawable="@drawable/ic_help_support"
-                app:drawablePadding="20dp"
-                app:drawableGravity="left"
-                app:selectedDrawableTint="@color/white"
-                app:selectedTextColor="@color/white"
-                app:selectedBackground="@drawable/cograd_blue_to_purple"
-                app:text="Pengeluaran"
-                app:textColor="@color/black" />
-
-        </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+        android:paddingTop="?attr/actionBarSize">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="4dp"
-                android:hint="Date"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxStrokeColor="@color/color_primary"
-                app:boxStrokeWidth="1dp"
-                app:hintTextColor="@color/color_primary">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add.et_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:inputType="text" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8sp"
-                android:layout_marginBottom="4dp"
-                android:hint="Time"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxStrokeColor="@color/color_primary"
-                app:boxStrokeWidth="1dp"
-                app:hintTextColor="@color/color_primary">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add.et_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:inputType="text" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="berulang/cicilan"
-                android:textSize="11sp"
-                android:layout_marginEnd="16dp"
-                app:icon="@drawable/ic_looping"
-                app:iconSize="20dp"
-                app:iconGravity="start"
-                app:iconPadding="0dp"
-                android:maxLines="2"
-                android:paddingEnd="6dp"
-                android:paddingStart="8dp"
-                app:cornerRadius="24dp"
-                />
-        </LinearLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Total"
-            android:layout_marginBottom="4dp"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusTopStart="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            android:layout_marginHorizontal="16dp"
-            app:hintTextColor="@color/color_primary"
-            app:boxStrokeColor="@color/color_primary"
-            app:boxStrokeWidth="1dp"
-            app:boxBackgroundMode="outline">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add.et_total"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Kategori"
-            android:layout_marginBottom="4dp"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusTopStart="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            android:layout_marginHorizontal="16dp"
-            app:hintTextColor="@color/color_primary"
-            app:boxStrokeColor="@color/color_primary"
-            app:boxStrokeWidth="1dp"
-            app:boxBackgroundMode="outline">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add.et_kategori"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:inputType="text"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Aset"
-            android:layout_marginBottom="4dp"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusTopStart="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            android:layout_marginHorizontal="16dp"
-            app:hintTextColor="@color/color_primary"
-            app:boxStrokeColor="@color/color_primary"
-            app:boxStrokeWidth="1dp"
-            app:boxBackgroundMode="outline">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add.et_aset"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:inputType="text"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="4dp"
-            android:hint="Catatan"
-            app:boxBackgroundMode="outline"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusTopStart="16dp"
-            app:boxStrokeColor="@color/color_primary"
-            app:boxStrokeWidth="1dp"
-            app:hintTextColor="@color/color_primary">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add.et_catatan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="20dp"
-        android:elevation="16dp"
-        android:layout_marginTop="16dp"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingVertical="16dp"
-            >
+            android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                android:background="@color/white"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:paddingVertical="16dp">
+
+                <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
+                    android:id="@+id/buttonGroup_type_transaction"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="30dp"
-                    android:hint="Username"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:elevation="2dp"
+                    app:borderColor="@color/white"
+                    app:borderWidth="1dp"
+                    app:position="0"
+                    app:radius="30dp"
+                    app:ripple="true"
+                    app:rippleColor="@color/black"
+                    app:selectionAnimationInterpolator="anticipateOvershoot">
+
+                    <com.addisonelliott.segmentedbutton.SegmentedButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        app:drawable="@drawable/ic_about"
+                        app:drawableGravity="left"
+                        app:drawablePadding="20dp"
+                        app:rounded="true"
+                        app:selectedBackground="@drawable/cograd_blue_to_purple"
+                        app:selectedDrawableTint="@color/white"
+                        app:selectedTextColor="@color/white"
+                        app:text="Pendapatan"
+                        app:textColor="@color/black" />
+
+                    <com.addisonelliott.segmentedbutton.SegmentedButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        app:drawable="@drawable/ic_help_support"
+                        app:drawableGravity="left"
+                        app:drawablePadding="20dp"
+                        app:rounded="true"
+                        app:selectedBackground="@drawable/cograd_blue_to_purple"
+                        app:selectedDrawableTint="@color/white"
+                        app:selectedTextColor="@color/white"
+                        app:text="Pengeluaran"
+                        app:textColor="@color/black" />
+
+                </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_weight="2"
+                        android:hint="Date"
+                        app:boxBackgroundMode="outline"
+                        app:boxCornerRadiusBottomEnd="16dp"
+                        app:boxCornerRadiusBottomStart="16dp"
+                        app:boxCornerRadiusTopEnd="16dp"
+                        app:boxCornerRadiusTopStart="16dp"
+                        app:boxStrokeColor="@color/color_primary"
+                        app:boxStrokeWidth="1dp"
+                        app:hintTextColor="@color/color_primary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add.et_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:inputType="text" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8sp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_weight="1"
+                        android:hint="Time"
+                        app:boxBackgroundMode="outline"
+                        app:boxCornerRadiusBottomEnd="16dp"
+                        app:boxCornerRadiusBottomStart="16dp"
+                        app:boxCornerRadiusTopEnd="16dp"
+                        app:boxCornerRadiusTopStart="16dp"
+                        app:boxStrokeColor="@color/color_primary"
+                        app:boxStrokeWidth="1dp"
+                        app:hintTextColor="@color/color_primary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/add.et_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:inputType="text" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="16dp"
+                        android:layout_weight="1"
+                        android:maxLines="2"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="6dp"
+                        android:text="berulang/cicilan"
+                        android:textSize="11sp"
+                        app:cornerRadius="24dp"
+                        app:icon="@drawable/ic_looping"
+                        app:iconGravity="start"
+                        app:iconPadding="0dp"
+                        app:iconSize="20dp" />
+                </LinearLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:hint="Total"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp"
+                    app:boxStrokeColor="@color/color_primary"
+                    app:boxStrokeWidth="1dp"
+                    app:hintTextColor="@color/color_primary"
+                    app:placeholderText="Masukkan Jumlah Uang                                                                          "
+                    app:prefixText="Rp">
+
+                    <com.example.financetrackerapplication.customview.CurrencyEditText
+                        android:id="@+id/add.et_total"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:hint="Kategori"
                     app:boxBackgroundMode="outline"
                     app:boxCornerRadiusBottomEnd="16dp"
                     app:boxCornerRadiusBottomStart="16dp"
@@ -278,54 +203,147 @@
                     app:hintTextColor="@color/color_primary">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/add.et_deskripsi"
+                        android:id="@+id/add.et_kategori"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="false" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:hint="Aset"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp"
+                    app:boxStrokeColor="@color/color_primary"
+                    app:boxStrokeWidth="1dp"
+                    app:hintTextColor="@color/color_primary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/add.et_aset"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="false" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:hint="Catatan"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp"
+                    app:boxStrokeColor="@color/color_primary"
+                    app:boxStrokeWidth="1dp"
+                    app:hintTextColor="@color/color_primary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/add.et_catatan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="64dp"
-                    android:layout_marginEnd="16dp"
-                    android:paddingStart="34dp"
-                    app:icon="@drawable/ic_camera"
-                    app:iconSize="24dp"/>
             </LinearLayout>
 
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="16dp"
-                >
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/add.btn_save"
-                    android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_weight="1"
-                    android:text="Simpan"
-                    app:cornerRadius="16dp"
-                    android:layout_marginEnd="8dp"
-                    app:backgroundTint="@null"
-                    android:background="@drawable/cograd_purple_to_blue"
-                    />
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/add.btn_next_lanjut"
-                    android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_weight="1"
-                    app:cornerRadius="16dp"
-                    android:text="Lanjut"
-                    android:textColor="@color/color_primary"
-                    android:textStyle="bold"
-                    android:background="@drawable/cograd_stroke_blue_to_purple"
-                    app:backgroundTint="@null"
-                    android:layout_marginStart="8dp"
-                    />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:elevation="16dp"
+                app:cardCornerRadius="20dp">
 
-</LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingVertical="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="30dp"
+                            android:layout_weight="1"
+                            android:hint="Username"
+                            app:boxBackgroundMode="outline"
+                            app:boxCornerRadiusBottomEnd="16dp"
+                            app:boxCornerRadiusBottomStart="16dp"
+                            app:boxCornerRadiusTopEnd="16dp"
+                            app:boxCornerRadiusTopStart="16dp"
+                            app:boxStrokeColor="@color/color_primary"
+                            app:boxStrokeWidth="1dp"
+                            app:hintTextColor="@color/color_primary">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/add.et_deskripsi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="64dp"
+                            android:layout_marginEnd="16dp"
+                            android:paddingStart="34dp"
+                            app:icon="@drawable/ic_camera"
+                            app:iconSize="24dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/add.btn_save"
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/cograd_purple_to_blue"
+                            android:text="Simpan"
+                            app:backgroundTint="@null"
+                            app:cornerRadius="16dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/add.btn_next_lanjut"
+                            android:layout_width="0dp"
+                            android:layout_height="56dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/cograd_stroke_blue_to_purple"
+                            android:text="Lanjut"
+                            android:textColor="@color/color_primary"
+                            android:textStyle="bold"
+                            app:backgroundTint="@null"
+                            app:cornerRadius="16dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+<!--    keyboard-->
+    <include
+        android:id="@+id/keyboard_num"
+        layout="@layout/keyboard_number"/>
+</FrameLayout>

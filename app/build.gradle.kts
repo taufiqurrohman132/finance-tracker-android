@@ -80,6 +80,9 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.56.2")
     ksp("com.google.dagger:hilt-android-compiler:2.56.2")
 
+    // chart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
     testImplementation("androidx.room:room-testing:2.7.2")
     testImplementation(libs.junit)
 

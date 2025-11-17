@@ -29,6 +29,7 @@ class TransactionViewModel @Inject constructor(
         type: String,
         dateTimeMillis: Long,
         description: String,
+        catatan: String,
         accountId: Long,
         categoryId: Long,
     ) {
@@ -37,6 +38,7 @@ class TransactionViewModel @Inject constructor(
             type = type,
             dateTimeMillis = dateTimeMillis,
             description = description,
+            catatan = catatan,
             accountId = accountId,
             categoryId = categoryId
         )
@@ -49,6 +51,7 @@ class TransactionViewModel @Inject constructor(
         amount: Double,
         type: String,
         dateTimeMillis: Long,
+        catatan: String,
         description: String,
         accountId: Long,
         categoryId: Long,
@@ -58,6 +61,7 @@ class TransactionViewModel @Inject constructor(
             type = type,
             dateTimeMillis = dateTimeMillis,
             description = description,
+            catatan = catatan,
             accountId = accountId,
             categoryId = categoryId
         )

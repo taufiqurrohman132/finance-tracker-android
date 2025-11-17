@@ -32,7 +32,8 @@ data class TransactionEntity(
     val amount: Double = 0.00, // Jumlah uang
     val type: String, // "INCOME" atau "EXPENSE"
     val dateTimeMillis: Long, // Simpan sebagai timestamp (Long) agar mudah di-query
-    val description: String?, // Catatan, bisa null
+    val catatan: String?,
+    val description: String?, //, bisa null
     val percentage: Double = 0.0, // 1.89
     val synced: Boolean = false, // tanda sinkronisasi
 

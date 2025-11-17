@@ -36,7 +36,10 @@ class DashboardAdapter(
         ViewHolder(binding.root) {
         fun bind(itemTransaction: ItemTransaction) {
             binding.apply {
-
+                tvKategoriItem.text = itemTransaction.category
+                tvCatatanItem.text = itemTransaction.catatan
+                tvAsetItem.text = itemTransaction.aset
+                tvJumlahItem.text = itemTransaction.amount.toString()
             }
 
             itemView.setOnClickListener {

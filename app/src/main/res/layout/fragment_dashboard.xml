@@ -82,6 +82,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
+                        <TextView
+                            style="@style/TextBodySecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:id="@+id/dash.chart_income"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

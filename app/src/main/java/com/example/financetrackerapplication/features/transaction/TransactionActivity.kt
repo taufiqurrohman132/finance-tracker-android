@@ -1,11 +1,19 @@
 package com.example.financetrackerapplication.features.transaction
 
+import android.content.Context
 import android.os.Bundle
+import android.text.InputType
 import android.text.format.DateFormat
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
 import com.example.financetrackerapplication.data.datasource.local.entity.CategoryEntity
 import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
@@ -15,14 +23,18 @@ import com.example.financetrackerapplication.databinding.CustomTimePickerBinding
 import com.example.financetrackerapplication.databinding.SheetAddTransCategoryBinding
 import com.example.financetrackerapplication.domain.model.TransOptions
 import com.example.financetrackerapplication.utils.DialogUtils
+import com.example.financetrackerapplication.utils.Extention.convertToDateMillis
 import com.example.financetrackerapplication.utils.Extention.focus
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import kotlin.math.truncate
 
 @AndroidEntryPoint
 class TransactionActivity : AppCompatActivity() {
@@ -50,50 +62,109 @@ class TransactionActivity : AppCompatActivity() {
 
     // inisialize ui / setup ui pertama ketika baru tampil
     private fun init() {
+        binding.apply {
+            // sembunyikan sheet
+//            val sheet = BottomSheetBehavior.from(binding.bottomSheet)
+//            sheet.state = BottomSheetBehavior.STATE_HIDDEN
+
+            /* pastikan keyboard tidak muncul */
+            addEtKategori.apply {
+                showSoftInputOnFocus = false
+                inputType = InputType.TYPE_NULL // pastikan keyboard tidak muncul
+            }
+            addEtAset.apply {
+                inputType = InputType.TYPE_NULL // pastikan keyboard tidak muncul
+                showSoftInputOnFocus = false
+            }
+        }
+
         updateDate()
         updateTime()
     }
 
     private fun setupListener() {
         binding.apply {
-            addEtKategori.setOnClickListener {
-                showBottomSheetDialog { dialog ->
-                    val adapter = OptionsAdapter<CategoryEntity> {
-                        categorySelectedId = it.id
-                        binding.addEtKategori.setText(it.name)
-                        dialog.dismiss()
+            addEtKategori.apply {
+                setOnFocusChangeListener { view, hasFocus ->
+                    if (hasFocus) this.performClick()
+                }
+                setOnClickListener {
+                    showBottomSheetDialog { dialog ->
+                        val adapter = OptionsAdapter<CategoryEntity> {
+                            categorySelectedId = it.id
+                            binding.addEtKategori.setText(it.name)
+                            dialog.dismiss()
+
+                            addEtAset.apply {
+                                requestFocus()
+                                performClick()
+                            }
+                        }
+                        lifecycleScope.launch {
+                            val data = viewModel.getAllCategory()
+                            adapter.submitList(data)
+                        }
+                        adapter
                     }
-                    lifecycleScope.launch {
-                        val data = viewModel.getAllCategory()
-                        adapter.submitList(data)
-                    }
-                    adapter
                 }
             }
-            addEtAset.setOnClickListener {
-                showBottomSheetDialog { dialog ->
-                    val adapter = OptionsAdapter<AsetEntity> {
-                        asetSelectedId = it.id
-                        binding.addEtAset.setText(it.name)
-                        dialog.dismiss()
+            addEtAset.apply {
+                setOnFocusChangeListener { _, hasFocus ->
+                    if (hasFocus) this.performClick()
+                }
+                setOnClickListener {
+                    showBottomSheetDialog { dialog ->
+                        val adapter = OptionsAdapter<AsetEntity> {
+                            asetSelectedId = it.id
+                            binding.addEtAset.setText(it.name)
+                            dialog.dismiss()
+
+                            addEtCatatan.requestFocus()
+                        }
+                        lifecycleScope.launch {
+                            val data = viewModel.getAllAset()
+                            adapter.submitList(data)
+                        }
+                        adapter
                     }
-                    lifecycleScope.launch {
-                        val data = viewModel.getAllAset()
-                        adapter.submitList(data)
-                    }
-                    adapter
                 }
             }
 
             addEtTime.setOnClickListener { showTimePicker(addEtTime.text.toString()) }
             addEtDate.setOnClickListener { showDatePicker(addEtDate.text.toString()) }
             addBtnSave.setOnClickListener { saveTransaction() }
+
+            // setup keyboard
+            keyboardClickListener(
+                addEtTotal,
+                keyboardNum.keyNum1,
+                keyboardNum.keyNum2,
+                keyboardNum.keyNum3,
+                keyboardNum.keyNum4,
+                keyboardNum.keyNum5,
+                keyboardNum.keyNum6,
+                keyboardNum.keyNum7,
+                keyboardNum.keyNum8,
+                keyboardNum.keyNum9,
+                keyboardNum.keyNumNol,
+                keyboardNum.keyNumKoma,
+                keyboardNum.keyNumMinus,
+                keyboardNum.keyNumDelete,
+                keyboardNum.keyNumCalculator,
+                keyboardNum.keyNumSelesai
+            )
+
+            // tampilakan edtieks total ketika keyboard muncul
+            keyboardNum.root.viewTreeObserver.addOnGlobalLayoutListener {
+                transScroll.post {
+                    transScroll.smoothScrollTo(0, addEtTotal.bottom)
+                }
+            }
         }
     }
 
     private fun setupRecyclerView() {
         // aset
-
 
     }
 
@@ -103,8 +174,9 @@ class TransactionActivity : AppCompatActivity() {
                 amount = addEtTotal.text.toString().toDouble(),
                 type = if (buttonGroupTypeTransaction.position == 0) TransactionEntity.TYPE_INCOME
                 else TransactionEntity.TYPE_EXPANSE,
-                dateTimeMillis = System.currentTimeMillis(),
+                dateTimeMillis = addEtDate.text.toString().convertToDateMillis(),
                 description = addEtDeskripsi.text.toString(),
+                catatan = addEtCatatan.text.toString(),
                 accountId = asetSelectedId,
                 categoryId = categorySelectedId
             )
@@ -163,7 +235,6 @@ class TransactionActivity : AppCompatActivity() {
             }
             .setNegativeButton("Batal", null)
             .create()
-
         dialog.show()
     }
 
@@ -179,7 +250,7 @@ class TransactionActivity : AppCompatActivity() {
 
     }
 
-    private fun showTimePicker(timeString: String){
+    private fun showTimePicker(timeString: String) {
         val timeFormatter = SimpleDateFormat("hh:mm", Locale.getDefault())
         val parseTime = timeFormatter.parse(timeString) // konversi
 
@@ -211,12 +282,32 @@ class TransactionActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun updateTime(calendar: Calendar? = null){
+    private fun updateTime(calendar: Calendar? = null) {
         val formatter = SimpleDateFormat("hh:mm", Locale.getDefault())
         val time = calendar?.let {
             formatter.format(it.time)
         } ?: formatter.format(Calendar.getInstance().time)
         binding.addEtTime.setText(time)
         binding.addEtTotal.focus(this)
+    }
+
+    private fun keyboardClickListener(editText: TextInputEditText, vararg button: AppCompatButton){
+        button.forEach {
+            when(it.id){
+                R.id.key_num_delete -> editText.text?.apply {
+                    delete(length -1, length) // hapus karakter terakhir
+                }
+                R.id.key_num_minus -> editText.text?.apply {
+                    insert(0, this.toString())
+                }
+                R.id.key_num_koma -> editText.text?.apply {
+                    if (!this.toString().contains(this)) insert(length -1, this.toString())
+                }
+                R.id.key_num_selesai -> {
+
+                }
+            }
+            editText.append(it.text.toString())
+        }
     }
 }

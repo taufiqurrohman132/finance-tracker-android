@@ -67,6 +67,10 @@ class DashboardFragment : Fragment() {
         }
     }
 
+    private fun setupChart(){
+
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
