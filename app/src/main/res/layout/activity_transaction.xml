@@ -13,10 +13,12 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:backgroundTint="@color/white"
+        android:elevation="1dp"
         app:menu="@menu/transaction_app_bar_menu"
         app:navigationIcon="@drawable/ic_back"
+        android:paddingEnd="8dp"
+        android:paddingStart="0dp"
         app:title="Judul Activity"
-        android:elevation="1dp"
         app:titleTextColor="@android:color/black" />
 
     <androidx.core.widget.NestedScrollView
@@ -27,8 +29,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,25 +48,27 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginBottom="12dp"
                     android:elevation="2dp"
-                    app:borderColor="@color/white"
+                    android:background="@color/white"
                     app:borderWidth="1dp"
+                    app:borderColor="@color/color_primary"
                     app:position="0"
                     app:radius="30dp"
-                    app:ripple="true"
-                    app:rippleColor="@color/black"
-                    app:selectionAnimationInterpolator="anticipateOvershoot">
+                    app:selectedBorderWidth="2dp"
+                    app:selectedBackground="@drawable/cograd_blue_to_purple"
+                    app:selectedBorderColor="#555555"
+                    app:selectedButtonRadius="50dp"
+                    app:rippleColor="@color/color_primary"
+                    app:selectionAnimationInterpolator="fastOutSlowIn">
 
                     <com.addisonelliott.segmentedbutton.SegmentedButton
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="10dp"
+                        app:selectedDrawableTint="@color/black"
                         app:drawable="@drawable/ic_about"
                         app:drawableGravity="left"
                         app:drawablePadding="20dp"
-                        app:rounded="true"
-                        app:selectedBackground="@drawable/cograd_blue_to_purple"
-                        app:selectedDrawableTint="@color/white"
                         app:selectedTextColor="@color/white"
                         app:text="Pendapatan"
                         app:textColor="@color/black" />
@@ -77,9 +81,7 @@
                         app:drawable="@drawable/ic_help_support"
                         app:drawableGravity="left"
                         app:drawablePadding="20dp"
-                        app:rounded="true"
-                        app:selectedBackground="@drawable/cograd_blue_to_purple"
-                        app:selectedDrawableTint="@color/white"
+                        app:selectedDrawableTint="@color/black"
                         app:selectedTextColor="@color/white"
                         app:text="Pengeluaran"
                         app:textColor="@color/black" />
@@ -115,7 +117,7 @@
                             android:layout_height="wrap_content"
                             android:cursorVisible="false"
                             android:focusable="false"
-                            android:inputType="text" />
+                            android:inputType="none" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -342,8 +344,13 @@
     </androidx.core.widget.NestedScrollView>
 
 
-<!--    keyboard-->
+    <!--    keyboard-->
     <include
         android:id="@+id/keyboard_num"
-        layout="@layout/keyboard_number"/>
+        layout="@layout/keyboard_number"
+        android:visibility="invisible" />
+    <include
+        android:id="@+id/keyboard_list_options"
+        layout="@layout/keyboard_list"
+        android:visibility="invisible" />
 </FrameLayout>

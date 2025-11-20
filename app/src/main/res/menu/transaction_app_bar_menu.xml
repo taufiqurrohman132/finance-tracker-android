@@ -3,17 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/transac.search"
-        android:title="@string/search"
-        app:showAsAction="always"
-        app:iconTint="@color/black"
-        android:icon="@drawable/ic_search"
-        tools:ignore="AlwaysShowAction" />
-    <item
-        android:id="@+id/transac.bookmark"
+        android:id="@+id/transac.bookmark_list"
         android:title="@string/bookmark"
         app:showAsAction="always"
         app:iconTint="@color/black"
-        android:icon="@drawable/ic_favorit_not"/>
+        android:icon="@drawable/ic_list_bookmark"/>
 
 </menu>

@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.ActivityAddAsetBinding
-import com.example.financetrackerapplication.utils.Extention.focus
+import com.example.financetrackerapplication.utils.Extention.focusAndHideKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -81,7 +81,7 @@ class AddAsetActivity : AppCompatActivity() {
             .setOnDismissListener {
                 binding.apply {
                     // langsung fokus edit name
-                    addAssetEtName.focus(this@AddAsetActivity)
+                    addAssetEtName.focusAndHideKeyboard()
                 }
             }
             .show()

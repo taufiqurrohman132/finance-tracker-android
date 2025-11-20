@@ -1,16 +1,13 @@
 package com.example.financetrackerapplication.features.transaction
 
-import android.content.Context
 import android.os.Bundle
 import android.text.InputType
 import android.text.format.DateFormat
-import android.view.MotionEvent
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.financetrackerapplication.R
@@ -20,13 +17,10 @@ import com.example.financetrackerapplication.data.datasource.local.entity.Transa
 import com.example.financetrackerapplication.databinding.ActivityTransactionBinding
 import com.example.financetrackerapplication.databinding.CustomDatePickerBinding
 import com.example.financetrackerapplication.databinding.CustomTimePickerBinding
-import com.example.financetrackerapplication.databinding.SheetAddTransCategoryBinding
 import com.example.financetrackerapplication.domain.model.TransOptions
-import com.example.financetrackerapplication.utils.DialogUtils
 import com.example.financetrackerapplication.utils.Extention.convertToDateMillis
-import com.example.financetrackerapplication.utils.Extention.focus
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.financetrackerapplication.utils.Extention.focusAndHideKeyboard
+import com.example.financetrackerapplication.utils.Extention.hideKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +28,6 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-import kotlin.math.truncate
 
 @AndroidEntryPoint
 class TransactionActivity : AppCompatActivity() {
@@ -63,11 +56,11 @@ class TransactionActivity : AppCompatActivity() {
     // inisialize ui / setup ui pertama ketika baru tampil
     private fun init() {
         binding.apply {
-            // sembunyikan sheet
-//            val sheet = BottomSheetBehavior.from(binding.bottomSheet)
-//            sheet.state = BottomSheetBehavior.STATE_HIDDEN
-
             /* pastikan keyboard tidak muncul */
+            addEtTotal.apply {
+                showSoftInputOnFocus = false
+                inputType = InputType.TYPE_NULL // pastikan keyboard tidak muncul
+            }
             addEtKategori.apply {
                 showSoftInputOnFocus = false
                 inputType = InputType.TYPE_NULL // pastikan keyboard tidak muncul
@@ -84,50 +77,67 @@ class TransactionActivity : AppCompatActivity() {
 
     private fun setupListener() {
         binding.apply {
-            addEtKategori.apply {
-                setOnFocusChangeListener { view, hasFocus ->
-                    if (hasFocus) this.performClick()
+            // total
+            addEtTotal.setOnFocusChangeListener { _, hasFocus ->
+                keyboardNum.root.apply {
+                    isVisible = hasFocus
                 }
-                setOnClickListener {
-                    showBottomSheetDialog { dialog ->
-                        val adapter = OptionsAdapter<CategoryEntity> {
-                            categorySelectedId = it.id
-                            binding.addEtKategori.setText(it.name)
-                            dialog.dismiss()
+            }
 
-                            addEtAset.apply {
-                                requestFocus()
-                                performClick()
+            // category
+            addEtKategori.apply {
+                setOnFocusChangeListener { _, hasFocus ->
+                    keyboardListOptions.root.isVisible = hasFocus
+
+                    // show list
+                    if (hasFocus) {
+                        showKeyboardOptionsList {
+                            val adapter = OptionsAdapter<CategoryEntity> {
+                                categorySelectedId = it.id
+                                addEtKategori.setText(it.name)
+
+                                addEtAset.requestFocus()
                             }
+                            lifecycleScope.launch {
+                                val data = viewModel.getAllCategory()
+                                adapter.submitList(data)
+                            }
+                            adapter
                         }
-                        lifecycleScope.launch {
-                            val data = viewModel.getAllCategory()
-                            adapter.submitList(data)
-                        }
-                        adapter
                     }
                 }
             }
+
+            // aset
             addEtAset.apply {
                 setOnFocusChangeListener { _, hasFocus ->
-                    if (hasFocus) this.performClick()
-                }
-                setOnClickListener {
-                    showBottomSheetDialog { dialog ->
-                        val adapter = OptionsAdapter<AsetEntity> {
-                            asetSelectedId = it.id
-                            binding.addEtAset.setText(it.name)
-                            dialog.dismiss()
+                    keyboardListOptions.root.isVisible = hasFocus
 
-                            addEtCatatan.requestFocus()
+                    // show list
+                    if (hasFocus) {
+                        showKeyboardOptionsList {
+                            val adapter = OptionsAdapter<AsetEntity> {
+                                asetSelectedId = it.id
+                                addEtAset.setText(it.name)
+
+                                addEtCatatan.requestFocus()
+                            }
+                            lifecycleScope.launch {
+                                val data = viewModel.getAllAset()
+                                adapter.submitList(data)
+                            }
+                            adapter
                         }
-                        lifecycleScope.launch {
-                            val data = viewModel.getAllAset()
-                            adapter.submitList(data)
-                        }
-                        adapter
                     }
                 }
+            }
+
+            // hide keyboard on non focus
+            addEtCatatan.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) addEtCatatan.hideKeyboard(this@TransactionActivity)
+            }
+            addEtDeskripsi.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) addEtDeskripsi.hideKeyboard(this@TransactionActivity)
             }
 
             addEtTime.setOnClickListener { showTimePicker(addEtTime.text.toString()) }
@@ -136,6 +146,10 @@ class TransactionActivity : AppCompatActivity() {
 
             // setup keyboard
             keyboardClickListener(
+                {
+                    // btn selesai
+                    addEtKategori.requestFocus()
+                },
                 addEtTotal,
                 keyboardNum.keyNum1,
                 keyboardNum.keyNum2,
@@ -165,7 +179,6 @@ class TransactionActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         // aset
-
     }
 
     private fun saveTransaction() {
@@ -189,15 +202,10 @@ class TransactionActivity : AppCompatActivity() {
         }
     }
 
-    private fun <T : TransOptions> showBottomSheetDialog(optionsAdapter: (BottomSheetDialog) -> OptionsAdapter<T>) {
-        val bindingBottomSheet = SheetAddTransCategoryBinding.inflate(layoutInflater)
-        val dialog = DialogUtils.showBottomSheet(this, bindingBottomSheet.root)
-
-        bindingBottomSheet.apply {
-            transRvListCategoryOptions.apply {
-                adapter = optionsAdapter.invoke(dialog)
-                layoutManager = GridLayoutManager(this@TransactionActivity, 3)
-            }
+    private fun <T : TransOptions> showKeyboardOptionsList(optionsAdapter: () -> OptionsAdapter<T>) {
+        binding.keyboardListOptions.keyRvListOptions.apply {
+            adapter = optionsAdapter.invoke()
+            layoutManager = GridLayoutManager(this@TransactionActivity, 3)
         }
     }
 
@@ -246,7 +254,7 @@ class TransactionActivity : AppCompatActivity() {
             simpleDateFormat.format(calendar.time)
         } ?: simpleDateFormat.format(Calendar.getInstance().time)
         binding.addEtDate.setText(date)
-        binding.addEtTotal.focus(this)
+        binding.addEtTotal.focusAndHideKeyboard()
 
     }
 
@@ -288,26 +296,42 @@ class TransactionActivity : AppCompatActivity() {
             formatter.format(it.time)
         } ?: formatter.format(Calendar.getInstance().time)
         binding.addEtTime.setText(time)
-        binding.addEtTotal.focus(this)
+        binding.addEtTotal.focusAndHideKeyboard()
     }
 
-    private fun keyboardClickListener(editText: TextInputEditText, vararg button: AppCompatButton){
-        button.forEach {
-            when(it.id){
-                R.id.key_num_delete -> editText.text?.apply {
-                    delete(length -1, length) // hapus karakter terakhir
-                }
-                R.id.key_num_minus -> editText.text?.apply {
-                    insert(0, this.toString())
-                }
-                R.id.key_num_koma -> editText.text?.apply {
-                    if (!this.toString().contains(this)) insert(length -1, this.toString())
-                }
-                R.id.key_num_selesai -> {
+    private fun keyboardClickListener(nextFocus: () -> Unit, editText: TextInputEditText, vararg button: AppCompatButton) {
+        button.forEach { btn ->
+            btn.setOnClickListener {
+                when (btn.id) {
+                    R.id.key_num_delete -> editText.text?.apply {
+                        delete(length - 1, length) // hapus karakter terakhir
+                    }
 
+                    R.id.key_num_minus -> editText.text?.apply {
+                        val minus = btn.text.toString()
+                        if (!this.toString().contains(minus)) insert(0, btn.text.toString())
+                        else delete(0, 1)
+                    }
+
+                    R.id.key_num_koma -> editText.text?.apply {
+                        // di editteks apa ada koma
+                        val comma = btn.text.toString()
+                        if (!this.toString().contains(comma)) insert(this.length, comma)
+                    }
+
+                    R.id.key_num_selesai -> {
+                        nextFocus.invoke()
+                    }
+
+                    else -> editText.append(btn.text.toString())
                 }
+                Log.d(TAG, "keyboardClickListener: input teks = ${btn.text}")
             }
-            editText.append(it.text.toString())
+
         }
+    }
+
+    companion object {
+        private val TAG = TransactionActivity::class.java.simpleName
     }
 }

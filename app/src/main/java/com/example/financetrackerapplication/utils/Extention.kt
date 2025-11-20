@@ -24,15 +24,11 @@ object Extention {
         }
     }
 
-    fun TextInputEditText.focus(context: Context){
+    fun TextInputEditText.focusAndHideKeyboard(){
         this.post {
             this.isFocusableInTouchMode = true
+            this.showSoftInputOnFocus = false
             this.requestFocus()
-
-            this.postDelayed({
-                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.showSoftInput(this, InputMethodManager.SHOW_FORCED)
-            }, 150)
         }
 
 //        postDelayed({
@@ -43,6 +39,11 @@ object Extention {
 ////            imm.hideSoftInputFromWindow(this.windowToken, 0)
 //            imm.showSoftInput(this, InputMethodManager.SHOW_FORCED)
 //        }, 300)
+    }
+
+    fun TextInputEditText.hideKeyboard(context: Context){
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(this.windowToken, 0)
     }
 
     fun String.convertToDateMillis(): Long{
