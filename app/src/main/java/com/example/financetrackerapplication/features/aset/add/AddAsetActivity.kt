@@ -48,7 +48,7 @@ class AddAsetActivity : AppCompatActivity() {
     private fun saveAset() {
         binding.apply {
             val total = addAssetEtTotal.text.toString()
-                .toDoubleOrNull() // null ketika tidak bisa di convert
+                .toLongOrNull() // null ketika tidak bisa di convert
             if (total == null) {
                 // toast
                 Toast.makeText(

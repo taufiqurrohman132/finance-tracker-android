@@ -54,21 +54,13 @@ class CurrencyEditText @JvmOverloads constructor(
                     return
                 }
 
-                Log.d("TEXT", "afterTextChanged: clean string running")
-                val cleanString = originalString.replace(",", "").replace(".", "")
-                val parsed = cleanString.toLongOrNull() ?: 0
-
-                val formattingString = getFormattedNumber(parsed)
+                //format
+                val formattingString = getFormattedNumber(originalString)
 
                 setText(formattingString)
                 setSelection(formattingString.length)
 
                 isFormatting = false
-                Log.d(
-                    "TEXT", "afterTextChanged: $originalString" +
-                            "clean String = $cleanString" +
-                            "parsed string = $parsed"
-                )
 
             }
 
@@ -80,13 +72,16 @@ class CurrencyEditText @JvmOverloads constructor(
         })
     }
 
-    private fun getFormattedNumber(number: Long): String {
+    private fun getFormattedNumber(originalString: String): String {
+        val cleanString = originalString.replace(",", "").replace(".", "")
+        val parsed = cleanString.toLongOrNull() ?: 0
+
         val symbols = DecimalFormatSymbols(Locale.getDefault()).apply {
             groupingSeparator = '.'
             decimalSeparator = ','
         }
         val decimalFormat = DecimalFormat("#,###", symbols)
-        return decimalFormat.format(number)
+        return decimalFormat.format(parsed)
     }
 
 

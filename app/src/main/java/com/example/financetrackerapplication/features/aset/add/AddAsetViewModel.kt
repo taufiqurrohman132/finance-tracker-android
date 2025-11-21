@@ -17,7 +17,7 @@ class AddAsetViewModel @Inject constructor(
 
     fun saveAset(
         name: String,
-        initialBalance: Double,
+        initialBalance: Long,
         groupAset: String,
         iconName: String?
     ){

@@ -21,6 +21,7 @@ import com.example.financetrackerapplication.domain.model.TransOptions
 import com.example.financetrackerapplication.utils.Extention.convertToDateMillis
 import com.example.financetrackerapplication.utils.Extention.focusAndHideKeyboard
 import com.example.financetrackerapplication.utils.Extention.hideKeyboard
+import com.example.financetrackerapplication.utils.Extention.parseMoneyToLong
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -180,11 +181,11 @@ class TransactionActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         // aset
     }
-
+   
     private fun saveTransaction() {
         binding.apply {
             viewModel.insertTransaction(
-                amount = addEtTotal.text.toString().toDouble(),
+                amount = addEtTotal.text.toString().parseMoneyToLong(),
                 type = if (buttonGroupTypeTransaction.position == 0) TransactionEntity.TYPE_INCOME
                 else TransactionEntity.TYPE_EXPANSE,
                 dateTimeMillis = addEtDate.text.toString().convertToDateMillis(),
@@ -299,12 +300,16 @@ class TransactionActivity : AppCompatActivity() {
         binding.addEtTotal.focusAndHideKeyboard()
     }
 
-    private fun keyboardClickListener(nextFocus: () -> Unit, editText: TextInputEditText, vararg button: AppCompatButton) {
+    private fun keyboardClickListener(
+        nextFocus: () -> Unit,
+        editText: TextInputEditText,
+        vararg button: AppCompatButton
+    ) {
         button.forEach { btn ->
             btn.setOnClickListener {
                 when (btn.id) {
                     R.id.key_num_delete -> editText.text?.apply {
-                        delete(length - 1, length) // hapus karakter terakhir
+                        if (this.isNotBlank()) delete(length - 1, length) // hapus karakter terakhir
                     }
 
                     R.id.key_num_minus -> editText.text?.apply {

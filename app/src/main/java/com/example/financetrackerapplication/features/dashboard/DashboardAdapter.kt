@@ -8,6 +8,7 @@ import com.example.financetrackerapplication.databinding.ItemTransactionBinding
 import com.example.financetrackerapplication.databinding.ItemTransactionHeaderBinding
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.utils.BaseDiffCallback
+import com.example.financetrackerapplication.utils.Extention.parseLongToMoney
 import com.example.financetrackerapplication.utils.TimeUtils
 
 class DashboardAdapter(
@@ -22,8 +23,8 @@ class DashboardAdapter(
                     itemTransHeaderTvDate.text = TimeUtils.getStyleDate(it)
                 }
                 itemTransHeaderTvDay.text = itemTransaction.day
-                itemTransHeaderTvIncome.text = itemTransaction.income.toString()
-                itemTransHeaderTvExpanse.text = itemTransaction.expense.toString()
+                itemTransHeaderTvIncome.text = itemTransaction.income.toString().toLong().parseLongToMoney()
+                itemTransHeaderTvExpanse.text = itemTransaction.expense.toString().toLong().parseLongToMoney()
             }
 
             itemView.setOnClickListener {
@@ -39,7 +40,7 @@ class DashboardAdapter(
                 tvKategoriItem.text = itemTransaction.category
                 tvCatatanItem.text = itemTransaction.catatan
                 tvAsetItem.text = itemTransaction.aset
-                tvJumlahItem.text = itemTransaction.amount.toString()
+                tvJumlahItem.text = itemTransaction.amount.toString().toLong().parseLongToMoney()
             }
 
             itemView.setOnClickListener {

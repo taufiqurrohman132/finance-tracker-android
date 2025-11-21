@@ -29,7 +29,7 @@ data class TransactionEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
 
-    val amount: Double = 0.00, // Jumlah uang
+    val amount: Long = 0, // Jumlah uang
     val type: String, // "INCOME" atau "EXPENSE"
     val dateTimeMillis: Long, // Simpan sebagai timestamp (Long) agar mudah di-query
     val catatan: String?,

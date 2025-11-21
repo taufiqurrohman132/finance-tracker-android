@@ -25,7 +25,7 @@ class TransactionViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun insertTransaction(
-        amount: Double,
+        amount: Long,
         type: String,
         dateTimeMillis: Long,
         description: String,
@@ -48,7 +48,7 @@ class TransactionViewModel @Inject constructor(
     }
 
     fun updateTransaction(
-        amount: Double,
+        amount: Long,
         type: String,
         dateTimeMillis: Long,
         catatan: String,
