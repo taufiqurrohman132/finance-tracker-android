@@ -31,20 +31,16 @@ object Extention {
             this.showSoftInputOnFocus = false
             this.requestFocus()
         }
-
-//        postDelayed({
-//            this.isFocusableInTouchMode = true
-//            this.requestFocus()
-//            val imm =
-//                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-////            imm.hideSoftInputFromWindow(this.windowToken, 0)
-//            imm.showSoftInput(this, InputMethodManager.SHOW_FORCED)
-//        }, 300)
     }
 
     fun TextInputEditText.hideKeyboard(context: Context) {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(this.windowToken, 0)
+    }
+
+    fun TextInputEditText.showKeyboard(context: Context) {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
     }
 
     fun String.convertToDateMillis(): Long {

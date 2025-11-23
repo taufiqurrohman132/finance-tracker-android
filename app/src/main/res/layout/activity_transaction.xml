@@ -115,6 +115,7 @@
                             android:id="@+id/add.et_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            style="@style/TextBodyMain"
                             android:cursorVisible="false"
                             android:focusable="false"
                             android:inputType="none" />
@@ -140,6 +141,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/add.et_time"
                             android:layout_width="match_parent"
+                            style="@style/TextBodyMain"
                             android:layout_height="wrap_content"
                             android:cursorVisible="false"
                             android:focusable="false"
@@ -185,6 +187,7 @@
                     <com.example.financetrackerapplication.customview.CurrencyEditText
                         android:id="@+id/add.et_total"
                         android:layout_width="match_parent"
+                        style="@style/TextBodyMain"
                         android:layout_height="wrap_content"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -206,6 +209,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/add.et_kategori"
+                        style="@style/TextBodyMain"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:cursorVisible="false" />
@@ -229,6 +233,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/add.et_aset"
                         android:layout_width="match_parent"
+                        style="@style/TextBodyMain"
                         android:layout_height="wrap_content"
                         android:cursorVisible="false" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -251,6 +256,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/add.et_catatan"
                         android:layout_width="match_parent"
+                        style="@style/TextBodyMain"
                         android:layout_height="wrap_content"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -281,7 +287,7 @@
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="30dp"
                             android:layout_weight="1"
-                            android:hint="Username"
+                            android:hint="Deskripsi"
                             app:boxBackgroundMode="outline"
                             app:boxCornerRadiusBottomEnd="16dp"
                             app:boxCornerRadiusBottomStart="16dp"
@@ -294,6 +300,7 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/add.et_deskripsi"
                                 android:layout_width="match_parent"
+                                style="@style/TextBodyMain"
                                 android:layout_height="wrap_content"
                                 android:inputType="text" />
                         </com.google.android.material.textfield.TextInputLayout>

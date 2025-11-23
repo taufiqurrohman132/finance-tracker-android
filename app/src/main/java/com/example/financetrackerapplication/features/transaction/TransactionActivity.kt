@@ -22,6 +22,7 @@ import com.example.financetrackerapplication.utils.Extention.convertToDateMillis
 import com.example.financetrackerapplication.utils.Extention.focusAndHideKeyboard
 import com.example.financetrackerapplication.utils.Extention.hideKeyboard
 import com.example.financetrackerapplication.utils.Extention.parseMoneyToLong
+import com.example.financetrackerapplication.utils.Extention.showKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,8 +38,8 @@ class TransactionActivity : AppCompatActivity() {
     private val viewModel: TransactionViewModel by viewModels()
 
     // adapter
-    private lateinit var asetAdapter: OptionsAdapter<AsetEntity>
-    private lateinit var categoryAdapter: OptionsAdapter<CategoryEntity>
+//    private lateinit var asetAdapter: OptionsAdapter<AsetEntity>
+//    private lateinit var categoryAdapter: OptionsAdapter<CategoryEntity>
 
     // input selected
     private var asetSelectedId: Long = -1
@@ -98,6 +99,7 @@ class TransactionActivity : AppCompatActivity() {
                                 addEtKategori.setText(it.name)
 
                                 addEtAset.requestFocus()
+
                             }
                             lifecycleScope.launch {
                                 val data = viewModel.getAllCategory()
@@ -121,7 +123,9 @@ class TransactionActivity : AppCompatActivity() {
                                 asetSelectedId = it.id
                                 addEtAset.setText(it.name)
 
-                                addEtCatatan.requestFocus()
+                                addEtCatatan.apply {
+                                    requestFocus()
+                                }
                             }
                             lifecycleScope.launch {
                                 val data = viewModel.getAllAset()
@@ -136,9 +140,12 @@ class TransactionActivity : AppCompatActivity() {
             // hide keyboard on non focus
             addEtCatatan.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) addEtCatatan.hideKeyboard(this@TransactionActivity)
+                else addEtCatatan.showKeyboard(this@TransactionActivity)
+
             }
             addEtDeskripsi.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) addEtDeskripsi.hideKeyboard(this@TransactionActivity)
+                else addEtDeskripsi.showKeyboard(this@TransactionActivity)
             }
 
             addEtTime.setOnClickListener { showTimePicker(addEtTime.text.toString()) }
@@ -203,6 +210,7 @@ class TransactionActivity : AppCompatActivity() {
         }
     }
 
+    // keyboard custom option list
     private fun <T : TransOptions> showKeyboardOptionsList(optionsAdapter: () -> OptionsAdapter<T>) {
         binding.keyboardListOptions.keyRvListOptions.apply {
             adapter = optionsAdapter.invoke()
@@ -260,7 +268,7 @@ class TransactionActivity : AppCompatActivity() {
     }
 
     private fun showTimePicker(timeString: String) {
-        val timeFormatter = SimpleDateFormat("hh:mm", Locale.getDefault())
+        val timeFormatter = SimpleDateFormat("HH:mm", Locale.getDefault())
         val parseTime = timeFormatter.parse(timeString) // konversi
 
         val timeBinding = CustomTimePickerBinding.inflate(layoutInflater)
@@ -292,7 +300,11 @@ class TransactionActivity : AppCompatActivity() {
     }
 
     private fun updateTime(calendar: Calendar? = null) {
-        val formatter = SimpleDateFormat("hh:mm", Locale.getDefault())
+        /**
+         * hh = format 12-jam
+         * HH = format 24-jam
+         */
+        val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
         val time = calendar?.let {
             formatter.format(it.time)
         } ?: formatter.format(Calendar.getInstance().time)
