@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.text.format.DateFormat
 import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -55,6 +56,7 @@ class TransactionActivity : AppCompatActivity() {
         setupListener()
     }
 
+
     // inisialize ui / setup ui pertama ketika baru tampil
     private fun init() {
         binding.apply {
@@ -72,6 +74,22 @@ class TransactionActivity : AppCompatActivity() {
                 showSoftInputOnFocus = false
             }
         }
+
+        // setup behavior back system
+        this.onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val keyNum = binding.keyboardNum.root
+                val keyList = binding.keyboardListOptions.root
+
+                if (keyNum.isVisible || keyList.isVisible) {
+                    isEnabled = false
+                    keyNum.isVisible = false
+                    keyList.isVisible = false
+                }
+                else this@TransactionActivity.onBackPressedDispatcher.onBackPressed()
+            }
+
+        })
 
         updateDate()
         updateTime()
@@ -148,6 +166,7 @@ class TransactionActivity : AppCompatActivity() {
                 else addEtDeskripsi.showKeyboard(this@TransactionActivity)
             }
 
+            addBtnOptionsRepeat.setOnClickListener {  }
             addEtTime.setOnClickListener { showTimePicker(addEtTime.text.toString()) }
             addEtDate.setOnClickListener { showDatePicker(addEtDate.text.toString()) }
             addBtnSave.setOnClickListener { saveTransaction() }
@@ -155,7 +174,7 @@ class TransactionActivity : AppCompatActivity() {
             // setup keyboard
             keyboardClickListener(
                 {
-                    // btn selesai
+                    // ketiak btn selesai di triger
                     addEtKategori.requestFocus()
                 },
                 addEtTotal,
@@ -188,7 +207,8 @@ class TransactionActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         // aset
     }
-   
+
+
     private fun saveTransaction() {
         binding.apply {
             viewModel.insertTransaction(
@@ -201,6 +221,8 @@ class TransactionActivity : AppCompatActivity() {
                 accountId = asetSelectedId,
                 categoryId = categorySelectedId
             )
+
+            finish()
         }
     }
 

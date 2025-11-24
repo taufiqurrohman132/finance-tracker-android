@@ -55,7 +55,7 @@ class DashboardFragment : Fragment() {
 
     // semua aksi listener di semua komponen
     private fun setupListener(){
-        binding.tesss.setOnClickListener {
+        binding.dashFabAddTrans.setOnClickListener {
             val intent = Intent(requireActivity(), TransactionActivity::class.java)
             startActivity(intent)
         }

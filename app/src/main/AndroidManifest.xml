@@ -14,6 +14,12 @@
         android:theme="@style/Theme.FinanceTrackerApplication"
         tools:targetApi="31">
         <activity
+            android:name=".features.transaction.instalment.AddInstalmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.transaction.repeat.AddRepeatActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.settings.categorymanage.add.AddCategoryActivity"
             android:exported="false" />
         <activity

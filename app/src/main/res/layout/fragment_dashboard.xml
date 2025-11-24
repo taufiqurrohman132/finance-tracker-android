@@ -136,4 +136,14 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dash.fab_add_trans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_camera"
+        app:tint="@color/white"
+        app:backgroundTint="@color/color_primary"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|end"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

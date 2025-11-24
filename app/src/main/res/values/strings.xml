@@ -34,4 +34,21 @@
         <item>Asuransi</item>
         <item>Lainnya</item>
     </string-array>
+
+    <string-array name="group_repeat_transaction">
+        <item>Tidak ada</item>
+        <item>Setiap hari</item>
+        <item>Hari biasa</item>
+        <item>Akhir pekan</item>
+        <item>Setiap minggu</item>
+        <item>Setiap 2 minggu</item>
+        <item>Setiap 4 minggu</item>
+        <item>Setiap bulan</item>
+        <item>Akhir bulan</item>
+        <item>Setiap 2 bulan</item>
+        <item>Setiap 3 bulan</item>
+        <item>Setiap 4 bulan</item>
+        <item>Setiap 6 bulan</item>
+        <item>Setiap 1 tahun</item>
+    </string-array>
 </resources>
