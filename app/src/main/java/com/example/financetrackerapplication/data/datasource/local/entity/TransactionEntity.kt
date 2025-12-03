@@ -1,5 +1,6 @@
 package com.example.financetrackerapplication.data.datasource.local.entity
 
+import android.net.Uri
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -34,6 +35,7 @@ data class TransactionEntity(
     val dateTimeMillis: Long, // Simpan sebagai timestamp (Long) agar mudah di-query
     val catatan: String?,
     val description: String?, //, bisa null
+    val photoDescription: List<Uri> = emptyList(), //, bisa null
     val percentage: Double = 0.0, // 1.89
     val synced: Boolean = false, // tanda sinkronisasi
 

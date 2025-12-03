@@ -1,13 +1,24 @@
 package com.example.financetrackerapplication.features.transaction
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.text.format.DateFormat
 import android.util.Log
+import android.view.Gravity
+import android.view.MenuItem
+import android.view.View
+import android.widget.FrameLayout
+import android.widget.GridLayout
+import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,11 +30,15 @@ import com.example.financetrackerapplication.databinding.ActivityTransactionBind
 import com.example.financetrackerapplication.databinding.CustomDatePickerBinding
 import com.example.financetrackerapplication.databinding.CustomTimePickerBinding
 import com.example.financetrackerapplication.domain.model.TransOptions
+import com.example.financetrackerapplication.features.transaction.previewcamera.AddPreviewActivity
+import com.example.financetrackerapplication.utils.DialogUtils
+import com.example.financetrackerapplication.utils.Extention.clearAllEditTexts
 import com.example.financetrackerapplication.utils.Extention.convertToDateMillis
 import com.example.financetrackerapplication.utils.Extention.focusAndHideKeyboard
 import com.example.financetrackerapplication.utils.Extention.hideKeyboard
 import com.example.financetrackerapplication.utils.Extention.parseMoneyToLong
 import com.example.financetrackerapplication.utils.Extention.showKeyboard
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,10 +52,19 @@ class TransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTransactionBinding
 
     private val viewModel: TransactionViewModel by viewModels()
+    private val listPhotoDescription: MutableList<Uri> = mutableListOf()
 
-    // adapter
-//    private lateinit var asetAdapter: OptionsAdapter<AsetEntity>
-//    private lateinit var categoryAdapter: OptionsAdapter<CategoryEntity>
+    // launcher
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val dataUri = result.data?.getStringExtra(AddPreviewActivity.ARG_URI)?.toUri()
+                dataUri?.let {
+                    addPhotoDescription(dataUri)
+                    Log.d(TAG, "list photo desc add = $listPhotoDescription: ")
+                }
+            }
+        }
 
     // input selected
     private var asetSelectedId: Long = -1
@@ -50,10 +74,23 @@ class TransactionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTransactionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.transToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         init()
         setupRecyclerView()
         setupListener()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 
@@ -82,11 +119,14 @@ class TransactionActivity : AppCompatActivity() {
                 val keyList = binding.keyboardListOptions.root
 
                 if (keyNum.isVisible || keyList.isVisible) {
-                    isEnabled = false
                     keyNum.isVisible = false
                     keyList.isVisible = false
+                    // non aktifkan semua focus edt
+                    binding.root.requestFocus()
+                } else {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
                 }
-                else this@TransactionActivity.onBackPressedDispatcher.onBackPressed()
             }
 
         })
@@ -109,7 +149,7 @@ class TransactionActivity : AppCompatActivity() {
                 setOnFocusChangeListener { _, hasFocus ->
                     keyboardListOptions.root.isVisible = hasFocus
 
-                    // show list
+                    // show keyboard list on focus
                     if (hasFocus) {
                         showKeyboardOptionsList {
                             val adapter = OptionsAdapter<CategoryEntity> {
@@ -134,7 +174,7 @@ class TransactionActivity : AppCompatActivity() {
                 setOnFocusChangeListener { _, hasFocus ->
                     keyboardListOptions.root.isVisible = hasFocus
 
-                    // show list
+                    // show keyboard list on focus
                     if (hasFocus) {
                         showKeyboardOptionsList {
                             val adapter = OptionsAdapter<AsetEntity> {
@@ -166,10 +206,17 @@ class TransactionActivity : AppCompatActivity() {
                 else addEtDeskripsi.showKeyboard(this@TransactionActivity)
             }
 
-            addBtnOptionsRepeat.setOnClickListener {  }
+            addBtnCamera.setOnClickListener {
+                val intent = Intent(this@TransactionActivity, AddPreviewActivity::class.java)
+                launcher.launch(intent)
+            }
             addEtTime.setOnClickListener { showTimePicker(addEtTime.text.toString()) }
             addEtDate.setOnClickListener { showDatePicker(addEtDate.text.toString()) }
             addBtnSave.setOnClickListener { saveTransaction() }
+            addBtnNextLanjut.setOnClickListener {
+                saveTransaction()
+                root.clearAllEditTexts()// bersihkan edteks
+            }
 
             // setup keyboard
             keyboardClickListener(
@@ -211,6 +258,34 @@ class TransactionActivity : AppCompatActivity() {
 
     private fun saveTransaction() {
         binding.apply {
+            // perintah untuk lengkapi
+            when {
+                addEtKategori.text.isNullOrBlank() -> {
+                    addEtKategori.requestFocus()
+                    DialogUtils.showToast(
+                        this@TransactionActivity,
+                        resources.getString(
+                            R.string.warning_message_trans,
+                            addKategoriLayout.hint.toString()
+                        )
+                    )
+                    return@apply
+                }
+                addEtAset.text.isNullOrBlank() -> {
+                    // perintah untuk lengkapi
+                    addEtAset.requestFocus()
+                    DialogUtils.showToast(
+                        this@TransactionActivity,
+                        resources.getString(
+                            R.string.warning_message_trans,
+                            addAsetLayout.hint.toString()
+                        )
+                    )
+                    return@apply
+                }
+            }
+
+
             viewModel.insertTransaction(
                 amount = addEtTotal.text.toString().parseMoneyToLong(),
                 type = if (buttonGroupTypeTransaction.position == 0) TransactionEntity.TYPE_INCOME
@@ -219,6 +294,7 @@ class TransactionActivity : AppCompatActivity() {
                 description = addEtDeskripsi.text.toString(),
                 catatan = addEtCatatan.text.toString(),
                 accountId = asetSelectedId,
+                photoDescription = listPhotoDescription,
                 categoryId = categorySelectedId
             )
 
@@ -367,6 +443,76 @@ class TransactionActivity : AppCompatActivity() {
                 Log.d(TAG, "keyboardClickListener: input teks = ${btn.text}")
             }
 
+        }
+    }
+
+    private fun addPhotoDescription(imgUri: Uri) {
+
+        val cardView = MaterialCardView(this).apply {
+            layoutParams = GridLayout.LayoutParams().apply {
+                width = 0
+                height = 300
+                columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                setMargins(8, 8, 8, 8)
+            }
+            radius = 32f
+            cardElevation = 8f
+        }
+
+        val container = FrameLayout(this).apply {
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+            )
+        }
+
+        // ImageView foto
+        val imageView = ImageView(this).apply {
+            layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+            )
+            scaleType = ImageView.ScaleType.CENTER_CROP
+            setImageURI(imgUri)
+
+            // add to list
+            listPhotoDescription.add(imgUri)
+        }
+
+        // tombol delete
+        val deleteBtn = ImageView(this).apply {
+            layoutParams = FrameLayout.LayoutParams(60, 60).apply {
+                gravity = Gravity.END or Gravity.TOP
+                setMargins(4, 4, 4, 4)
+                setImageResource(R.drawable.ic_remove_circle_outline)
+
+                setOnClickListener {
+                    binding.apply {
+                        addGridPhotoTrans.removeView(cardView)
+                        listPhotoDescription.remove(imgUri)
+                        // tampilkan btn camera
+                        addBtnCamera.visibility = View.VISIBLE
+
+                        Log.d(TAG, "list photo desc remove = $listPhotoDescription: ")
+                    }
+                }
+            }
+        }
+
+        // pasang view
+        container.apply {
+            addView(imageView)
+            addView(deleteBtn)
+        }
+        cardView.addView(container)
+
+        // tambah item grid
+        binding.addGridPhotoTrans.apply {
+            addView(cardView)
+            // sembunyikan kamera
+            if (this.childCount == this.columnCount) {
+                binding.addBtnCamera.visibility = View.GONE
+            }
         }
     }
 

@@ -3,10 +3,13 @@ package com.example.financetrackerapplication.utils
 import android.content.Context
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -76,4 +79,17 @@ object Extention {
         val format = NumberFormat.getCurrencyInstance(Locale.getDefault())
         return format.format(result)
     }
+
+    // NON FOCUS ALL editeks
+    fun View.clearAllEditTexts(){
+        if (this is EditText){
+            this.text.clear()
+        }else if (this is ViewGroup) {
+            for (i in 0 until this.childCount) {
+                this.getChildAt(i).clearAllEditTexts()
+            }
+        }
+    }
+
+
 }

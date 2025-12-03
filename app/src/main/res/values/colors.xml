@@ -52,8 +52,8 @@
 
     <color name="color_primary">#2383FC</color> <!-- contoh biru DANA -->
     <color name="color_primary_gradiant">#442DB2</color>
-<!--    <color name="color_primary_dark">#0D6EBD</color> &lt;!&ndash; lebih gelap &ndash;&gt;-->
-<!--    <color name="color_primary_light">#64B5F6</color> &lt;!&ndash; lebih terang &ndash;&gt;-->
+    <!--    <color name="color_primary_dark">#0D6EBD</color> &lt;!&ndash; lebih gelap &ndash;&gt;-->
+    <!--    <color name="color_primary_light">#64B5F6</color> &lt;!&ndash; lebih terang &ndash;&gt;-->
 
     <!-- 🔹 Heading / Title -->
     <color name="text_heading">#000000</color>
@@ -98,5 +98,12 @@
     <color name="text_form_input">#212121</color>
     <color name="text_form_hint">#9E9E9E</color>
 
+    <!--    grey-->
+    <color name="grey_solid">#000000</color>
+    <color name="grey_trans_10">#1A000000</color>
+    <color name="grey_trans_20">#33000000</color>
+    <color name="grey_trans_40">#66000000</color>
+    <color name="grey_trans_60">#99000000</color>
+    <color name="grey_trans_80">#CC000000</color>
 
 </resources>

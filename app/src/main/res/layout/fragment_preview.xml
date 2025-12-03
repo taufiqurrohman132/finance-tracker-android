@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".features.transaction.previewcamera.PreviewFragment">
+
+    <FrameLayout
+        android:id="@+id/btnCaptureNext"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_margin="24dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:background="@drawable/shutter_outer"
+        android:padding="9dp">   <!-- jarak transparan -->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shutter_inner"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_check"
+            android:layout_margin="8dp"
+            app:tint="@color/black" />
+
+    </FrameLayout>
+
+
+</FrameLayout>

@@ -1,5 +1,6 @@
 package com.example.financetrackerapplication.features.transaction
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -29,6 +30,7 @@ class TransactionViewModel @Inject constructor(
         type: String,
         dateTimeMillis: Long,
         description: String,
+        photoDescription: List<Uri>,
         catatan: String,
         accountId: Long,
         categoryId: Long,
@@ -38,6 +40,7 @@ class TransactionViewModel @Inject constructor(
             type = type,
             dateTimeMillis = dateTimeMillis,
             description = description,
+            photoDescription = photoDescription,
             catatan = catatan,
             accountId = accountId,
             categoryId = categoryId
@@ -52,6 +55,7 @@ class TransactionViewModel @Inject constructor(
         type: String,
         dateTimeMillis: Long,
         catatan: String,
+        photoDescription: List<Uri>,
         description: String,
         accountId: Long,
         categoryId: Long,
@@ -61,6 +65,7 @@ class TransactionViewModel @Inject constructor(
             type = type,
             dateTimeMillis = dateTimeMillis,
             description = description,
+            photoDescription = photoDescription,
             catatan = catatan,
             accountId = accountId,
             categoryId = categoryId

@@ -83,6 +83,15 @@ dependencies {
     // chart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    // camera x
+    // The following line is optional, as the core library is included indirectly by camera-camera2
+    implementation("androidx.camera:camera-core:1.5.1")
+    implementation("androidx.camera:camera-camera2:1.5.1")
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation("androidx.camera:camera-lifecycle:1.5.1")
+    // If you want to additionally use the CameraX View class
+    implementation("androidx.camera:camera-view:1.5.1")
+
     testImplementation("androidx.room:room-testing:2.7.2")
     testImplementation(libs.junit)
 

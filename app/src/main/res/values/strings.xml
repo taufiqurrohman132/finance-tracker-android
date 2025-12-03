@@ -21,6 +21,8 @@
     <string name="aset">Aset</string>
     <string name="grup_aset">Grup Aset</string>
 
+    <!--    warning massage-->
+    <string name="warning_message_trans">Silahkan tentukan %1$s</string>
     <string-array name="group_option_aset">
         <item>Tunai</item>
         <item>Bank</item>

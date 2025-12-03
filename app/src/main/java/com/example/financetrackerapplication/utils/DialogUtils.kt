@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.Toast
 import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.utils.Extention.setupStyle
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -28,7 +29,11 @@ object DialogUtils {
             true
         )
         pop.elevation = 12f
+        pop.elevation = 12f
 
-        po
+    }
+
+    fun showToast(context: Context, msg: String){
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 }

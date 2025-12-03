@@ -5,6 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".features.transaction.TransactionActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -14,10 +16,10 @@
         android:background="?attr/colorPrimary"
         android:backgroundTint="@color/white"
         android:elevation="1dp"
-        app:menu="@menu/transaction_app_bar_menu"
-        app:navigationIcon="@drawable/ic_back"
-        android:paddingEnd="8dp"
         android:paddingStart="0dp"
+        android:paddingEnd="8dp"
+        app:menu="@menu/transaction_app_bar_menu"
+        app:navigationIcon ="@drawable/ic_back"
         app:title="Judul Activity"
         app:titleTextColor="@android:color/black" />
 
@@ -38,6 +40,7 @@
                 android:background="@color/white"
                 android:elevation="4dp"
                 android:orientation="vertical"
+                android:paddingHorizontal="8dp"
                 android:paddingVertical="16dp">
 
                 <com.addisonelliott.segmentedbutton.SegmentedButtonGroup
@@ -45,19 +48,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_marginBottom="12dp"
-                    android:elevation="2dp"
                     android:background="@color/white"
-                    app:borderWidth="1dp"
+                    android:elevation="2dp"
                     app:borderColor="@color/color_primary"
+                    app:borderWidth="1dp"
                     app:position="0"
                     app:radius="30dp"
-                    app:selectedBorderWidth="2dp"
+                    app:rippleColor="@color/color_primary"
                     app:selectedBackground="@drawable/cograd_blue_to_purple"
                     app:selectedBorderColor="#555555"
+                    app:selectedBorderWidth="2dp"
                     app:selectedButtonRadius="50dp"
-                    app:rippleColor="@color/color_primary"
                     app:selectionAnimationInterpolator="fastOutSlowIn">
 
                     <com.addisonelliott.segmentedbutton.SegmentedButton
@@ -65,10 +68,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="10dp"
-                        app:selectedDrawableTint="@color/black"
                         app:drawable="@drawable/ic_about"
                         app:drawableGravity="left"
                         app:drawablePadding="20dp"
+                        app:selectedDrawableTint="@color/black"
                         app:selectedTextColor="@color/white"
                         app:text="Pendapatan"
                         app:textColor="@color/black" />
@@ -97,7 +100,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="4dp"
                         android:layout_weight="2"
@@ -113,9 +116,9 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/add.et_date"
+                            style="@style/TextBodyMain"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/TextBodyMain"
                             android:cursorVisible="false"
                             android:focusable="false"
                             android:inputType="none" />
@@ -125,7 +128,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8sp"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="4dp"
                         android:layout_weight="1"
                         android:hint="Time"
@@ -140,8 +143,8 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/add.et_time"
-                            android:layout_width="match_parent"
                             style="@style/TextBodyMain"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:cursorVisible="false"
                             android:focusable="false"
@@ -149,29 +152,29 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/add.btn_options_repeat"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
-                        android:maxLines="2"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="6dp"
-                        android:text="berulang/cicilan"
-                        android:textSize="11sp"
-                        app:cornerRadius="24dp"
-                        app:icon="@drawable/ic_looping"
-                        app:iconGravity="start"
-                        app:iconPadding="0dp"
-                        app:iconSize="20dp" />
+                    <!--                    <com.google.android.material.button.MaterialButton-->
+                    <!--                        android:id="@+id/add.btn_options_repeat"-->
+                    <!--                        android:layout_width="0dp"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:layout_marginEnd="16dp"-->
+                    <!--                        android:layout_weight="1"-->
+                    <!--                        android:maxLines="2"-->
+                    <!--                        android:paddingStart="8dp"-->
+                    <!--                        android:paddingEnd="6dp"-->
+                    <!--                        android:text="berulang/cicilan"-->
+                    <!--                        android:textSize="11sp"-->
+                    <!--                        app:cornerRadius="24dp"-->
+                    <!--                        app:icon="@drawable/ic_looping"-->
+                    <!--                        app:iconGravity="start"-->
+                    <!--                        app:iconPadding="0dp"-->
+                    <!--                        app:iconSize="20dp" />-->
                 </LinearLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_marginBottom="4dp"
                     android:hint="Total"
                     app:boxBackgroundMode="outline"
@@ -187,16 +190,17 @@
 
                     <com.example.financetrackerapplication.customview.CurrencyEditText
                         android:id="@+id/add.et_total"
-                        android:layout_width="match_parent"
                         style="@style/TextBodyMain"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/add.kategori_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_marginBottom="4dp"
                     android:hint="Kategori"
                     app:boxBackgroundMode="outline"
@@ -217,9 +221,10 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/add.aset_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_marginBottom="4dp"
                     android:hint="Aset"
                     app:boxBackgroundMode="outline"
@@ -233,8 +238,8 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/add.et_aset"
-                        android:layout_width="match_parent"
                         style="@style/TextBodyMain"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:cursorVisible="false" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -242,7 +247,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_marginBottom="4dp"
                     android:hint="Catatan"
                     app:boxBackgroundMode="outline"
@@ -256,8 +261,8 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/add.et_catatan"
-                        android:layout_width="match_parent"
                         style="@style/TextBodyMain"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -274,6 +279,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
+                    android:paddingHorizontal="8dp"
                     android:paddingVertical="16dp">
 
                     <LinearLayout
@@ -284,9 +290,8 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="30dp"
                             android:layout_weight="1"
                             android:hint="Deskripsi"
                             app:boxBackgroundMode="outline"
@@ -300,27 +305,39 @@
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/add.et_deskripsi"
-                                android:layout_width="match_parent"
                                 style="@style/TextBodyMain"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="text" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.button.MaterialButton
+                            android:id="@+id/add.btn_camera"
                             android:layout_width="wrap_content"
                             android:layout_height="64dp"
-                            android:layout_marginEnd="16dp"
+                            android:layout_marginEnd="8dp"
                             android:paddingStart="34dp"
+                            android:paddingEnd="0dp"
+                            app:backgroundTint="@color/grey_trans_10"
                             app:icon="@drawable/ic_camera"
+                            app:iconTint="@color/black"
                             app:iconSize="24dp" />
                     </LinearLayout>
 
+                    <GridLayout
+                        android:id="@+id/add.grid_photo_trans"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="12dp"
+                        android:layout_marginVertical="4dp"
+                        android:columnCount="3"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="16dp">
+                        android:paddingHorizontal="8dp">
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/add.btn_save"
@@ -357,6 +374,7 @@
         android:id="@+id/keyboard_num"
         layout="@layout/keyboard_number"
         android:visibility="invisible" />
+
     <include
         android:id="@+id/keyboard_list_options"
         layout="@layout/keyboard_list"
