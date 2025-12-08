@@ -7,6 +7,8 @@ import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
 import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
@@ -16,7 +18,7 @@ object TimeUtils {
     fun getDayName(dateStr: String): String {
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         val date = LocalDate.parse(dateStr, formatter)
-        return date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale("id"))
+        return date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
     }
 
     fun getDate(dateTimeMillis: Long): String {
@@ -25,6 +27,24 @@ object TimeUtils {
             .atZone(ZoneId.systemDefault())
             .toLocalDate()
             .format(formatter)
+    }
+    fun getTime(dateTimeMillis: Long): String {
+        val formatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
+        return Instant.ofEpochMilli(dateTimeMillis)
+            .atZone(ZoneId.systemDefault())
+            .toLocalTime()
+            .format(formatter)
+    }
+
+    fun combineDateTimeMillis(dateStr: String, time: String): Long{
+        return try {
+            val localDate = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+            val localTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"))
+            val localDateTime = LocalDateTime.of(localDate, localTime)
+            localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        }catch (e: Exception){
+            System.currentTimeMillis()
+        }
     }
 
     fun getStyleDate(dateStr: String): CharSequence {

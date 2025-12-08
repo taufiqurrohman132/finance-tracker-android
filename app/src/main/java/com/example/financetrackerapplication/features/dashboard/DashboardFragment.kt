@@ -2,14 +2,17 @@ package com.example.financetrackerapplication.features.dashboard
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.FragmentDashboardBinding
 import com.example.financetrackerapplication.features.transaction.TransactionActivity
+import com.example.financetrackerapplication.utils.Extention.parseLongToMoney
+import com.example.financetrackerapplication.utils.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,13 +40,15 @@ class DashboardFragment : Fragment() {
         observer()
     }
 
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         dashoardAdapter = DashboardAdapter(
             onClickItemHeader = { transaction ->
-
+                val intent = Intent(requireContext(), TransactionActivity::class.java)
+                intent.putExtra(TransactionActivity.TRANS_TIME_MILLIS, transaction.dateTimeMillis)
+                startActivity(intent)
             },
             onClickItemBody = { transaction ->
-
+                Navigation.navigateToTransaction(requireContext(), transaction.id)
             }
         )
 
@@ -54,20 +59,27 @@ class DashboardFragment : Fragment() {
     }
 
     // semua aksi listener di semua komponen
-    private fun setupListener(){
+    private fun setupListener() {
         binding.dashFabAddTrans.setOnClickListener {
             val intent = Intent(requireActivity(), TransactionActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun observer(){
-        viewModel.listTransaction.observe(viewLifecycleOwner){ listItem ->
-            dashoardAdapter.submitList(listItem)
+    private fun observer() {
+        viewModel.apply {
+            // header total
+            totalBalance.observe(viewLifecycleOwner) { total ->
+                binding.dashTvTotalSaldo.text =
+                    requireActivity().getString(R.string.total_balance, total.parseLongToMoney())
+            }
+            listTransaction.observe(viewLifecycleOwner) { listItem ->
+                dashoardAdapter.submitList(listItem)
+            }
         }
     }
 
-    private fun setupChart(){
+    private fun setupChart() {
 
     }
 

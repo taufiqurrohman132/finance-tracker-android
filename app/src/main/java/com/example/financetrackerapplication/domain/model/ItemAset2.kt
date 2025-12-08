@@ -4,22 +4,18 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ItemTransaction(
+data class ItemAset2(
     val id: Long? = null,
     val type: Int, // identitas HEADER / ITEM
+    val isVisible: Boolean = true,
 
     // type = HEADER
-    val dateTimeMillis: Long? = null,
-    val day: String? = null,
-    val income: Long? = null,
-    val expense: Long? = null,
+    val groupAset: String? = null, // HEADER and ITEM
+    val total: Long? = null,
 
     // type = ITEM
-    val category: String? = null,
-    val catatan: String? = null,
-    val aset: String? = null,
-    val amount: Long? = null,
-    val percentage: Double? = null
+    val name: String? = null,
+    val initialBalance: Long? = null,
 ): Parcelable {
     companion object {
         const val HEADER = 0

@@ -6,6 +6,7 @@
     android:layout_marginVertical="4dp"
     android:background="@drawable/cograd_stroke_blue_to_purple"
     android:gravity="center_vertical"
+    android:foreground="@drawable/ripple_custom"
     android:orientation="horizontal"
     android:paddingHorizontal="12dp"
     android:paddingVertical="4dp">
@@ -13,6 +14,7 @@
     <TextView
         android:id="@+id/item.trans.header.tv_date"
         android:layout_width="wrap_content"
+        style="@style/TextBodyMain"
         android:layout_height="wrap_content"
         android:text="24.45.2004" />
 
@@ -27,6 +29,7 @@
         <TextView
             android:id="@+id/item.trans.header.tv_day"
             android:layout_width="wrap_content"
+            style="@style/TextBodyMain"
             android:layout_height="wrap_content"
             android:text="Min"
             android:textColor="@color/white" />
@@ -35,6 +38,7 @@
     <TextView
         android:id="@+id/item.trans.header.tv_income"
         android:layout_width="0dp"
+        style="@style/TextBodyMain"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="end"
@@ -43,6 +47,7 @@
         android:textColor="@android:color/holo_green_light" />
 
     <TextView
+        style="@style/TextBodyMain"
         android:id="@+id/item.trans.header.tv_expanse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

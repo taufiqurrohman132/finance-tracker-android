@@ -20,7 +20,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
@@ -33,11 +35,12 @@ import com.example.financetrackerapplication.domain.model.TransOptions
 import com.example.financetrackerapplication.features.transaction.previewcamera.AddPreviewActivity
 import com.example.financetrackerapplication.utils.DialogUtils
 import com.example.financetrackerapplication.utils.Extention.clearAllEditTexts
-import com.example.financetrackerapplication.utils.Extention.convertToDateMillis
 import com.example.financetrackerapplication.utils.Extention.focusAndHideKeyboard
 import com.example.financetrackerapplication.utils.Extention.hideKeyboard
+import com.example.financetrackerapplication.utils.Extention.parseLongToMoney
 import com.example.financetrackerapplication.utils.Extention.parseMoneyToLong
 import com.example.financetrackerapplication.utils.Extention.showKeyboard
+import com.example.financetrackerapplication.utils.TimeUtils
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -55,7 +58,7 @@ class TransactionActivity : AppCompatActivity() {
     private val listPhotoDescription: MutableList<Uri> = mutableListOf()
 
     // launcher
-    private val launcher =
+    private val launcherCamera =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val dataUri = result.data?.getStringExtra(AddPreviewActivity.ARG_URI)?.toUri()
@@ -70,6 +73,8 @@ class TransactionActivity : AppCompatActivity() {
     private var asetSelectedId: Long = -1
     private var categorySelectedId: Long = -1
 
+    private var transactionId: Long? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTransactionBinding.inflate(layoutInflater)
@@ -80,6 +85,7 @@ class TransactionActivity : AppCompatActivity() {
         init()
         setupRecyclerView()
         setupListener()
+        observer()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -96,6 +102,10 @@ class TransactionActivity : AppCompatActivity() {
 
     // inisialize ui / setup ui pertama ketika baru tampil
     private fun init() {
+        // inisialize id data
+        transactionId = intent.getSerializableExtra(TRANS_ID) as? Long
+        binding.addTotalLayout.isExpandedHintEnabled = false
+
         binding.apply {
             /* pastikan keyboard tidak muncul */
             addEtTotal.apply {
@@ -133,6 +143,24 @@ class TransactionActivity : AppCompatActivity() {
 
         updateDate()
         updateTime()
+
+        // ketika update, kalo ada focus berarti update
+        // pantau
+        binding.root.viewTreeObserver.addOnGlobalFocusChangeListener { view, newFocus ->
+            if (newFocus != null) transactionId?.let {
+                binding.addBtnUpdate.isVisible = true
+            }
+        }
+        transactionId?.let {
+            binding.btnAddLayout.isVisible = false
+        }
+
+        // from tab header home
+        val timeFromHeader = intent.getSerializableExtra(TRANS_TIME_MILLIS) as? Long
+        timeFromHeader?.let { dateTimeMillis->
+            updateDate(dateTimeMillis)
+            updateTime(dateTimeMillis)
+        }
     }
 
     private fun setupListener() {
@@ -199,23 +227,31 @@ class TransactionActivity : AppCompatActivity() {
             addEtCatatan.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) addEtCatatan.hideKeyboard(this@TransactionActivity)
                 else addEtCatatan.showKeyboard(this@TransactionActivity)
-
             }
             addEtDeskripsi.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) addEtDeskripsi.hideKeyboard(this@TransactionActivity)
                 else addEtDeskripsi.showKeyboard(this@TransactionActivity)
             }
 
-            addBtnCamera.setOnClickListener {
+//            buttonGroupTypeTransaction.setOnTouchListener { view, motionEvent ->
+//                saveToUpdateButton()
+//                true
+//            }
+            this.addBtnCamera.setOnClickListener {
                 val intent = Intent(this@TransactionActivity, AddPreviewActivity::class.java)
-                launcher.launch(intent)
+                launcherCamera.launch(intent)
+                saveToUpdateButton()
             }
             addEtTime.setOnClickListener { showTimePicker(addEtTime.text.toString()) }
             addEtDate.setOnClickListener { showDatePicker(addEtDate.text.toString()) }
-            addBtnSave.setOnClickListener { saveTransaction() }
+            addBtnSave.setOnClickListener {
+                saveTransaction(true)
+            }
             addBtnNextLanjut.setOnClickListener {
-                saveTransaction()
-                root.clearAllEditTexts()// bersihkan edteks
+                saveTransaction(false)
+            }
+            addBtnUpdate.setOnClickListener {
+                updateTransaction()
             }
 
             // setup keyboard
@@ -255,10 +291,18 @@ class TransactionActivity : AppCompatActivity() {
         // aset
     }
 
+    private fun saveToUpdateButton() {
+        transactionId?.let {
+            binding.addBtnUpdate.isVisible = true
+            binding.btnAddLayout.isVisible = false
+        }
+    }
 
-    private fun saveTransaction() {
+
+    private fun saveTransaction(isFinish: Boolean) {
         binding.apply {
             // perintah untuk lengkapi
+            Log.d(TAG, "updateTransaction: list photo = $listPhotoDescription")
             when {
                 addEtKategori.text.isNullOrBlank() -> {
                     addEtKategori.requestFocus()
@@ -271,6 +315,7 @@ class TransactionActivity : AppCompatActivity() {
                     )
                     return@apply
                 }
+
                 addEtAset.text.isNullOrBlank() -> {
                     // perintah untuk lengkapi
                     addEtAset.requestFocus()
@@ -290,7 +335,10 @@ class TransactionActivity : AppCompatActivity() {
                 amount = addEtTotal.text.toString().parseMoneyToLong(),
                 type = if (buttonGroupTypeTransaction.position == 0) TransactionEntity.TYPE_INCOME
                 else TransactionEntity.TYPE_EXPANSE,
-                dateTimeMillis = addEtDate.text.toString().convertToDateMillis(),
+                dateTimeMillis = TimeUtils.combineDateTimeMillis(
+                    addEtDate.text.toString(),
+                    addEtTime.text.toString()
+                ),
                 description = addEtDeskripsi.text.toString(),
                 catatan = addEtCatatan.text.toString(),
                 accountId = asetSelectedId,
@@ -298,13 +346,103 @@ class TransactionActivity : AppCompatActivity() {
                 categoryId = categorySelectedId
             )
 
-            finish()
+            if (isFinish) {
+                finish()
+                return@apply
+            }
+
+            root.clearAllEditTexts()// bersihkan edteks
+            addGridPhotoTrans.removeAllViews()
+            addEtTotal.requestFocus()
+
+            updateDate()
+            updateTime()
+        }
+    }
+
+    private fun updateTransaction() {
+        binding.apply {
+            Log.d(TAG, "updateTransaction: list photo = $listPhotoDescription")
+            // perintah untuk lengkapi
+            transactionId?.let { id ->
+                viewModel.updateTransaction(
+                    id = id,
+                    amount = addEtTotal.text.toString().parseMoneyToLong(),
+                    type = if (buttonGroupTypeTransaction.position == 0) TransactionEntity.TYPE_INCOME
+                    else TransactionEntity.TYPE_EXPANSE,
+                    dateTimeMillis = TimeUtils.combineDateTimeMillis(
+                        addEtDate.text.toString(),
+                        addEtTime.text.toString()
+                    ),
+                    description = addEtDeskripsi.text.toString(),
+                    catatan = addEtCatatan.text.toString(),
+                    accountId = asetSelectedId,
+                    photoDescription = listPhotoDescription,
+                    categoryId = categorySelectedId
+                ).also {
+                    finish()
+                }
+            }
         }
     }
 
     private fun observer() {
         viewModel.apply {
+            transactionId?.let { id ->
+                binding.apply {
+                    listOf(
+                        addDateLayout,
+                        addTimeLayout,
+                        addTotalLayout,
+                        addDescLayout,
+                        addCatatanLayout,
+                        addKategoriLayout,
+                        addAsetLayout
+                    ).forEach { it.isExpandedHintEnabled = false }
+                }
 
+                lifecycleScope.launch {
+                    getTransaction(id).collect { data ->
+                        data?.let {
+                            val transaction = data.transaction
+                            val category = data.category
+                            val asset = data.account
+
+                            // set fk
+                            asetSelectedId = data.account.id
+                            categorySelectedId = data.category.id
+                            Log.d(TAG, "observer: get transaction is observe")
+
+                            binding.apply {
+                                buttonGroupTypeTransaction.setPosition(
+                                    if (transaction.type == TransactionEntity.TYPE_INCOME) 0 else 1,
+                                    false
+                                )
+
+                                addEtTotal.setText(transaction.amount.parseLongToMoney())
+                                addEtCatatan.setText(transaction.catatan.toString())
+                                addEtDeskripsi.setText(transaction.description.toString())
+
+                                addEtKategori.setText(category.name)
+                                addEtAset.setText(asset.name)
+
+                                updateDate(transaction.dateTimeMillis)
+                                updateTime(transaction.dateTimeMillis)
+
+                                val uriIsNotEmpty = transaction.photoDescription.isNotEmpty() &&
+                                        transaction.photoDescription.any { it.toString().isNotBlank() }
+                                if (uriIsNotEmpty) {
+                                    Log.d(TAG, "observer: photo desc = ${transaction.photoDescription}")
+                                    addGridPhotoTrans.removeAllViews() // bersihkan biar nggk duplikat
+                                    transaction.photoDescription.forEach { uri ->
+                                        addPhotoDescription(uri)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -346,7 +484,7 @@ class TransactionActivity : AppCompatActivity() {
                 val selected = calendar.apply {
                     set(year, month, day)
                 }
-                updateDate(selected)
+                updateDate(selected.timeInMillis)
             }
             .setNegativeButton("Batal", null)
             .create()
@@ -354,14 +492,16 @@ class TransactionActivity : AppCompatActivity() {
     }
 
     // update tanggal
-    private fun updateDate(calendar: Calendar? = null) {
+    private fun updateDate(newDate: Long? = null) {
         val formatter = "dd-MM-yyyy"
         val simpleDateFormat = SimpleDateFormat(formatter, Locale.getDefault())
-        val date = calendar?.let {
-            simpleDateFormat.format(calendar.time)
-        } ?: simpleDateFormat.format(Calendar.getInstance().time)
+        val date = newDate?.let {
+            simpleDateFormat.format(newDate)
+        } ?: simpleDateFormat.format(Calendar.getInstance().timeInMillis)
         binding.addEtDate.setText(date)
-        binding.addEtTotal.focusAndHideKeyboard()
+        if (transactionId == null) {
+            binding.addEtTotal.focusAndHideKeyboard()
+        }
 
     }
 
@@ -392,22 +532,25 @@ class TransactionActivity : AppCompatActivity() {
                     set(Calendar.HOUR_OF_DAY, hour)
                     set(Calendar.MINUTE, minute)
                 }
-                updateTime(selected)
+                updateTime(selected.timeInMillis)
             }.setNegativeButton("Batal", null)
             .show()
     }
 
-    private fun updateTime(calendar: Calendar? = null) {
+    private fun updateTime(newTime: Long? = null) {
         /**
          * hh = format 12-jam
          * HH = format 24-jam
          */
         val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
-        val time = calendar?.let {
-            formatter.format(it.time)
-        } ?: formatter.format(Calendar.getInstance().time)
+        val time = newTime?.let {
+            formatter.format(it)
+        } ?: formatter.format(Calendar.getInstance().timeInMillis)
         binding.addEtTime.setText(time)
-        binding.addEtTotal.focusAndHideKeyboard()
+        // non focus ketika edit
+        if (transactionId == null) {
+            binding.addEtTotal.focusAndHideKeyboard()
+        }
     }
 
     private fun keyboardClickListener(
@@ -477,6 +620,7 @@ class TransactionActivity : AppCompatActivity() {
 
             // add to list
             listPhotoDescription.add(imgUri)
+            Log.d(TAG, "addPhotoDescription: listPhoto descripsiotn = $listPhotoDescription")
         }
 
         // tombol delete
@@ -487,6 +631,7 @@ class TransactionActivity : AppCompatActivity() {
                 setImageResource(R.drawable.ic_remove_circle_outline)
 
                 setOnClickListener {
+                    saveToUpdateButton()
                     binding.apply {
                         addGridPhotoTrans.removeView(cardView)
                         listPhotoDescription.remove(imgUri)
@@ -518,5 +663,7 @@ class TransactionActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = TransactionActivity::class.java.simpleName
+        val TRANS_ID = "trans_id"
+        val TRANS_TIME_MILLIS = "trans_time_millis"
     }
 }

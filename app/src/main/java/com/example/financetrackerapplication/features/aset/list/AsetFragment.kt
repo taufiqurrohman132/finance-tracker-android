@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.FragmentAsetBinding
 import com.example.financetrackerapplication.features.aset.add.AddAsetActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,15 +40,18 @@ class AsetFragment : Fragment() {
     }
 
     private fun observer() {
-        viewModel.listAset.observe(requireActivity()) { listAset ->
+        val orderKeys = requireContext().resources.getStringArray(R.array.group_option_aset).toList()
+        viewModel.getListAset(orderKeys).observe(requireActivity()) { listAset ->
             asetAdapter.submitList(listAset)
         }
     }
 
     private fun setupRecyclerView() {
-        asetAdapter = AsetAdapter { aset ->
+        asetAdapter = AsetAdapter(
+            onClickItemBody = {
 
-        }
+            }
+        )
 
         binding.asetRvAset.apply {
             adapter = asetAdapter

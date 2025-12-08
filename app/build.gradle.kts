@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.google.gms.google.services)
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -82,6 +83,9 @@ dependencies {
 
     // chart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    // expanable recycler view
+    implementation("com.github.kamrul3288:Expandable-Recyclerview-List-Android:1.0.2")
 
     // camera x
     // The following line is optional, as the core library is included indirectly by camera-camera2

@@ -4,8 +4,6 @@ import com.example.financetrackerapplication.data.datasource.local.entity.Transa
 import com.example.financetrackerapplication.data.datasource.local.entity.TransactionWithCategoryAndAccount
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.utils.TimeUtils
-import java.time.Instant
-import java.time.ZoneId
 
 class GroupTransactionsUseCase {
 
@@ -13,13 +11,15 @@ class GroupTransactionsUseCase {
         val grouped = listTransaction.groupBy {
             // convert dati millis ke date
             TimeUtils.getDate(it.transaction.dateTimeMillis)
-        }
+        }.toSortedMap(reverseOrder())// balik urutan dari yang terbaru
         val result = mutableListOf<ItemTransaction>() // memori sementara
 
         for ((date, items) in grouped){
+            val itemsDesc = items.reversed()// urutkan dari yang terbaru
             val totalIncome = items.filter {
                 it.transaction.type == TransactionEntity.TYPE_INCOME
             }.sumOf { it.transaction.amount }
+
             val totalExpanse = items.filter {
                 it.transaction.type == TransactionEntity.TYPE_EXPANSE
             }.sumOf { it.transaction.amount }
@@ -28,7 +28,7 @@ class GroupTransactionsUseCase {
             result.add(
                 ItemTransaction(
                     type = ItemTransaction.HEADER,
-                    date = date,
+                    dateTimeMillis = itemsDesc.first().transaction.dateTimeMillis,
                     day = TimeUtils.getDayName(date),
                     income = totalIncome,
                     expense = totalExpanse
@@ -36,9 +36,10 @@ class GroupTransactionsUseCase {
             )
 
             // list item
-            for (tx in items){
+            for (tx in itemsDesc){
                 result.add(
                     ItemTransaction(
+                        id = tx.transaction.id,
                         type = ItemTransaction.ITEM,
                         category = tx.category.name,
                         amount = tx.transaction.amount,

@@ -8,13 +8,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
 import com.example.financetrackerapplication.data.datasource.local.entity.CategoryEntity
 import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
+import com.example.financetrackerapplication.data.datasource.local.entity.TransactionWithCategoryAndAccount
 import com.example.financetrackerapplication.domain.repository.AsetRapository
 import com.example.financetrackerapplication.domain.repository.CategoryRapository
 import com.example.financetrackerapplication.domain.repository.TransactionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -51,6 +53,7 @@ class TransactionViewModel @Inject constructor(
     }
 
     fun updateTransaction(
+        id: Long,
         amount: Long,
         type: String,
         dateTimeMillis: Long,
@@ -61,6 +64,7 @@ class TransactionViewModel @Inject constructor(
         categoryId: Long,
     ) {
         val transaction = TransactionEntity(
+            id = id,
             amount = amount,
             type = type,
             dateTimeMillis = dateTimeMillis,
@@ -73,6 +77,11 @@ class TransactionViewModel @Inject constructor(
         viewModelScope.launch {
             repoTransaction.updateTransaction(transaction)
         }
+    }
+
+    fun getTransaction(id: Long): StateFlow<TransactionWithCategoryAndAccount?> {
+        return repoTransaction.getTransaction(id)
+            .stateIn(viewModelScope, SharingStarted.Lazily, null)
     }
 
     fun deleteTransaction(vararg transactionEntity: TransactionEntity) {

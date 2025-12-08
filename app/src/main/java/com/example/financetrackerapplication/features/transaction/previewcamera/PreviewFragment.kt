@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.FragmentAsetBinding
 import com.example.financetrackerapplication.databinding.FragmentPreviewBinding
-import com.example.financetrackerapplication.features.aset.list.AsetAdapter
 import com.example.financetrackerapplication.features.aset.list.AsetViewModel
 import com.example.financetrackerapplication.features.transaction.previewcamera.AddPreviewActivity.Companion.ARG_URI
 

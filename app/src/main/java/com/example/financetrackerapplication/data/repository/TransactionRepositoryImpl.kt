@@ -13,6 +13,10 @@ class TransactionRepositoryImpl @Inject constructor(
     override fun getAllTransaction(): Flow<List<TransactionWithCategoryAndAccount>> =
         transactionDao.getAllTransaction()
 
+    override fun getTransaction(id: Long): Flow<TransactionWithCategoryAndAccount> =
+        transactionDao.getTransaction(id)
+
+
     override suspend fun insertTransaction(transaction: TransactionEntity) {
         transactionDao.insertTransaction(transaction)
     }

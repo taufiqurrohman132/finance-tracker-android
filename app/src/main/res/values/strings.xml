@@ -23,6 +23,10 @@
 
     <!--    warning massage-->
     <string name="warning_message_trans">Silahkan tentukan %1$s</string>
+
+    <!--    dasshboard-->
+    <string name="total_balance">Rp %1$s</string>
+
     <string-array name="group_option_aset">
         <item>Tunai</item>
         <item>Bank</item>

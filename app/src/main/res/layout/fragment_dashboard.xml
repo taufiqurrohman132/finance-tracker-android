@@ -36,6 +36,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/dash.tv_total_saldo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -140,7 +141,7 @@
         android:id="@+id/dash.fab_add_trans"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_camera"
+        android:src="@drawable/ic_add"
         app:tint="@color/white"
         app:backgroundTint="@color/color_primary"
         android:layout_margin="16dp"

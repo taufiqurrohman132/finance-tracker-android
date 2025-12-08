@@ -10,8 +10,10 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.util.Currency
 import java.util.Locale
 
 object Extention {
@@ -46,11 +48,21 @@ object Extention {
         imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
     }
 
-    fun String.convertToDateMillis(): Long {
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-        val parseDate = dateFormat.parse(this)
-        return parseDate?.time ?: 0L
-    }
+//    fun String.convertToDateMillis(): Long {
+//        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+//        val parseDate = dateFormat.parse(this)
+//        return parseDate?.time ?: 0L
+//    }
+//
+//    fun String.convertToTimeMillis(): Long {
+//        return try {
+//            val sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+//            sdf.parse(this)?.time ?: 0L
+//        } catch (e: Exception) {
+//            0L
+//        }
+//    }
+
 
     // di paki ketikaingin menyimpan ke room
     fun String.parseMoneyToLong(): Long {
@@ -77,7 +89,15 @@ object Extention {
     fun Long.parseLongToMoney(): String {
         val result = this / 100.0
         val format = NumberFormat.getCurrencyInstance(Locale.getDefault())
-        return format.format(result)
+        format.currency = Currency.getInstance("IDR")
+
+        // hapus simbol mata uang rp
+        if (format is DecimalFormat){
+            val symbols = format.decimalFormatSymbols
+            symbols.currencySymbol = ""
+            format.decimalFormatSymbols = symbols
+        }
+        return format.format(result).trim()
     }
 
     // NON FOCUS ALL editeks

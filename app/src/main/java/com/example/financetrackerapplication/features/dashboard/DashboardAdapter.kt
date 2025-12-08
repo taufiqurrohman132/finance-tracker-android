@@ -19,8 +19,9 @@ class DashboardAdapter(
         ViewHolder(binding.root) {
         fun bind(itemTransaction: ItemTransaction) {
             binding.apply {
-                itemTransaction.date?.let {
-                    itemTransHeaderTvDate.text = TimeUtils.getStyleDate(it)
+                itemTransaction.dateTimeMillis?.let {
+                    val dateResult = TimeUtils.getDate(it)
+                    itemTransHeaderTvDate.text = TimeUtils.getStyleDate(dateResult)
                 }
                 itemTransHeaderTvDay.text = itemTransaction.day
                 itemTransHeaderTvIncome.text = itemTransaction.income.toString().toLong().parseLongToMoney()
