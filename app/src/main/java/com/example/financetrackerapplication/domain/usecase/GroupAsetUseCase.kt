@@ -1,47 +1,28 @@
 package com.example.financetrackerapplication.domain.usecase
 
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
+import com.example.financetrackerapplication.domain.model.GroupAset
 import com.example.financetrackerapplication.domain.model.ItemAset2
 import com.example.financetrackerapplication.domain.model.ItemTransaction
+import com.example.financetrackerapplication.domain.repository.AsetRapository
+import com.example.financetrackerapplication.domain.repository.TransactionRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class GroupAsetUseCase {
+class GroupAsetUseCase(
+    private val repository: AsetRapository
+) {
 
-    fun execute(listAset: List<AsetEntity>, order: List<String>) : List<ItemAset2>{
-
-        val grouped = listAset.groupBy {
-            // convert dati millis ke date
-            it.groupAset
-        }.toList().sortedBy { (key, _) -> order.indexOf(key)}.toMap()// balik urutan dari yang terbaru
-        val result = mutableListOf<ItemAset2>() // memori sementara
-
-        for ((group, items) in grouped){
-            val itemsDesc = items.reversed()// urutkan dari yang terbaru
-            val totalBalance = items.filter {
-                it.groupAset == group
-            }.sumOf { it.initialBalance }
-
-            // header
-            result.add(
-                ItemAset2(
-                    type = ItemTransaction.HEADER,
-                    groupAset = group,
-                    total = totalBalance
-                )
-            )
-
-            // list item
-            for (aset in itemsDesc){
-                result.add(
-                    ItemAset2(
-                        id = aset.id,
-                        type = ItemTransaction.ITEM,
-                        groupAset = group,
-                        initialBalance = aset.initialBalance,
-                        name = aset.name
-                    )
-                )
+    operator fun invoke(listAset: List<AsetEntity>, order: List<String>) : Flow<List<GroupAset>>{
+        repository.getAset()
+            .map { asetList ->
+                asetList.groupBy { it.groupAset }
+                    .map { (groupName, listAset) ->
+                        GroupAset(
+                            groupName = groupName,
+                            asetList = listAset
+                        )
+                    }.toList().sortedBy { (key, _) -> order.indexOf(key) }
             }
-        }
-        return result
     }
 }
