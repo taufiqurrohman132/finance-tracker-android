@@ -86,6 +86,7 @@ dependencies {
 
     // expanable recycler view
     implementation("com.github.kamrul3288:Expandable-Recyclerview-List-Android:1.0.2")
+    implementation("androidx.recyclerview:recyclerview-selection:1.2.0")
 
     // camera x
     // The following line is optional, as the core library is included indirectly by camera-camera2

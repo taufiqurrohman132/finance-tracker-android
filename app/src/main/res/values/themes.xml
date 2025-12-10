@@ -110,6 +110,9 @@
 
 
 
-
+    <style name="CircleShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item> <!-- bikin bulat -->
+    </style>
 
 </resources>

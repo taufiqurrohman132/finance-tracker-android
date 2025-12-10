@@ -15,8 +15,8 @@ import dagger.hilt.components.SingletonComponent
 object AsetModule {
 
     @Provides
-    fun provideGroupAsetUseCase(): GroupAsetUseCase =
-        GroupAsetUseCase()
+    fun provideGroupAsetUseCase(asetRapository: AsetRapository): GroupAsetUseCase =
+        GroupAsetUseCase(asetRapository)
 
 //    companion object{
 //        // rekomendasi @provide selslau di taruh di object singelton

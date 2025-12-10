@@ -2,13 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/cograd_stroke_blue_to_purple"
-    android:paddingVertical="4dp"
+    android:paddingBottom="4dp"
+    android:paddingTop="24dp"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="4dp"
+    android:gravity="center_vertical"
     android:paddingHorizontal="12dp"
     android:orientation="horizontal">
-
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/aset.indicator_expand"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        app:shapeAppearanceOverlay="@style/CircleShape"
+        android:background="@color/grey_trans_10"
+        />
     <TextView
         android:id="@+id/aset.group_name"
         android:layout_width="wrap_content"
@@ -18,6 +27,7 @@
         android:paddingVertical="2dp"
         android:text="Tabungan"
         style="@style/TextBodyMain"
+        android:layout_marginHorizontal="8dp"
         android:textColor="@color/white"
         android:textStyle="bold" />
 

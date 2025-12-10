@@ -52,6 +52,7 @@
 
     <color name="color_primary">#2383FC</color> <!-- contoh biru DANA -->
     <color name="color_primary_gradiant">#442DB2</color>
+    <color name="color_primary_gradiant_10">#66442DB2</color>
     <!--    <color name="color_primary_dark">#0D6EBD</color> &lt;!&ndash; lebih gelap &ndash;&gt;-->
     <!--    <color name="color_primary_light">#64B5F6</color> &lt;!&ndash; lebih terang &ndash;&gt;-->
 

@@ -2,7 +2,6 @@ package com.example.financetrackerapplication.domain.usecase
 
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
 import com.example.financetrackerapplication.domain.model.GroupAset
-import com.example.financetrackerapplication.domain.model.ItemAset2
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.domain.repository.AsetRapository
 import com.example.financetrackerapplication.domain.repository.TransactionRepository
@@ -13,16 +12,18 @@ class GroupAsetUseCase(
     private val repository: AsetRapository
 ) {
 
-    operator fun invoke(listAset: List<AsetEntity>, order: List<String>) : Flow<List<GroupAset>>{
-        repository.getAset()
+    operator fun invoke( order: List<String>) : Flow<List<GroupAset>>{
+        return repository.getAset()
             .map { asetList ->
                 asetList.groupBy { it.groupAset }
+                    .toList().sortedBy { (key, _) -> order.indexOf(key) }
                     .map { (groupName, listAset) ->
                         GroupAset(
                             groupName = groupName,
-                            asetList = listAset
+                            asetList = listAset,
+                            isSelected = false
                         )
-                    }.toList().sortedBy { (key, _) -> order.indexOf(key) }
+                    }
             }
     }
 }
