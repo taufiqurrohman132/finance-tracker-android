@@ -85,8 +85,9 @@ dependencies {
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     // expanable recycler view
+//    implementation("com.thoughtbot:expandablecheckrecyclerview:1.4")
     implementation("com.github.kamrul3288:Expandable-Recyclerview-List-Android:1.0.2")
-    implementation("androidx.recyclerview:recyclerview-selection:1.2.0")
+//    implementation("androidx.recyclerview:recyclerview-selection:1.2.0")
 
     // camera x
     // The following line is optional, as the core library is included indirectly by camera-camera2

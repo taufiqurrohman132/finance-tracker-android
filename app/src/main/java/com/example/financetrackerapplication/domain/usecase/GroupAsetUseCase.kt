@@ -1,6 +1,7 @@
 package com.example.financetrackerapplication.domain.usecase
 
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
+import com.example.financetrackerapplication.domain.model.ChildAset
 import com.example.financetrackerapplication.domain.model.GroupAset
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.domain.repository.AsetRapository
@@ -20,7 +21,12 @@ class GroupAsetUseCase(
                     .map { (groupName, listAset) ->
                         GroupAset(
                             groupName = groupName,
-                            asetList = listAset,
+                            asetList = listAset.map { aset ->
+                                ChildAset(
+                                    aset,
+                                    false
+                                )
+                            },
                             isSelected = false
                         )
                     }

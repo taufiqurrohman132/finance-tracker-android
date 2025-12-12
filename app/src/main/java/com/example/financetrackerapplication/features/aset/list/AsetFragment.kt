@@ -5,18 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.selection.SelectionTracker
-import androidx.recyclerview.selection.StorageStrategy
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.FragmentAsetBinding
 import com.example.financetrackerapplication.features.aset.add.AddAsetActivity
-import com.example.financetrackerapplication.utils.createLongTracker
-import com.iamkamrul.expandablerecyclerviewlist.listener.ExpandCollapseListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AsetFragment : Fragment() {
@@ -25,7 +22,6 @@ class AsetFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var asetAdapter: AsetAdapter
-    private lateinit var tracker: SelectionTracker<Long>
 
     private val viewModel: AsetViewModel by viewModels()
 
@@ -49,36 +45,58 @@ class AsetFragment : Fragment() {
     private fun observer() {
         val orderKeys =
             requireContext().resources.getStringArray(R.array.group_option_aset).toList()
-        viewModel.getListAset(orderKeys).observe(viewLifecycleOwner) { listGroupAset ->
-            asetAdapter = AsetAdapter()
-            binding.asetRvAset.adapter = asetAdapter
-            asetAdapter.setExpandableParentItemList(listGroupAset)
-
-            // setup selection rv
-//            tracker = createLongTracker(
-//                binding.asetRvAset,
-//                asetAdapter,
-//                keySelector = {position -> position.toLong()},
-//                selectionId = "my_tracker"
-//            )
-//
-//            asetAdapter.tracker = this.tracker
-//
-//            // Observer untuk detect perubahan selection
-//            tracker.addObserver(object : SelectionTracker.SelectionObserver<Long>() {
-//                override fun onSelectionChanged() {
-//                    super.onSelectionChanged()
-//                    val count = tracker.selection.size()
-//                    Toast.makeText(requireActivity(), "$count item selected", Toast.LENGTH_SHORT).show()
+        viewModel.setOrder(orderKeys)
+//        viewModel.getListAset(orderKeys).observe(viewLifecycleOwner) { listGroupAset ->
+//            asetAdapter = AsetAdapter(
+//                onChildSelect = { aset ->
+//                    viewModel.toggleSelect(aset)
 //                }
-//            })
+//            )
+//            binding.asetRvAset.adapter = asetAdapter
+//            asetAdapter.setExpandableParentItemList(listGroupAset)
+//
+//            // setup selection rv
+////            tracker = createLongTracker(
+////                binding.asetRvAset,
+////                asetAdapter,
+////                keySelector = {position -> position.toLong()},
+////                selectionId = "my_tracker"
+////            )
+////
+////            asetAdapter.tracker = this.tracker
+////
+////            // Observer untuk detect perubahan selection
+////            tracker.addObserver(object : SelectionTracker.SelectionObserver<Long>() {
+////                override fun onSelectionChanged() {
+////                    super.onSelectionChanged()
+////                    val count = tracker.selection.size()
+////                    Toast.makeText(requireActivity(), "$count item selected", Toast.LENGTH_SHORT).show()
+////                }
+////            })
+//        }
+
+        lifecycleScope.launch {
+            viewModel.childAsetList.collect{ list ->
+                asetAdapter = AsetAdapter(
+                    onChildSelect = { aset ->
+                        viewModel.toggleSelect(aset)
+                    }
+                )
+                binding.asetRvAset.adapter = asetAdapter
+                asetAdapter.setExpandableParentItemList(list)
+
+            }
         }
 
 
     }
 
     private fun setupRecyclerView() {
-        asetAdapter = AsetAdapter()
+        asetAdapter = AsetAdapter(
+            onChildSelect = { aset ->
+                viewModel.toggleSelect(aset)
+            }
+        )
         binding.asetRvAset.apply {
             layoutManager = LinearLayoutManager(requireContext())
         }

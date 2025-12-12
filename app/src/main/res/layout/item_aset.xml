@@ -9,6 +9,7 @@
     app:cardCornerRadius="16dp">
 
     <LinearLayout
+        android:id="@+id/bg_aset_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -38,5 +39,5 @@
             android:textColor="@color/black" />
 
     </LinearLayout>
-    l
+
 </androidx.cardview.widget.CardView>
