@@ -80,8 +80,6 @@ class AsetAdapter(
                 selectionCallback.onSelectionEnded()
 
             itemView.setOnLongClickListener {
-//                isSelectionMode = true
-
                 selectionCallback.onSelectionStarted()
                 onSelect(child)
                 true

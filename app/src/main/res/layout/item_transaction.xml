@@ -9,10 +9,10 @@
     app:cardCornerRadius="20dp">
 
     <LinearLayout
+        android:id="@+id/bg_transaction_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:orientation="horizontal"
+          android:orientation="horizontal"
         android:paddingHorizontal="12dp"
         android:paddingVertical="8dp">
 

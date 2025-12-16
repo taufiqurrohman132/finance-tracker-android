@@ -18,6 +18,7 @@ data class ItemTransaction(
     val category: String? = null,
     val catatan: String? = null,
     val aset: String? = null,
+    val isSelected: Boolean = false,
     val typeBalance: String? = null,
     val amount: Long? = null,
     val percentage: Double? = null
