@@ -1,18 +1,19 @@
 package com.example.financetrackerapplication.utils
 
 import android.content.Context
+import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import java.text.DecimalFormat
 import java.text.NumberFormat
-import java.text.SimpleDateFormat
 import java.util.Currency
 import java.util.Locale
 
@@ -77,7 +78,7 @@ object Extention {
                 0 -> newText.append("00")
                 1 -> newText.append("0")
             }
-        }else
+        } else
             newText.append(",00")
 
         val result = newText.toString().replace(",", "").replace(".", "")
@@ -92,7 +93,7 @@ object Extention {
         format.currency = Currency.getInstance("IDR")
 
         // hapus simbol mata uang rp
-        if (format is DecimalFormat){
+        if (format is DecimalFormat) {
             val symbols = format.decimalFormatSymbols
             symbols.currencySymbol = ""
             format.decimalFormatSymbols = symbols
@@ -101,14 +102,26 @@ object Extention {
     }
 
     // NON FOCUS ALL editeks
-    fun View.clearAllEditTexts(){
-        if (this is EditText){
+    fun View.clearAllEditTexts() {
+        if (this is EditText) {
             this.text.clear()
-        }else if (this is ViewGroup) {
+        } else if (this is ViewGroup) {
             for (i in 0 until this.childCount) {
                 this.getChildAt(i).clearAllEditTexts()
             }
         }
+    }
+
+
+    // teksview
+    fun TextView.setBalanceColor(typeIncome: String) {
+        this.setTextColor(
+            if (TransactionEntity.TYPE_EXPANSE == typeIncome) {
+                Color.RED
+            } else {
+                Color.GREEN
+            }
+        )
     }
 
 

@@ -26,6 +26,7 @@
 
     <!--    dasshboard-->
     <string name="total_balance">Rp %1$s</string>
+    <string name="hapus">Hapus</string>
 
     <string-array name="group_option_aset">
         <item>Tunai</item>

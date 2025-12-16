@@ -12,24 +12,35 @@ import kotlinx.coroutines.flow.map
 class GroupAsetUseCase(
     private val repository: AsetRapository
 ) {
+    operator fun invoke(
+        order: List<String>
+    ): Flow<List<GroupAset.Parent>> {
 
-    operator fun invoke( order: List<String>) : Flow<List<GroupAset>>{
         return repository.getAset()
             .map { asetList ->
-                asetList.groupBy { it.groupAset }
-                    .toList().sortedBy { (key, _) -> order.indexOf(key) }
+                asetList
+                    .groupBy { it.groupAset } // String
+                    .toList()
+                    .sortedBy { (key, _) ->
+                        val index = order.indexOf(key)
+                        if (index == -1) Int.MAX_VALUE else index
+                    }
                     .map { (groupName, listAset) ->
-                        GroupAset(
-                            groupName = groupName,
-                            asetList = listAset.map { aset ->
-                                ChildAset(
-                                    aset,
-                                    false
+
+                        GroupAset.Parent(
+                            id = groupName,
+                            name = groupName,
+                            childAsetList = listAset.map { aset ->
+                                GroupAset.Child(
+                                    aset = aset,
+                                    isSelected = false
                                 )
                             },
+                            isExpanded = true,
                             isSelected = false
                         )
                     }
             }
     }
+
 }

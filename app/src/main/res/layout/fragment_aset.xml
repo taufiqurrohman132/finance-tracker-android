@@ -14,21 +14,25 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="@color/white"
             app:title="Aset"
+            app:collapsedTitleGravity="center_horizontal"
+            app:collapsedTitleTextAppearance="@style/ToolbarTitleCenter"
             app:titleCollapseMode="scale"
-            app:expandedTitleTextColor="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <!-- Toolbar -->
 
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="34dp"
                 android:orientation="vertical"
                 android:layout_marginTop="?attr/actionBarSize"
                 android:padding="16dp"
@@ -56,6 +60,7 @@
                             android:layout_height="wrap_content"
                             android:text="Aset"/>
                         <TextView
+                            android:id="@+id/aset.tv_aset"
                             style="@style/TextBodySecondary"
                             android:layout_width="wrap_content"
                             android:lines="1"
@@ -81,6 +86,7 @@
                             android:text="Liabilitas"/>
                         <TextView
                             style="@style/TextBodySecondary"
+                            android:id="@+id/aset.tv_liabilitas"
                             android:lines="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -106,18 +112,67 @@
                         <TextView
                             style="@style/TextBodySecondary"
                             android:layout_width="wrap_content"
+                            android:id="@+id/aset.tv_total"
                             android:lines="1"
                             android:layout_height="wrap_content"
                             android:text="Rp 29.393.949,90"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-            <androidx.appcompat.widget.Toolbar
+
+            <!-- Title saat EXPANDED -->
+
+<!--            <TextView-->
+<!--                android:id="@+id/aset.tv_total_balance_selected"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_collapseMode="parallax"-->
+<!--                android:text="34.344.344,90"-->
+<!--                android:layout_marginHorizontal="16dp"-->
+<!--                app:layout_collapseParallaxMultiplier="0.7"-->
+<!--                android:layout_gravity="bottom"-->
+<!--                android:maxLines="1" />-->
+
+
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"/>
+
+            <FrameLayout
+                android:id="@+id/selection_layout"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_collapseMode="pin"
+                android:layout_height="?attr/actionBarSize"
+                >
+                <TextView
+                    android:id="@+id/btn_batalkan_selection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Batalkan"
+                    style="@style/TextCardTitle"
+                    android:layout_marginStart="16dp"
+                    android:layout_gravity="start"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/btn_pilih_semua_selection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Pilih Semua"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="16dp"
+                    style="@style/TextCardTitle"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    />
+            </FrameLayout>
 
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

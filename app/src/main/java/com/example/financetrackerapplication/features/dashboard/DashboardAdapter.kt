@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.financetrackerapplication.databinding.ItemTransactionBinding
 import com.example.financetrackerapplication.databinding.ItemTransactionHeaderBinding
 import com.example.financetrackerapplication.domain.model.ItemTransaction
+import com.example.financetrackerapplication.utils.BalanceUtils
 import com.example.financetrackerapplication.utils.BaseDiffCallback
 import com.example.financetrackerapplication.utils.Extention.parseLongToMoney
+import com.example.financetrackerapplication.utils.Extention.setBalanceColor
 import com.example.financetrackerapplication.utils.TimeUtils
 
 class DashboardAdapter(
@@ -41,7 +43,10 @@ class DashboardAdapter(
                 tvKategoriItem.text = itemTransaction.category
                 tvCatatanItem.text = itemTransaction.catatan
                 tvAsetItem.text = itemTransaction.aset
-                tvJumlahItem.text = itemTransaction.amount.toString().toLong().parseLongToMoney()
+                tvJumlahItem.apply {
+                    text = itemTransaction.amount.toString().toLong().parseLongToMoney()
+                    setBalanceColor(itemTransaction.typeBalance.toString())
+                }
             }
 
             itemView.setOnClickListener {

@@ -2,6 +2,7 @@ package com.example.financetrackerapplication
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -16,7 +17,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val viewModel: SettingsViewModel by viewModels()
+    private val settingViewModel: SettingsViewModel by viewModels()
+    private val sharedViewModel: MainSharedViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -30,11 +32,56 @@ class MainActivity : AppCompatActivity() {
 
         observer()
 
+        // bottom action
+
+
 
     }
 
-    private fun observer(){
-        viewModel.userStatus.observe(this){ state ->
+    fun showActionMenu(show: Boolean) {
+        val bottomNav = binding.navView
+        val navIsVisible = bottomNav.menu.findItem(R.id.navigation_aset) != null
+
+        if (show) {
+            if (!navIsVisible) return
+            bottomNav.apply {
+                menu.clear()
+                inflateMenu(R.menu.menu_bottom_nav_action)
+                isItemActiveIndicatorEnabled = false
+                setItemTextAppearanceActiveBoldEnabled(false)
+
+            }
+
+            binding.navView.menu.apply {
+                findItem(R.id.action_delete_list).setOnMenuItemClickListener {
+                    sharedViewModel.onBottomAction(Action.DELETE)
+                    false
+                }
+
+                findItem(R.id.action_pin_list).setOnMenuItemClickListener {
+                    sharedViewModel.onBottomAction(Action.PIN)
+                    false
+                }
+            }
+
+        } else {
+            if (navIsVisible) return
+            bottomNav.apply {
+                menu.clear()
+                inflateMenu(R.menu.bottom_nav)
+                selectedItemId = R.id.navigation_aset
+
+                isItemActiveIndicatorEnabled = true
+                setItemTextAppearanceActiveBoldEnabled(true)
+
+            }
+
+        }
+    }
+
+
+    private fun observer() {
+        settingViewModel.userStatus.observe(this) { state ->
 
 
             when (state) {
@@ -44,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
                 UserStatus.Anonymous -> {
                     Log.d("MainActivity", "UI update: Guest")
-                    viewModel.loginGuest()
+                    settingViewModel.loginGuest()
                 }
 
                 UserStatus.LoggedIn -> {
