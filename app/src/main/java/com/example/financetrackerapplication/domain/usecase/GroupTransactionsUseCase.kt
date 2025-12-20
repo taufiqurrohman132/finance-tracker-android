@@ -41,12 +41,7 @@ class GroupTransactionsUseCase {
                     ItemTransaction(
                         id = tx.transaction.id,
                         type = ItemTransaction.ITEM,
-                        category = tx.category.name,
-                        amount = tx.transaction.amount,
-                        catatan = tx.transaction.catatan,
-                        typeBalance = tx.transaction.type,
-                        aset = tx.account.name,
-                        percentage = tx.transaction.percentage
+                        dataItem = tx
                     )
                 )
             }

@@ -6,14 +6,14 @@
         android:id="@+id/dash.search"
         android:title="@string/search"
         app:showAsAction="always"
-        app:iconTint="@color/white"
+        app:iconTint="@color/black"
         android:icon="@drawable/ic_search"
         tools:ignore="AlwaysShowAction" />
     <item
         android:id="@+id/dash.bookmark"
         android:title="@string/bookmark"
         app:showAsAction="always"
-        app:iconTint="@color/white"
+        app:iconTint="@color/black"
         android:icon="@drawable/ic_favorit_not"/>
 
 </menu>

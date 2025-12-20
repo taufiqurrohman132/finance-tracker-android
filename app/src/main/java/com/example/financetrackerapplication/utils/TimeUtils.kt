@@ -12,6 +12,7 @@ import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
+import java.util.Calendar
 import java.util.Locale
 
 object TimeUtils {
@@ -28,6 +29,7 @@ object TimeUtils {
             .toLocalDate()
             .format(formatter)
     }
+
     fun getTime(dateTimeMillis: Long): String {
         val formatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
         return Instant.ofEpochMilli(dateTimeMillis)
@@ -36,13 +38,13 @@ object TimeUtils {
             .format(formatter)
     }
 
-    fun combineDateTimeMillis(dateStr: String, time: String): Long{
+    fun combineDateTimeMillis(dateStr: String, time: String): Long {
         return try {
             val localDate = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
             val localTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"))
             val localDateTime = LocalDateTime.of(localDate, localTime)
             localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
-        }catch (e: Exception){
+        } catch (e: Exception) {
             System.currentTimeMillis()
         }
     }
@@ -66,4 +68,21 @@ object TimeUtils {
         }
         return builder
     }
+
+    //    Hitung jumlah hari dalam bulan
+    fun daysInMonth(year: Int, month: Int): Int {
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.YEAR, year)
+        cal.set(Calendar.MONTH, month)
+        return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+    }
+
+    //    Ambil hari dari datetimeMillis
+    fun getDayOfMonth(timeMillis: Long): Int {
+        val cal = Calendar.getInstance()
+        cal.timeInMillis = timeMillis
+        return cal.get(Calendar.DAY_OF_MONTH)
+    }
+
+
 }

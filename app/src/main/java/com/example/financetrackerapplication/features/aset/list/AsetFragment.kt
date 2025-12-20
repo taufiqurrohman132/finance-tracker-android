@@ -88,7 +88,7 @@ class AsetFragment : Fragment() {
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     val activity = requireActivity() as MainActivity
-                    activity.showActionMenu(false)
+                    activity.showActionMenu(false, R.id.navigation_aset)
 
                     isEnabled = false
                     requireActivity()
@@ -138,13 +138,15 @@ class AsetFragment : Fragment() {
             Log.d(TAG, "observer: update list is running")
 
             val activity = requireActivity() as MainActivity
-            activity.showActionMenu(viewModel.hasSelection())
+            activity.showActionMenu(viewModel.hasSelection(), R.id.navigation_aset)
 
+            binding.selectionLayout.isVisible = viewModel.hasSelection()
             binding.collapsingLayout.collapsedTitleGravity = if (viewModel.selectedCount() == 0)
                 Gravity.START else Gravity.CENTER_HORIZONTAL
             binding.collapsingLayout.title = if (viewModel.selectedCount() == 0)
                 "Aset" else "${viewModel.selectedCount()} dipilih"
             asetAdapter.submitList(list)
+
         }
 
         sharedViewModel.actionEvent.observe(viewLifecycleOwner) { action ->
@@ -158,7 +160,6 @@ class AsetFragment : Fragment() {
             when (action) {
                 Action.DELETE -> {
                     binding.selectionLayout.isVisible = false
-                    asetAdapter.isSelectionMode = false
                     viewModel.deleteList(asetEntitiesToDelete)
                 }
 
@@ -179,15 +180,12 @@ class AsetFragment : Fragment() {
             },
             onSelect = { child ->
                 viewModel.toggleSelect(child)
-
-                asetAdapter.isSelectionMode = viewModel.hasSelection()
-
             },
             selectionCallback = object : AsetAdapter.SelectionCallback {
                 // selection callback
                 override fun onSelectionStarted() {
                     // show toolbar custom
-                    binding.selectionLayout.isVisible = true
+//                    binding.selectionLayout.isVisible = true
                     // hide bottom nav
                 }
 
@@ -196,7 +194,7 @@ class AsetFragment : Fragment() {
                 }
 
                 override fun onSelectionEnded() {
-                    binding.selectionLayout.isVisible = false
+//                    binding.selectionLayout.isVisible = false
                 }
             }
         )
@@ -213,7 +211,6 @@ class AsetFragment : Fragment() {
     private fun setupListener() {
         binding.apply {
             btnBatalkanSelection.setOnClickListener {
-                asetAdapter.isSelectionMode = false
                 viewModel.clearSelection()
             }
             btnPilihSemuaSelection.setOnClickListener {

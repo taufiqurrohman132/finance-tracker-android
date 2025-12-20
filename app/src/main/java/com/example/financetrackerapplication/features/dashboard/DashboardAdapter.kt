@@ -1,5 +1,6 @@
 package com.example.financetrackerapplication.features.dashboard
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -19,7 +20,7 @@ class DashboardAdapter(
     private val onClickItemBody: (ItemTransaction) -> Unit,
     private val onItemSelected: (ItemTransaction) -> Unit,
 ) : ListAdapter<ItemTransaction, ViewHolder>(BaseDiffCallback { it }) {
-    var isSelectedMode = false
+    private var isSelectedMode = false
 
     inner class ItemHeaderViewHolder(private val binding: ItemTransactionHeaderBinding) :
         ViewHolder(binding.root) {
@@ -46,12 +47,12 @@ class DashboardAdapter(
         ViewHolder(binding.root) {
         fun bind(itemTransaction: ItemTransaction) {
             binding.apply {
-                tvKategoriItem.text = itemTransaction.category
-                tvCatatanItem.text = itemTransaction.catatan
-                tvAsetItem.text = itemTransaction.aset
+                tvKategoriItem.text = itemTransaction.dataItem?.category?.name
+                tvCatatanItem.text = itemTransaction.dataItem?.transaction?.catatan
+                tvAsetItem.text = itemTransaction.dataItem?.account?.name
                 tvJumlahItem.apply {
-                    text = itemTransaction.amount.toString().toLong().parseLongToMoney()
-                    setBalanceColor(itemTransaction.typeBalance.toString())
+                    text = itemTransaction.dataItem?.transaction?.amount.toString().toLong().parseLongToMoney()
+                    setBalanceColor(itemTransaction.dataItem?.transaction?.type.toString())
                 }
 
                 bgTransactionItem.setBackgroundColor(
@@ -66,6 +67,7 @@ class DashboardAdapter(
 
             }
 
+            Log.d(TAG, "bind: item is selected mode = $isSelectedMode")
             itemView.setOnLongClickListener {
                 isSelectedMode = true
                 onItemSelected(itemTransaction)
@@ -78,6 +80,8 @@ class DashboardAdapter(
                     onItemSelected(itemTransaction)
                 } else onClickItemBody.invoke(itemTransaction)
             }
+            isSelectedMode = currentList.any { it.isSelected }
+
         }
     }
 
@@ -118,5 +122,6 @@ class DashboardAdapter(
     companion object {
         private const val ITEM_HEADER = 0
         private const val ITEM_BODY = 1
+        private val TAG = DashboardAdapter::class.java.simpleName
     }
 }

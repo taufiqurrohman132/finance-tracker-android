@@ -19,7 +19,7 @@ class AsetAdapter(
     private val selectionCallback: SelectionCallback
 ) : ListAdapter<GroupAset, RecyclerView.ViewHolder>(Diff) {
 
-    var isSelectionMode = false
+    private var isSelectionMode = false
 
     override fun getItemViewType(position: Int): Int =
         when (getItem(position)) {
@@ -80,6 +80,7 @@ class AsetAdapter(
                 selectionCallback.onSelectionEnded()
 
             itemView.setOnLongClickListener {
+                isSelectionMode = true
                 selectionCallback.onSelectionStarted()
                 onSelect(child)
                 true
@@ -90,6 +91,7 @@ class AsetAdapter(
                     onSelect(child)
                 }
             }
+            isSelectionMode = currentList.any { it is GroupAset.Child && it.isSelected }
         }
     }
 

@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun showActionMenu(show: Boolean) {
+    fun showActionMenu(show: Boolean, selectedItemId: Int) {
         val bottomNav = binding.navView
         val navIsVisible = bottomNav.menu.findItem(R.id.navigation_aset) != null
 
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             bottomNav.apply {
                 menu.clear()
                 inflateMenu(R.menu.bottom_nav)
-                selectedItemId = R.id.navigation_aset
+                this.selectedItemId = selectedItemId
 
                 isItemActiveIndicatorEnabled = true
                 setItemTextAppearanceActiveBoldEnabled(true)

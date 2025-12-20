@@ -2,6 +2,7 @@ package com.example.financetrackerapplication.utils
 
 import android.content.Context
 import android.graphics.Color
+import android.icu.text.CompactDecimalFormat
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -89,16 +90,29 @@ object Extention {
     //    yang baka di tampilkan ke ui
     fun Long.parseLongToMoney(): String {
         val result = this / 100.0
-        val format = NumberFormat.getCurrencyInstance(Locale.getDefault())
-        format.currency = Currency.getInstance("IDR")
 
-        // hapus simbol mata uang rp
-        if (format is DecimalFormat) {
-            val symbols = format.decimalFormatSymbols
-            symbols.currencySymbol = ""
-            format.decimalFormatSymbols = symbols
+        return when{
+            result >= 10_000_000 -> {
+                val icuFormatter = CompactDecimalFormat.getInstance(
+                    Locale.getDefault(),
+                    CompactDecimalFormat.CompactStyle.SHORT
+                )
+                icuFormatter.format(result).trim()
+            }
+            else ->{
+                val format = NumberFormat.getCurrencyInstance(Locale.getDefault())
+                format.currency = Currency.getInstance("IDR")
+
+                // hapus simbol mata uang rp
+                if (format is DecimalFormat) {
+                    val symbols = format.decimalFormatSymbols
+                    symbols.currencySymbol = ""
+                    format.decimalFormatSymbols = symbols
+                }
+                format.format(result).trim()
+            }
         }
-        return format.format(result).trim()
+
     }
 
     // NON FOCUS ALL editeks
