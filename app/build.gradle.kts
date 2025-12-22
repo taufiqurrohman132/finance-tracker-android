@@ -84,9 +84,14 @@ dependencies {
     // chart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    // month and year picker
+//    implementation("io.github.dzmitry-lakisau:month-year-picker-dialog:1.0.0")
+//    implementation("com.github.kal72:RackMonthPicker:1.6.1")
+
     // expanable recycler view
 //    implementation("com.thoughtbot:expandablecheckrecyclerview:1.4")
-    implementation("com.github.kamrul3288:Expandable-Recyclerview-List-Android:1.0.2")
+//    implementation("com.github.DogusTeknoloji:compose-date-picker:1.1.0")
+    implementation("com.github.azikar24:MonthYearPicker:1.0.0")
 //    implementation("androidx.recyclerview:recyclerview-selection:1.2.0")
 
     // camera x

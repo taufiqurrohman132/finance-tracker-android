@@ -6,23 +6,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
 import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.domain.repository.TransactionRepository
 import com.example.financetrackerapplication.domain.usecase.CalculateTotalBalanceUseCase
 import com.example.financetrackerapplication.domain.usecase.GroupTransactionsUseCase
 import com.example.financetrackerapplication.utils.TimeUtils
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.formatter.ValueFormatter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.time.Year
+import java.time.LocalDate
+import java.time.Month
 import java.util.Calendar
 import javax.inject.Inject
-import kotlin.math.min
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
@@ -44,7 +40,11 @@ class DashboardViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             repository.getAllTransaction().collect { list ->
-                transaction = groupTransactionsUseCase.execute(list)
+                transaction = groupTransactionsUseCase.execute(
+                    list,
+                    LocalDate.now().month,
+                    LocalDate.now().year
+                )
                 _listTransaction.value = transaction
             }
         }
@@ -79,25 +79,25 @@ class DashboardViewModel @Inject constructor(
         _listTransaction.value = transaction
     }
 
-    fun deleteList(listAset: List<TransactionEntity>){
+    fun deleteList(listAset: List<TransactionEntity>) {
         viewModelScope.launch {
             repository.deleteTransaction(*listAset.toTypedArray())
         }
     }
 
-    fun setBarCharInMonth(year: Int, month: Int){
+    fun setBarCharInMonth(year: Int, month: Int) {
         val cal = Calendar.getInstance()
         val daysInMonth = TimeUtils.daysInMonth(year, month)
 
         val dailyTotal = LongArray(daysInMonth)
 
-        listTransaction.value?.forEach { transaction->
+        listTransaction.value?.forEach { transaction ->
             cal.timeInMillis = transaction.dataItem?.transaction?.dateTimeMillis ?: 0L
             if (
                 cal.get(Calendar.YEAR) == year &&
                 cal.get(Calendar.MONTH) == month &&
                 (transaction.dataItem?.transaction?.type) == TransactionEntity.TYPE_INCOME
-            ){
+            ) {
                 val day = cal.get(Calendar.DAY_OF_MONTH) // 1..31
                 dailyTotal[day - 1] += transaction.dataItem.transaction.amount
             }
@@ -108,7 +108,7 @@ class DashboardViewModel @Inject constructor(
             Log.d(TAG, "x=$index, y=$total")
 //            val yDisplay = min(total.toFloat(), CAP)
             val percentation = (total.toFloat() / maxValue) * 100f
-            BarEntry((index +1).toFloat(), percentation)
+            BarEntry((index + 1).toFloat(), percentation)
         }
         Log.d(TAG, "total entries = ${entries.size}")
 
@@ -118,8 +118,21 @@ class DashboardViewModel @Inject constructor(
         _displayBarChart.value = entries
     }
 
-    companion object{
-//        val CAP = 10_000_000f // misal versi miliar
-        private  val TAG = DashboardViewModel::class.java.simpleName
+    fun setMonthYear(month: Month, year: Int){
+        viewModelScope.launch {
+            repository.getAllTransaction().collect { list ->
+                transaction = groupTransactionsUseCase.execute(
+                    list,
+                    month,
+                    year
+                )
+                _listTransaction.value = transaction
+            }
+        }
+    }
+
+    companion object {
+        //        val CAP = 10_000_000f // misal versi miliar
+        private val TAG = DashboardViewModel::class.java.simpleName
     }
 }

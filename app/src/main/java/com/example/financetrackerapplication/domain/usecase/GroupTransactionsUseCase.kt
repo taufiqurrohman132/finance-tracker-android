@@ -4,11 +4,14 @@ import com.example.financetrackerapplication.data.datasource.local.entity.Transa
 import com.example.financetrackerapplication.data.datasource.local.entity.TransactionWithCategoryAndAccount
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.utils.TimeUtils
+import java.time.LocalDate
+import java.time.Month
+import java.time.ZoneId
 
 class GroupTransactionsUseCase {
 
-    fun execute(listTransaction: List<TransactionWithCategoryAndAccount>) : List<ItemTransaction>{
-        val grouped = listTransaction.groupBy {
+    fun execute(listTransaction: List<TransactionWithCategoryAndAccount>, month: Month, year: Int) : List<ItemTransaction>{
+        val grouped = setMonthYear(listTransaction, month, year).groupBy {
             // convert dati millis ke date
             TimeUtils.getDate(it.transaction.dateTimeMillis)
         }.toSortedMap(reverseOrder())// balik urutan dari yang terbaru
@@ -47,5 +50,25 @@ class GroupTransactionsUseCase {
             }
         }
         return result
+    }
+
+    private fun setMonthYear(
+        list: List<TransactionWithCategoryAndAccount>,
+        month: Month ,
+        year: Int
+    ) : List<TransactionWithCategoryAndAccount>{
+        val zone = ZoneId.systemDefault()
+        val start = LocalDate.of(year, month, 1)
+            .atStartOfDay(zone)
+            .toInstant()
+            .toEpochMilli()
+
+        val end = LocalDate.of(year, month, 1)
+            .plusMonths(1)
+            .atStartOfDay(zone)
+            .toInstant()
+            .toEpochMilli() - 1
+
+        return list.filter { it.transaction.dateTimeMillis in start..end }
     }
 }

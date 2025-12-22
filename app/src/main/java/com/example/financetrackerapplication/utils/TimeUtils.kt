@@ -1,14 +1,17 @@
 package com.example.financetrackerapplication.utils
 
+import android.content.Context
 import android.graphics.Typeface
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
+import com.example.financetrackerapplication.R
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.Month
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
@@ -84,5 +87,24 @@ object TimeUtils {
         return cal.get(Calendar.DAY_OF_MONTH)
     }
 
+    private fun parseMonthFromRes(context: Context, monthText: String): Month{
+        val month = context.resources.getStringArray(R.array.month_short_id)
+
+        val index = month.indexOf(monthText)
+        if (index == -1) error("Bulan Tidak Valid")
+
+        return Month.of(index +1)
+    }
+
+    fun parseMonthYear(
+        context: Context,
+        text: String
+    ): Pair<Int, Month>{
+        val parts = text.trim().split(" ")
+        val month = parseMonthFromRes(context, parts[0])
+        val year = parts[1].toInt()
+
+        return year to month
+    }
 
 }

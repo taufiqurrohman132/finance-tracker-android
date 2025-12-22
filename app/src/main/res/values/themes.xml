@@ -103,11 +103,28 @@
         <item name="shapeAppearanceMediumComponent">@style/CustomDialogCorners</item>
     </style>
 
+
+    <style name="ThemeMonthYearPicker">
+        <item name="backgroundColor">?colorSurface</item>
+        <item name="titleColor">@color/black</item>
+
+        <item name="dayPickerActive">@color/white</item>
+        <item name="dayPickerInActive">@color/color_primary</item>
+        <item name="yearPickerActive">@color/white</item>
+        <item name="yearPickerInActive">@color/color_primary_gradiant</item>
+
+
+        <item name="dividerColor">@color/color_primary</item>
+        <item name="dividerBackgroundColor">@color/color_primary</item>
+
+        <item name="negativeTextColor">@color/grey_trans_40</item>
+        <item name="positiveTextColor">@color/color_primary_gradiant</item>
+    </style>
+    
     <style name="CustomDialogCorners" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
     </style>
-
 
 
     <style name="CircleShape">

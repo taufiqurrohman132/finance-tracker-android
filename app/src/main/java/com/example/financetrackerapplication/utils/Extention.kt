@@ -97,7 +97,9 @@ object Extention {
                     Locale.getDefault(),
                     CompactDecimalFormat.CompactStyle.SHORT
                 )
-                icuFormatter.format(result).trim()
+                icuFormatter
+                    .format(result)
+                    .trim()
             }
             else ->{
                 val format = NumberFormat.getCurrencyInstance(Locale.getDefault())

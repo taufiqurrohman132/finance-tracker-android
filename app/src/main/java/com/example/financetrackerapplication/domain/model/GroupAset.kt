@@ -2,7 +2,6 @@ package com.example.financetrackerapplication.domain.model
 
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
 import com.example.financetrackerapplication.domain.usecase.GroupAsetUseCase
-import com.iamkamrul.expandablerecyclerviewlist.model.ParentListItem
 
 sealed class GroupAset{
     data class Parent(

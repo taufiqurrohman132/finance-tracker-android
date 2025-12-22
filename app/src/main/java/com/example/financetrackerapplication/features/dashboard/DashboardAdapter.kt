@@ -1,5 +1,6 @@
 package com.example.financetrackerapplication.features.dashboard
 
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -31,10 +32,22 @@ class DashboardAdapter(
                     itemTransHeaderTvDate.text = TimeUtils.getStyleDate(dateResult)
                 }
                 itemTransHeaderTvDay.text = itemTransaction.day
-                itemTransHeaderTvIncome.text =
-                    itemTransaction.income.toString().toLong().parseLongToMoney()
-                itemTransHeaderTvExpanse.text =
-                    itemTransaction.expense.toString().toLong().parseLongToMoney()
+                itemTransHeaderTvIncome.apply {
+                    setTextColor(Color.GREEN)
+                    text = itemView.resources.getString(
+                        R.string.total_balance,
+                        itemTransaction.income.toString().toLong().parseLongToMoney()
+                    )
+
+                }
+                itemTransHeaderTvExpanse.apply {
+                    setTextColor(Color.RED)
+                    text = itemView.resources.getString(
+                        R.string.total_balance,
+                        itemTransaction.expense.toString().toLong().parseLongToMoney()
+                    )
+
+                }
             }
 
             itemView.setOnClickListener {
@@ -51,7 +64,11 @@ class DashboardAdapter(
                 tvCatatanItem.text = itemTransaction.dataItem?.transaction?.catatan
                 tvAsetItem.text = itemTransaction.dataItem?.account?.name
                 tvJumlahItem.apply {
-                    text = itemTransaction.dataItem?.transaction?.amount.toString().toLong().parseLongToMoney()
+                    text = itemView.resources.getString(
+                        R.string.total_balance,
+                        itemTransaction.dataItem?.transaction?.amount.toString().toLong()
+                            .parseLongToMoney()
+                    )
                     setBalanceColor(itemTransaction.dataItem?.transaction?.type.toString())
                 }
 

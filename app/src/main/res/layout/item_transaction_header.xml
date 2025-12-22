@@ -43,8 +43,7 @@
         android:layout_weight="1"
         android:gravity="end"
         android:text="Rp 78.899,89"
-        android:lines="1"
-        android:textColor="@android:color/holo_green_light" />
+        android:lines="1"/>
 
     <TextView
         style="@style/TextBodyMain"
@@ -55,6 +54,6 @@
         android:gravity="end"
         android:lines="1"
         android:text="Rp 90.899,89"
-        android:textColor="@android:color/holo_red_light" />
+        />
 
 </LinearLayout>

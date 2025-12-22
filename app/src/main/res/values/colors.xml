@@ -52,7 +52,7 @@
 
     <color name="color_primary">#2383FC</color> <!-- contoh biru DANA -->
     <color name="color_primary_gradiant">#442DB2</color>
-    <color name="color_primary_gradiant_10">#66442DB2</color>
+    <color name="color_primary_gradiant_10">#1A442DB2</color>
     <!--    <color name="color_primary_dark">#0D6EBD</color> &lt;!&ndash; lebih gelap &ndash;&gt;-->
     <!--    <color name="color_primary_light">#64B5F6</color> &lt;!&ndash; lebih terang &ndash;&gt;-->
 
@@ -78,11 +78,14 @@
     <!-- 🔹 Data angka penting -->
     <color name="text_balance">#000000</color>
     <color name="text_balance_dana">#108EE9</color>
-    <color name="text_balance_ovo">#00A859</color>
+    <color name="text_balance_ovo">#FF00FF00</color>
+
+    <!--    Transparent-->
+    <color name="text_balance_ovo_10">#1A00FF00</color>
 
     <!-- 🔹 Nominal transaksi -->
     <color name="text_income">#2E7D32</color>
-    <color name="text_income_alt">#4CAF50</color>
+    <color name="text_income_alt">#FF00FF00</color>
     <color name="text_expense">#C62828</color>
     <color name="text_expense_alt">#E53935</color>
 

@@ -16,17 +16,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
+            app:titleCollapseMode="scale"
+            app:titleEnabled="false"
+            app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="302dp"
+                android:layout_height="280dp"
                 android:layout_marginTop="?attr/actionBarSize"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:paddingBottom="124dp">
+                android:paddingBottom="70dp"
+                app:layout_collapseMode="parallax"
+                android:orientation="vertical">
 
                 <TextView
                     style="@style/TextBodyMain"
@@ -49,15 +51,24 @@
                     android:textSize="32sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
                     style="@style/TextBodySecondary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+2.67%(24h)"
+                    android:padding="4dp"
+                    android:insetTop="0dp"
+                    app:backgroundTint="@color/text_balance_ovo_10"
+                    android:insetBottom="0dp"
+                    android:minHeight="0dp"
+                    app:cornerRadius="10dp"
+                    android:textColor="@color/text_balance_ovo"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
+                app:layout_collapseParallaxMultiplier="0.1"
+                app:layout_collapseMode="parallax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -151,7 +162,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:menu="@menu/dashboard_menu" />
+                app:title="Fintrack"
+                app:titleTextAppearance="@style/TextHeadingAppBarTitle"
+                app:menu="@menu/dashboard_menu" >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dash.btn_filter_mounth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Des 2023"
+                    app:cornerRadius="16dp"
+                    app:icon="@drawable/ic_check"
+                    app:iconTint="@color/black"
+                    android:layout_gravity="center"
+                    app:backgroundTint="@color/grey_trans_10"
+                    android:textColor="@color/black"/>
+            </com.google.android.material.appbar.MaterialToolbar>
 
             <FrameLayout
                 android:id="@+id/dash.selection_layout"
