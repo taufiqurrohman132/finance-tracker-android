@@ -18,7 +18,9 @@ import com.example.financetrackerapplication.Action
 import com.example.financetrackerapplication.MainActivity
 import com.example.financetrackerapplication.MainSharedViewModel
 import com.example.financetrackerapplication.R
+import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
 import com.example.financetrackerapplication.databinding.FragmentDashboardBinding
+import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.features.transaction.TransactionActivity
 import com.example.financetrackerapplication.utils.Extention.parseLongToMoney
 import com.example.financetrackerapplication.utils.Navigation
@@ -112,10 +114,6 @@ class DashboardFragment : Fragment() {
     private fun observer() {
         viewModel.apply {
             // header total
-            totalBalance.observe(viewLifecycleOwner) { total ->
-                binding.dashTvTotalSaldo.text =
-                    requireActivity().getString(R.string.total_balance, total.parseLongToMoney())
-            }
             listTransaction.observe(viewLifecycleOwner) { listItem ->
                 val activity = requireActivity() as MainActivity
                 activity.showActionMenu(viewModel.hasSelection(), R.id.navigation_dashboard)
@@ -129,6 +127,9 @@ class DashboardFragment : Fragment() {
 
                 val totalIncome = listItem.sumOf { it.income ?: 0L }
                 binding.dashTvIncomeTotal.text = totalIncome.parseLongToMoney()
+
+                binding.dashTvTotalSaldo.text =
+                    requireActivity().getString(R.string.total_balance, totalBalance(listItem).parseLongToMoney())
             }
         }
 
@@ -188,6 +189,13 @@ class DashboardFragment : Fragment() {
         }
     }
 
+    private fun totalBalance(list: List<ItemTransaction>): Long{
+        val totalIncome = list.sumOf { it.income ?: 0L }
+        val totalExpense = list.sumOf { it.expense ?: 0L }
+
+        return totalIncome - totalExpense
+    }
+
     private fun setupChart() {
         binding.dashChartIncome.apply {
             description.isEnabled = false
@@ -218,97 +226,6 @@ class DashboardFragment : Fragment() {
         }
     }
 
-//    private fun showMonthYearPicker(textMonthYear: String) {
-//        val (year, month) = TimeUtils.parseMonthYear(requireContext(), textMonthYear)
-//        val arrayMonth = requireActivity().resources.getStringArray(R.array.month_short_id)
-//
-//        val dialog = MonthYearPickerDialog.Builder(
-//            context = requireContext(),
-//            themeResId = R.style.MonthYearPickerRounded,
-//            onDateSetListener = { selectedYear, selectedMonth ->
-//                // year + month
-//                Log.d(TAG, "showMonthYearPicker: montch = $month, year = $year")
-//                viewModel.setMonthYear(Month.of(selectedMonth + 1), selectedYear)
-//                binding.dashBtnFilterMounth.text = "${arrayMonth[selectedMonth]} $selectedYear"
-//            },
-//            selectedMonth = month.value - 1,
-//            selectedYear = year
-//        )
-//            .setNegativeButton(R.string.batal)
-//            .setPositiveButton(R.string.oke)
-//            .build()
-//
-//        val view = CustomDialogBinding.inflate(
-//            LayoutInflater.from(requireContext())
-//        )
-//        dialog.apply {
-////            setView(
-////                view.root,
-////                20,
-////                20,
-////                20,
-////                20
-////            )
-//            setTitle("Select Mount And Year")
-//            show()
-//        }
-//    }
-
-    //    private fun showMonthYearPickers(textMonthYear: String) {
-//        val (year, month) = TimeUtils.parseMonthYear(requireContext(), textMonthYear)
-//        val arrayMonth = requireActivity().resources.getStringArray(R.array.month_short_id)
-//
-//        val dateMillis = LocalDate.of(year, month, 1)
-//            .atStartOfDay(ZoneId.systemDefault())
-//            .toInstant()
-//            .toEpochMilli()
-//        val calendar = Calendar.getInstance().apply {
-//            timeInMillis = dateMillis
-//        }
-//
-//        val dialog = YearMonthPickerDialog(
-//            requireContext(),
-//            { selectedYear, selectedMonth ->
-//                viewModel.setMonthYear(Month.of(selectedMonth + 1), selectedYear)
-//                binding.dashBtnFilterMounth.text = "${arrayMonth[selectedMonth]} $selectedYear"
-//            },
-//            R.style.MyDialogTheme,
-//            Color.BLACK,
-//            calendar,
-//        )
-//
-//        dialog.apply {
-//
-//            show()
-//        }
-//    }
-//    private fun showMonthYearPickers(textMonthYear: String) {
-//        val (year, month) = TimeUtils.parseMonthYear(requireContext(), textMonthYear)
-//        val arrayMonth = requireActivity().resources.getStringArray(R.array.month_short_id)
-//
-//        Log.d(TAG, "showMonthYearPickers: month = ${month.value}")
-//        val dialog = RackMonthPicker(requireContext())
-//        dialog.apply {
-//            setLocale(Locale.getDefault())
-//            setSelectedMonth(month.value -1)
-//            setSelectedYear(year)
-//            requireContext().resources.apply {
-//                setNegativeText(getString(R.string.batal))
-//                setPositiveText(getString(R.string.oke))
-//                setColorTheme(R.color.color_primary)
-//            }
-//            setPositiveButton { selectedMonth, startDate, endDate, selectedYear, monthLabel ->
-//                viewModel.setMonthYear(Month.of(selectedMonth), selectedYear)
-//                binding.dashBtnFilterMounth.text = "${arrayMonth[selectedMonth -1]} $selectedYear"
-//                dialog.dismiss()
-//            }
-//            setNegativeButton {
-//                dialog.dismiss()
-//            }
-//            show()
-//
-//        }
-//    }
     private fun showMonthYearPickers(textMonthYear: String) {
         val (year, month) = TimeUtils.parseMonthYear(requireContext(), textMonthYear)
         val arrayMonth = requireActivity().resources.getStringArray(R.array.month_short_id)

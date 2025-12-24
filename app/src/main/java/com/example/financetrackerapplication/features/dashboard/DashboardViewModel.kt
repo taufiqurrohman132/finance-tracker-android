@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.domain.repository.TransactionRepository
-import com.example.financetrackerapplication.domain.usecase.CalculateTotalBalanceUseCase
 import com.example.financetrackerapplication.domain.usecase.GroupTransactionsUseCase
 import com.example.financetrackerapplication.utils.TimeUtils
 import com.github.mikephil.charting.data.BarEntry
@@ -24,7 +23,6 @@ import javax.inject.Inject
 class DashboardViewModel @Inject constructor(
     private val repository: TransactionRepository,
     private val groupTransactionsUseCase: GroupTransactionsUseCase,
-    private val calculateTotalBalanceUseCase: CalculateTotalBalanceUseCase
 ) : ViewModel() {
     private val _displayBarChart = MutableLiveData<List<BarEntry>>()
     val displayBarChart: LiveData<List<BarEntry>> = _displayBarChart
@@ -33,9 +31,6 @@ class DashboardViewModel @Inject constructor(
 
     private val _listTransaction = MutableLiveData<List<ItemTransaction>>()
     val listTransaction: LiveData<List<ItemTransaction>> = _listTransaction
-
-    val totalBalance: LiveData<Long> =
-        calculateTotalBalanceUseCase().asLiveData()
 
     init {
         viewModelScope.launch {
@@ -104,9 +99,9 @@ class DashboardViewModel @Inject constructor(
         }
 
         val maxValue = listTransaction.value?.maxOf { it.dataItem?.transaction?.amount ?: 0L } ?: 0L
+
         val entries = dailyTotal.mapIndexed { index, total ->
             Log.d(TAG, "x=$index, y=$total")
-//            val yDisplay = min(total.toFloat(), CAP)
             val percentation = (total.toFloat() / maxValue) * 100f
             BarEntry((index + 1).toFloat(), percentation)
         }
