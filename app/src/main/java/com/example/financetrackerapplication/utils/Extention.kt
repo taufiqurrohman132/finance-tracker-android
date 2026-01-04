@@ -2,6 +2,7 @@ package com.example.financetrackerapplication.utils
 
 import android.content.Context
 import android.graphics.Color
+import android.icu.math.BigDecimal
 import android.icu.text.CompactDecimalFormat
 import android.util.Log
 import android.view.View
@@ -13,10 +14,13 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
+import java.math.RoundingMode
+import java.math.RoundingMode.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.Currency
 import java.util.Locale
+import kotlin.math.abs
 
 object Extention {
     fun BottomSheetDialog.setupStyle(
@@ -88,15 +92,20 @@ object Extention {
     }
 
     //    yang baka di tampilkan ke ui
-    fun Long.parseLongToMoney(): String {
+    fun Long.parseLongToMoneyShort(moneyLimit: Long = Money.TEN_MILLION): String {
         val result = this / 100.0
 
+        Log.d("MONEY", "parseLongToMoney: result money = $result")
         return when{
-            result >= 10_000_000 -> {
+            abs(result) >= moneyLimit -> {
                 val icuFormatter = CompactDecimalFormat.getInstance(
                     Locale.getDefault(),
                     CompactDecimalFormat.CompactStyle.SHORT
-                )
+                ).apply {
+                    maximumFractionDigits = 1
+                    minimumFractionDigits = 0
+                    roundingMode = BigDecimal.ROUND_DOWN
+                }
                 icuFormatter
                     .format(result)
                     .trim()
@@ -114,6 +123,22 @@ object Extention {
                 format.format(result).trim()
             }
         }
+    }
+
+    fun Long.parseLongToMoney(): String {
+        val result = this / 100
+
+        Log.d("MONEY", "parseLongToMoney: result money = $result")
+        val format = NumberFormat.getCurrencyInstance(Locale.getDefault())
+        format.currency = Currency.getInstance("IDR")
+
+        // hapus simbol mata uang rp
+        if (format is DecimalFormat) {
+            val symbols = format.decimalFormatSymbols
+            symbols.currencySymbol = ""
+            format.decimalFormatSymbols = symbols
+        }
+        return  format.format(result).trim()
 
     }
 

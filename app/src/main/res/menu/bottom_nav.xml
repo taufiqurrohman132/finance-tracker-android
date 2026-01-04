@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@android:drawable/ic_delete"
+        android:icon="@drawable/ic_transaction"
         android:title="@string/transaksi" />
     <item
         android:id="@+id/navigation_aset"
-        android:icon="@android:drawable/ic_menu_set_as"
+        android:icon="@drawable/ic_asset"
         android:title="@string/aset" />
 
     <item
         android:id="@+id/navigation_settings"
-        android:icon="@android:drawable/ic_menu_set_as"
+        android:icon="@drawable/ic_settings"
         android:title="@string/settings" />
 
 </menu>

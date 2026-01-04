@@ -1,11 +1,11 @@
-package com.example.financetrackerapplication.features.aset.add
+package com.example.financetrackerapplication.ui.aset.add
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
 import com.example.financetrackerapplication.domain.repository.AsetRapository
-import com.example.financetrackerapplication.features.aset.add.AddAsetActivity.Companion.TAG_ASET_ADD
+import com.example.financetrackerapplication.ui.aset.add.AddAsetActivity.Companion.TAG_ASET_ADD
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinanceTrackerApplication</string>
+    <string name="app_name">Cashlytics</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Search</string>
@@ -31,6 +31,7 @@
 <!--    confirmation-->
     <string name="oke">Ok</string>
     <string name="batal">Batal</string>
+    <string name="data_kategori">Data &amp; Kategori</string>
 
     <string-array name="group_option_aset">
         <item>Tunai</item>

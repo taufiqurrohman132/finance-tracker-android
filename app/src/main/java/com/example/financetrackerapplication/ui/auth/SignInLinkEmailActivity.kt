@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.auth
+package com.example.financetrackerapplication.ui.auth
 
 import android.os.Bundle
 import androidx.activity.viewModels

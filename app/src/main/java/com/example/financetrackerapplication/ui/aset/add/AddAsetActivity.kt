@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.aset.add
+package com.example.financetrackerapplication.ui.aset.add
 
 import android.os.Bundle
 import android.text.InputType
@@ -10,7 +10,6 @@ import androidx.core.view.isVisible
 import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.ActivityAddAsetBinding
 import com.example.financetrackerapplication.utils.DialogUtils
-import com.example.financetrackerapplication.utils.Extention.focusAndHideKeyboard
 import com.example.financetrackerapplication.utils.Extention.hideKeyboard
 import com.example.financetrackerapplication.utils.Extention.parseMoneyToLong
 import com.example.financetrackerapplication.utils.Extention.showKeyboard

@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.settings
+package com.example.financetrackerapplication.ui.settings
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,14 +13,15 @@ import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
 import androidx.credentials.exceptions.GetCredentialException
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.financetrackerapplication.MainSharedViewModel
 import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.FragmentSettingsBinding
 import com.example.financetrackerapplication.databinding.SheetAuthLayoutBinding
 import com.example.financetrackerapplication.domain.model.UserStatus
-import com.example.financetrackerapplication.features.auth.SignInLinkEmailActivity
-import com.example.financetrackerapplication.features.settings.categorymanage.list.CategoryActivity
+import com.example.financetrackerapplication.ui.auth.SignInLinkEmailActivity
 import com.example.financetrackerapplication.utils.Extention.setupStyle
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -39,6 +40,7 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: SettingsViewModel by viewModels()
+    private val sharedViewModel: MainSharedViewModel by activityViewModels()
 
     private lateinit var auth: FirebaseAuth
 
@@ -152,11 +154,9 @@ class SettingsFragment : Fragment() {
                     }
                 }
             }
+        }
 
-            themeMode.observe(viewLifecycleOwner){ mode ->
-
-            }
-
+        sharedViewModel.themeMode.observe(viewLifecycleOwner){ mode ->
 
         }
     }

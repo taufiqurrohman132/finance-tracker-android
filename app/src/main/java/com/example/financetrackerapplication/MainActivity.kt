@@ -1,23 +1,20 @@
 package com.example.financetrackerapplication
 
+import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.financetrackerapplication.databinding.ActivityMainBinding
-import com.example.financetrackerapplication.domain.model.UserStatus
-import com.example.financetrackerapplication.features.settings.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val settingViewModel: SettingsViewModel by viewModels()
+    //    private val settingViewModel: SettingsViewModel by viewModels()
     private val sharedViewModel: MainSharedViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         observer()
 
         // bottom action
-
 
 
     }
@@ -57,11 +53,6 @@ class MainActivity : AppCompatActivity() {
                     sharedViewModel.onBottomAction(Action.DELETE)
                     false
                 }
-
-                findItem(R.id.action_pin_list).setOnMenuItemClickListener {
-                    sharedViewModel.onBottomAction(Action.PIN)
-                    false
-                }
             }
 
         } else {
@@ -75,30 +66,35 @@ class MainActivity : AppCompatActivity() {
                 setItemTextAppearanceActiveBoldEnabled(true)
 
             }
-
         }
+
+        bottomNav.itemTextColor =
+            ColorStateList.valueOf(getColor(R.color.color_primary))
     }
 
 
     private fun observer() {
-        settingViewModel.userStatus.observe(this) { state ->
+//        settingViewModel.apply {
+//            userStatus.observe(this@MainActivity) { state ->
+//                when (state) {
+//                    UserStatus.LoggedOut -> {
+//                        Log.d("MainActivity", "UI update: Belum login")
+//                    }
+//
+//                    UserStatus.Anonymous -> {
+//                        Log.d("MainActivity", "UI update: Guest")
+//                        settingViewModel.loginGuest()
+//                    }
+//
+//                    UserStatus.LoggedIn -> {
+//                        Log.d("MainActivity", "UI update: Logged-in")
+//
+//                    }
+//                }
+//            }
 
+        sharedViewModel.themeMode.observe(this) { mode ->
 
-            when (state) {
-                UserStatus.LoggedOut -> {
-                    Log.d("MainActivity", "UI update: Belum login")
-                }
-
-                UserStatus.Anonymous -> {
-                    Log.d("MainActivity", "UI update: Guest")
-                    settingViewModel.loginGuest()
-                }
-
-                UserStatus.LoggedIn -> {
-                    Log.d("MainActivity", "UI update: Logged-in")
-
-                }
-            }
         }
     }
 }

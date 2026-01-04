@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.dashboard
+package com.example.financetrackerapplication.ui.dashboard
 
 import android.content.Intent
 import android.graphics.Color
@@ -20,7 +20,7 @@ import com.example.financetrackerapplication.MainSharedViewModel
 import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.FragmentDashboardBinding
 import com.example.financetrackerapplication.domain.model.ItemTransaction
-import com.example.financetrackerapplication.features.transaction.TransactionActivity
+import com.example.financetrackerapplication.ui.transaction.TransactionActivity
 import com.example.financetrackerapplication.utils.Extention.parseLongToMoneyShort
 import com.example.financetrackerapplication.utils.Navigation
 import com.example.financetrackerapplication.utils.TimeUtils

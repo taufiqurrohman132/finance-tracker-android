@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.transaction.repeat
+package com.example.financetrackerapplication.ui.transaction.repeat
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -9,6 +9,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -52,6 +53,7 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/dash.total_presentage"
                     style="@style/TextBodySecondary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -162,7 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="Fintrack"
+                app:title="@string/app_name"
                 app:titleTextAppearance="@style/TextHeadingAppBarTitle"
                 app:menu="@menu/dashboard_menu" >
                 <com.google.android.material.button.MaterialButton
@@ -171,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:text="Des 2023"
                     app:cornerRadius="16dp"
-                    app:icon="@drawable/ic_check"
+                    app:icon="@drawable/ic_filter"
                     app:iconTint="@color/black"
                     android:layout_gravity="center"
                     app:backgroundTint="@color/grey_trans_10"

@@ -1,13 +1,10 @@
-package com.example.financetrackerapplication.features.transaction.repeat
+package com.example.financetrackerapplication.ui.transaction.repeat
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.financetrackerapplication.databinding.ItemAddRepeatBinding
-import com.example.financetrackerapplication.databinding.ItemTransOptionsBinding
-import com.example.financetrackerapplication.domain.model.TransOptions
 import com.example.financetrackerapplication.utils.BaseDiffCallback
 
 class RepeatAdapter (

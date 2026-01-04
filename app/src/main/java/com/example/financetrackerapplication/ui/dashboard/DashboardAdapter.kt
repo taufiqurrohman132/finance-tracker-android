@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.dashboard
+package com.example.financetrackerapplication.ui.dashboard
 
 import android.graphics.Color
 import android.util.Log

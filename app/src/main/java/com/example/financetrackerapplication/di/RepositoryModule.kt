@@ -3,10 +3,12 @@ package com.example.financetrackerapplication.di
 import com.example.financetrackerapplication.data.repository.AsetRapositoryImpl
 import com.example.financetrackerapplication.data.repository.AuthRepositoryImpl
 import com.example.financetrackerapplication.data.repository.CategoryRapositoryImpl
+import com.example.financetrackerapplication.data.repository.SettingsRepositoryImpl
 import com.example.financetrackerapplication.data.repository.TransactionRepositoryImpl
 import com.example.financetrackerapplication.domain.repository.AsetRapository
 import com.example.financetrackerapplication.domain.repository.AuthRepository
 import com.example.financetrackerapplication.domain.repository.CategoryRapository
+import com.example.financetrackerapplication.domain.repository.SettingsRepository
 import com.example.financetrackerapplication.domain.repository.TransactionRepository
 import dagger.Binds
 import dagger.Module
@@ -36,5 +38,10 @@ abstract class RepositoryModule {
     abstract fun bindTransactionRepository(
         transactionRepositoryImpl: TransactionRepositoryImpl
     ): TransactionRepository
+
+    @Binds
+    abstract fun bindSettingsRepository(
+        settingsRepositoryImpl: SettingsRepositoryImpl
+    ): SettingsRepository
 
 }

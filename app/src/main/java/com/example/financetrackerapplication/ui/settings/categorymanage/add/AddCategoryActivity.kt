@@ -1,16 +1,11 @@
-package com.example.financetrackerapplication.features.settings.categorymanage.add
+package com.example.financetrackerapplication.ui.settings.categorymanage.add
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.financetrackerapplication.R
-import com.example.financetrackerapplication.data.datasource.local.entity.CategoryEntity
 import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
 import com.example.financetrackerapplication.databinding.ActivityAddCategoryBinding
-import com.example.financetrackerapplication.features.settings.categorymanage.list.CategoryViewModel
+import com.example.financetrackerapplication.ui.settings.categorymanage.list.CategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

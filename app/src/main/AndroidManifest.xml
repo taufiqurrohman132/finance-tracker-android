@@ -18,34 +18,34 @@
         android:theme="@style/Theme.FinanceTrackerApplication"
         tools:targetApi="31">
         <activity
-            android:name=".features.transaction.previewcamera.AddPreviewActivity"
+            android:name=".ui.transaction.previewcamera.AddPreviewActivity"
             android:exported="false" />
         <activity
-            android:name=".features.transaction.instalment.AddInstalmentActivity"
+            android:name=".ui.transaction.instalment.AddInstalmentActivity"
             android:exported="false" />
         <activity
-            android:name=".features.transaction.repeat.AddRepeatActivity"
+            android:name=".ui.transaction.repeat.AddRepeatActivity"
             android:exported="false" />
         <activity
-            android:name=".features.settings.categorymanage.add.AddCategoryActivity"
+            android:name=".ui.settings.categorymanage.add.AddCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".features.settings.categorymanage.list.CategoryActivity"
+            android:name=".ui.settings.categorymanage.list.CategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".features.aset.add.AddAsetActivity"
+            android:name=".ui.aset.add.AddAsetActivity"
             android:exported="false" />
         <activity
-            android:name=".features.auth.SignInLinkEmailActivity"
+            android:name=".ui.auth.SignInLinkEmailActivity"
             android:exported="false" />
         <activity
-            android:name=".features.auth.RegisterActivity"
+            android:name=".ui.auth.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".features.auth.SignInActivity"
+            android:name=".ui.auth.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".features.transaction.TransactionActivity"
+            android:name=".ui.transaction.TransactionActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

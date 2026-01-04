@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.aset.list
+package com.example.financetrackerapplication.ui.aset.list
 
 import android.content.Intent
 import android.graphics.Color
@@ -21,7 +21,7 @@ import com.example.financetrackerapplication.MainSharedViewModel
 import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.FragmentAsetBinding
 import com.example.financetrackerapplication.domain.model.GroupAset
-import com.example.financetrackerapplication.features.aset.add.AddAsetActivity
+import com.example.financetrackerapplication.ui.aset.add.AddAsetActivity
 import com.example.financetrackerapplication.utils.Extention.parseLongToMoneyShort
 import dagger.hilt.android.AndroidEntryPoint
 

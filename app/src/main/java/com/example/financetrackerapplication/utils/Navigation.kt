@@ -2,7 +2,7 @@ package com.example.financetrackerapplication.utils
 
 import android.content.Context
 import android.content.Intent
-import com.example.financetrackerapplication.features.transaction.TransactionActivity
+import com.example.financetrackerapplication.ui.transaction.TransactionActivity
 
 object Navigation {
     fun navigateToTransaction(context: Context, id: Long?){

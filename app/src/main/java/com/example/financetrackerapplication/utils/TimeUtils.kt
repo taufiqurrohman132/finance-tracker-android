@@ -107,4 +107,12 @@ object TimeUtils {
         return year to month
     }
 
+    fun getDayRange(dayOffset:Long): Pair<Long, Long>{
+        val date = LocalDate.now().minusDays(dayOffset)
+        val start = date.atStartOfDay(ZoneId.systemDefault())
+            .toInstant().toEpochMilli()
+        val end = start + (24 * 60 * 60 *1000) -1
+        return start to end
+    }
+
 }

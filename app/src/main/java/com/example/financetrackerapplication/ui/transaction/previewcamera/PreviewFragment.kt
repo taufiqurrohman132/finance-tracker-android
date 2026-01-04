@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.transaction.previewcamera
+package com.example.financetrackerapplication.ui.transaction.previewcamera
 
 import android.app.Activity
 import android.content.Intent
@@ -7,12 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import com.example.financetrackerapplication.R
-import com.example.financetrackerapplication.databinding.FragmentAsetBinding
 import com.example.financetrackerapplication.databinding.FragmentPreviewBinding
-import com.example.financetrackerapplication.features.aset.list.AsetViewModel
-import com.example.financetrackerapplication.features.transaction.previewcamera.AddPreviewActivity.Companion.ARG_URI
+import com.example.financetrackerapplication.ui.transaction.previewcamera.AddPreviewActivity.Companion.ARG_URI
 
 
 class PreviewFragment : Fragment() {

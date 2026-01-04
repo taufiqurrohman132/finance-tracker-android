@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.transaction
+package com.example.financetrackerapplication.ui.transaction
 
 import android.app.Activity
 import android.content.Intent
@@ -29,13 +29,12 @@ import com.example.financetrackerapplication.databinding.ActivityTransactionBind
 import com.example.financetrackerapplication.databinding.CustomDatePickerBinding
 import com.example.financetrackerapplication.databinding.CustomTimePickerBinding
 import com.example.financetrackerapplication.domain.model.TransOptions
-import com.example.financetrackerapplication.features.transaction.previewcamera.AddPreviewActivity
+import com.example.financetrackerapplication.ui.transaction.previewcamera.AddPreviewActivity
 import com.example.financetrackerapplication.utils.DialogUtils
 import com.example.financetrackerapplication.utils.Extention.clearAllEditTexts
 import com.example.financetrackerapplication.utils.Extention.focusAndHideKeyboard
 import com.example.financetrackerapplication.utils.Extention.hideKeyboard
 import com.example.financetrackerapplication.utils.Extention.parseLongToMoney
-import com.example.financetrackerapplication.utils.Extention.parseLongToMoneyShort
 import com.example.financetrackerapplication.utils.Extention.parseMoneyToLong
 import com.example.financetrackerapplication.utils.Extention.showKeyboard
 import com.example.financetrackerapplication.utils.TimeUtils

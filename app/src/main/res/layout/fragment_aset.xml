@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".features.aset.list.AsetFragment">
+    tools:context=".ui.aset.list.AsetFragment">
 
     <!-- AppBar dengan CollapsingToolbar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
@@ -62,8 +63,10 @@
                         <TextView
                             android:id="@+id/aset.tv_aset"
                             style="@style/TextBodySecondary"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
+                            android:textAlignment="center"
                             android:lines="1"
+                            android:ellipsize="end"
                             android:layout_height="wrap_content"
                             android:text="Rp 29.393.949,90"/>
                     </LinearLayout>
@@ -87,8 +90,10 @@
                         <TextView
                             style="@style/TextBodySecondary"
                             android:id="@+id/aset.tv_liabilitas"
+                            android:layout_width="match_parent"
+                            android:textAlignment="center"
                             android:lines="1"
-                            android:layout_width="wrap_content"
+                            android:ellipsize="end"
                             android:layout_height="wrap_content"
                             android:text="Rp 29.393.949,90"/>
                     </LinearLayout>
@@ -111,9 +116,12 @@
                             android:text="Total"/>
                         <TextView
                             style="@style/TextBodySecondary"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
+                            android:textAlignment="center"
+                            android:ellipsize="end"
                             android:id="@+id/aset.tv_total"
                             android:lines="1"
+                            android:textColor="@color/black"
                             android:layout_height="wrap_content"
                             android:text="Rp 29.393.949,90"/>
                     </LinearLayout>

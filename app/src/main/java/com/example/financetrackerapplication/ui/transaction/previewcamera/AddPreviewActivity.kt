@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.transaction.previewcamera
+package com.example.financetrackerapplication.ui.transaction.previewcamera
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -6,10 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
-import android.view.Gravity
 import android.view.ScaleGestureDetector
-import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -20,11 +17,9 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.ActivityAddPreviewBinding
 import com.example.financetrackerapplication.utils.FileUtils
-import com.google.android.material.card.MaterialCardView
 
 class AddPreviewActivity : AppCompatActivity() {
 

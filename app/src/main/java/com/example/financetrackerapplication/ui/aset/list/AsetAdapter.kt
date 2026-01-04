@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.aset.list
+package com.example.financetrackerapplication.ui.aset.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

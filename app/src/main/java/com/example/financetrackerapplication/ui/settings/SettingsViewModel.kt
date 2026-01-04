@@ -1,7 +1,6 @@
-package com.example.financetrackerapplication.features.settings
+package com.example.financetrackerapplication.ui.settings
 
 import android.util.Log
-import android.util.Printer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,7 +29,6 @@ class SettingsViewModel @Inject constructor(
 
     val themeMode: LiveData<Int> =
         settingsRepository.themeModeFlow.asLiveData()
-
     val notificationEnable: LiveData<Boolean> =
         settingsRepository.notificationEnableFlow.asLiveData()
 

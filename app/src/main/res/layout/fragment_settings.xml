@@ -9,42 +9,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".features.settings.SettingsFragment">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+        tools:context=".ui.settings.SettingsFragment">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="50dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <Button
-                    android:id="@+id/btn_signin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="sign in" />
-                <Button
-                    android:id="@+id/btn_guest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="login guest" />
-                <Button
-                    android:id="@+id/btn_logout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="log out" />
+            android:paddingTop="16dp"
+            android:text="Settings &amp; Support"
+            style="@style/TextHeadingAppBarTitle"
+            android:layout_margin="16dp"
+            />
 
-            </LinearLayout>
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="16dp"-->
+<!--            android:layout_marginVertical="50dp">-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical">-->
+<!--                <Button-->
+<!--                    android:id="@+id/btn_signin"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="sign in" />-->
+<!--                <Button-->
+<!--                    android:id="@+id/btn_guest"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="login guest" />-->
+<!--                <Button-->
+<!--                    android:id="@+id/btn_logout"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="log out" />-->
 
-        </androidx.cardview.widget.CardView>
+<!--            </LinearLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
 
         <TextView
-            style="@style/TextCardTitle"
+            style="@style/TextBodyMain"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -179,19 +188,59 @@
 
                 </LinearLayout>
 
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="?attr/selectableItemBackground"-->
+<!--                    android:clickable="true"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:paddingHorizontal="16dp"-->
+<!--                    android:paddingVertical="4dp">-->
+
+<!--                    <com.google.android.material.imageview.ShapeableImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:scaleType="center"-->
+<!--                        android:src="@drawable/ic_language"-->
+<!--                        android:tint="@color/black"-->
+<!--                        app:contentPadding="8dp" />-->
+
+<!--                    <TextView-->
+<!--                        style="@style/TextBodyMain"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_marginHorizontal="8dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Format mata uang &amp; tanggal"-->
+<!--                        android:textColor="@color/black" />-->
+
+<!--                    <ImageView-->
+<!--                        style="@style/Icon24dp"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:contentDescription="@string/next"-->
+<!--                        android:padding="3dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/ic_next_arrow"-->
+<!--                        app:tint="@color/text_detail_alt" />-->
+
+<!--                </LinearLayout>-->
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
         <!--    CARD 2-->
+        <!--    CARD 2-->
         <TextView
-            style="@style/TextCardTitle"
+            style="@style/TextBodyMain"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="12dp"
-            android:text="@string/informasi_amp_dukungan"
+            android:text="@string/data_kategori"
             android:textColor="@color/black" />
 
         <androidx.cardview.widget.CardView
@@ -231,7 +280,224 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginHorizontal="8dp"
                         android:layout_weight="1"
-                        android:text="@string/hapus_cache"
+                        android:text="Kelola Kategori"
+                        android:textColor="@color/black" />
+
+                    <ImageView
+                        style="@style/Icon24dp"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@string/next"
+                        android:padding="3dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_next_arrow"
+                        app:tint="@color/text_detail_alt" />
+
+                </LinearLayout>
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="?attr/selectableItemBackground"-->
+<!--                    android:clickable="true"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:paddingHorizontal="16dp"-->
+<!--                    android:paddingVertical="4dp">-->
+
+<!--                    <com.google.android.material.imageview.ShapeableImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:scaleType="center"-->
+<!--                        android:src="@drawable/ic_help_support"-->
+<!--                        android:tint="@color/black"-->
+<!--                        app:contentPadding="8dp" />-->
+
+<!--                    <TextView-->
+<!--                        style="@style/TextBodyMain"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_marginHorizontal="8dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Backup data lokal"-->
+<!--                        android:textColor="@color/black" />-->
+
+<!--                    <ImageView-->
+<!--                        style="@style/Icon24dp"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:contentDescription="@string/next"-->
+<!--                        android:padding="3dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/ic_next_arrow"-->
+<!--                        app:tint="@color/text_detail_alt" />-->
+
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="?attr/selectableItemBackground"-->
+<!--                    android:clickable="true"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:paddingHorizontal="16dp"-->
+<!--                    android:paddingVertical="4dp">-->
+
+<!--                    <com.google.android.material.imageview.ShapeableImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:scaleType="center"-->
+<!--                        android:src="@drawable/ic_about"-->
+<!--                        android:tint="@color/black"-->
+<!--                        app:contentPadding="8dp" />-->
+
+<!--                    <TextView-->
+<!--                        style="@style/TextBodyMain"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_marginHorizontal="8dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Restore / Import data"-->
+<!--                        android:textColor="@color/black" />-->
+
+<!--                    <ImageView-->
+<!--                        style="@style/Icon24dp"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:contentDescription="@string/next"-->
+<!--                        android:padding="3dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/ic_next_arrow"-->
+<!--                        app:tint="@color/text_detail_alt" />-->
+
+<!--                </LinearLayout> -->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="?attr/selectableItemBackground"-->
+<!--                    android:clickable="true"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:paddingHorizontal="16dp"-->
+<!--                    android:paddingVertical="4dp">-->
+
+<!--                    <com.google.android.material.imageview.ShapeableImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:scaleType="center"-->
+<!--                        android:src="@drawable/ic_about"-->
+<!--                        android:tint="@color/black"-->
+<!--                        app:contentPadding="8dp" />-->
+
+<!--                    <TextView-->
+<!--                        style="@style/TextBodyMain"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_marginHorizontal="8dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Ekspor data"-->
+<!--                        android:textColor="@color/black" />-->
+
+<!--                    <ImageView-->
+<!--                        style="@style/Icon24dp"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:contentDescription="@string/next"-->
+<!--                        android:padding="3dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/ic_next_arrow"-->
+<!--                        app:tint="@color/text_detail_alt" />-->
+
+<!--                </LinearLayout>  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="4dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_clear_cache"
+                        android:tint="@color/black"
+                        app:contentPadding="8dp" />
+
+                    <TextView
+                        style="@style/TextBodyMain"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_weight="1"
+                        android:text="Reset data"
+                        android:textColor="@color/black" />
+
+                    <ImageView
+                        style="@style/Icon24dp"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@string/next"
+                        android:padding="3dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_next_arrow"
+                        app:tint="@color/text_detail_alt" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            style="@style/TextBodyMain"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/informasi_amp_dukungan"
+            android:textColor="@color/black" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="4dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_about"
+                        android:tint="@color/black"
+                        app:contentPadding="8dp" />
+
+                    <TextView
+                        style="@style/TextBodyMain"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_weight="1"
+                        android:text="Tentang aplikasi"
                         android:textColor="@color/black" />
 
                     <ImageView
@@ -309,7 +575,44 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginHorizontal="8dp"
                         android:layout_weight="1"
-                        android:text="@string/tentang_aplikasi"
+                        android:text="Versi aplikasi"
+                        android:textColor="@color/black" />
+
+                    <ImageView
+                        style="@style/Icon24dp"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@string/next"
+                        android:padding="3dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_next_arrow"
+                        app:tint="@color/text_detail_alt" />
+
+                </LinearLayout>  <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="4dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_clear_cache"
+                        android:tint="@color/black"
+                        app:contentPadding="8dp" />
+
+                    <TextView
+                        style="@style/TextBodyMain"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_weight="1"
+                        android:text="Hapus cache"
                         android:textColor="@color/black" />
 
                     <ImageView

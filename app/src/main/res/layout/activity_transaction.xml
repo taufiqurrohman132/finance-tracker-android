@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".features.transaction.TransactionActivity">
+    tools:context=".ui.transaction.TransactionActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/trans.toolbar"
@@ -20,7 +20,7 @@
         android:paddingEnd="8dp"
         app:menu="@menu/transaction_app_bar_menu"
         app:navigationIcon ="@drawable/ic_back"
-        app:title="Judul Activity"
+        app:title="Transaksi"
         app:titleTextColor="@android:color/black" />
 
     <androidx.core.widget.NestedScrollView

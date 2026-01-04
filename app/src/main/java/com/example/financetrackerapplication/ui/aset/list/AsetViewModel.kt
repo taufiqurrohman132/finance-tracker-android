@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.aset.list
+package com.example.financetrackerapplication.ui.aset.list
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

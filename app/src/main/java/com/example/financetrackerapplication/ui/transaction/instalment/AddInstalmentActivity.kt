@@ -1,4 +1,4 @@
-package com.example.financetrackerapplication.features.transaction.instalment
+package com.example.financetrackerapplication.ui.transaction.instalment
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -42,7 +42,12 @@ interface TransactionDao {
     fun getDailyIncome(
         year: String,      // contoh: "2025"
         month: String,     // contoh: "01" s/d "12"
-        incomeType: Int
-    ): List<DailyIncome>
+        incomeType: String
+    ): Flow<List<DailyIncome>>
 
+    @Query("SELECT IFNULL(SUM(amount), 0) FROM `transaction` WHERE dateTimeMillis BETWEEN :startDayMillis AND :endDayMillis ")
+    fun getTotalByDay(
+        startDayMillis: Long,
+        endDayMillis: Long
+    ): Flow<Long>
 }
