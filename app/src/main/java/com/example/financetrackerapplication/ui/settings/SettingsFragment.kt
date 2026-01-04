@@ -73,14 +73,14 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupListener() {
-        binding.btnSignin.setOnClickListener { showRegisterOptions() }
+//        binding.btnSignin.setOnClickListener { showRegisterOptions() }
+//
+//        binding.btnLogout.setOnClickListener { viewModel.logout() }
 
-        binding.btnLogout.setOnClickListener { viewModel.logout() }
-
-        binding.btnGuest.setOnClickListener {
-            val intent = Intent(requireActivity(), CategoryActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.btnGuest.setOnClickListener {
+//            val intent = Intent(requireActivity(), CategoryActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 
     private fun signInWithGoogle() {
@@ -135,21 +135,29 @@ class SettingsFragment : Fragment() {
     }
 
     private fun observer() {
-        // perubahan status user
-        viewModel.userStatus.observe(viewLifecycleOwner) { status ->
-            when (status) {
-                UserStatus.LoggedOut -> {
-                    Log.d("SettingsActivity", "UI update: Belum login")
-                }
+        viewModel.apply {
+            // perubahan status user
+            userStatus.observe(viewLifecycleOwner) { status ->
+                when (status) {
+                    UserStatus.LoggedOut -> {
+                        Log.d("SettingsActivity", "UI update: Belum login")
+                    }
 
-                UserStatus.Anonymous -> {
-                    Log.d("SettingsActivity", "UI update: Guest")
-                }
+                    UserStatus.Anonymous -> {
+                        Log.d("SettingsActivity", "UI update: Guest")
+                    }
 
-                UserStatus.LoggedIn -> {
-                    Log.d("SettingsActivity", "UI update: Logged-in")
+                    UserStatus.LoggedIn -> {
+                        Log.d("SettingsActivity", "UI update: Logged-in")
+                    }
                 }
             }
+
+            themeMode.observe(viewLifecycleOwner){ mode ->
+
+            }
+
+
         }
     }
 

@@ -12,8 +12,9 @@ import com.example.financetrackerapplication.databinding.ItemTransactionBinding
 import com.example.financetrackerapplication.databinding.ItemTransactionHeaderBinding
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.utils.BaseDiffCallback
-import com.example.financetrackerapplication.utils.Extention.parseLongToMoney
+import com.example.financetrackerapplication.utils.Extention.parseLongToMoneyShort
 import com.example.financetrackerapplication.utils.Extention.setBalanceColor
+import com.example.financetrackerapplication.utils.Money
 import com.example.financetrackerapplication.utils.TimeUtils
 
 class DashboardAdapter(
@@ -36,17 +37,15 @@ class DashboardAdapter(
                     setTextColor(Color.GREEN)
                     text = itemView.resources.getString(
                         R.string.total_balance,
-                        itemTransaction.income.toString().toLong().parseLongToMoney()
+                        itemTransaction.income.toString().toLong().parseLongToMoneyShort(Money.TEN_THOUSAND)
                     )
-
                 }
                 itemTransHeaderTvExpanse.apply {
                     setTextColor(Color.RED)
                     text = itemView.resources.getString(
                         R.string.total_balance,
-                        itemTransaction.expense.toString().toLong().parseLongToMoney()
+                        itemTransaction.expense.toString().toLong().parseLongToMoneyShort(Money.TEN_THOUSAND)
                     )
-
                 }
             }
 
@@ -67,7 +66,7 @@ class DashboardAdapter(
                     text = itemView.resources.getString(
                         R.string.total_balance,
                         itemTransaction.dataItem?.transaction?.amount.toString().toLong()
-                            .parseLongToMoney()
+                            .parseLongToMoneyShort()
                     )
                     setBalanceColor(itemTransaction.dataItem?.transaction?.type.toString())
                 }

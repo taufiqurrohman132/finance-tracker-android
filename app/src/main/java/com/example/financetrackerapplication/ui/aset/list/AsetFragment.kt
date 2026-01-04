@@ -1,6 +1,7 @@
 package com.example.financetrackerapplication.features.aset.list
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.ActionMode
@@ -21,7 +22,7 @@ import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.databinding.FragmentAsetBinding
 import com.example.financetrackerapplication.domain.model.GroupAset
 import com.example.financetrackerapplication.features.aset.add.AddAsetActivity
-import com.example.financetrackerapplication.utils.Extention.parseLongToMoney
+import com.example.financetrackerapplication.utils.Extention.parseLongToMoneyShort
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -117,22 +118,37 @@ class AsetFragment : Fragment() {
                 .flatMap { it.childAsetList }
                 .filter { it.aset.initialBalance > 0 }
                 .sumOf { it.aset.initialBalance }
-                .parseLongToMoney()
+                .parseLongToMoneyShort()
             val totalLiability = list.filterIsInstance<GroupAset.Parent>()
                 .flatMap { it.childAsetList }
                 .filter { it.aset.initialBalance < 0 }
                 .sumOf { it.aset.initialBalance }
-                .parseLongToMoney()
+                .parseLongToMoneyShort()
             val totalBalance = list
                 .filterIsInstance<GroupAset.Parent>()
                 .flatMap { it.childAsetList }
                 .sumOf { it.aset.initialBalance }
-                .parseLongToMoney()
+                .parseLongToMoneyShort()
 
             binding.apply {
-                asetTvAset.text = totalAset
-                asetTvLiabilitas.text = totalLiability
-                asetTvTotal.text = totalBalance
+                asetTvAset.apply {
+                    text = requireContext().resources.getString(
+                        R.string.total_balance,
+                        totalAset
+                    )
+                    setTextColor(Color.GREEN)
+                }
+                asetTvLiabilitas.apply {
+                    text = requireContext().resources.getString(
+                        R.string.total_balance,
+                        totalLiability
+                    )
+                    setTextColor(Color.RED)
+                }
+                asetTvTotal.text = requireContext().resources.getString(
+                    R.string.total_balance,
+                    totalBalance
+                )
             }
 
             Log.d(TAG, "observer: update list is running")

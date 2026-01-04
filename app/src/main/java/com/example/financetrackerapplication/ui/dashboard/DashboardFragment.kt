@@ -18,14 +18,14 @@ import com.example.financetrackerapplication.Action
 import com.example.financetrackerapplication.MainActivity
 import com.example.financetrackerapplication.MainSharedViewModel
 import com.example.financetrackerapplication.R
-import com.example.financetrackerapplication.data.datasource.local.entity.TransactionEntity
 import com.example.financetrackerapplication.databinding.FragmentDashboardBinding
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.features.transaction.TransactionActivity
-import com.example.financetrackerapplication.utils.Extention.parseLongToMoney
+import com.example.financetrackerapplication.utils.Extention.parseLongToMoneyShort
 import com.example.financetrackerapplication.utils.Navigation
 import com.example.financetrackerapplication.utils.TimeUtils
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
@@ -45,6 +45,8 @@ class DashboardFragment : Fragment() {
     private lateinit var dashoardAdapter: DashboardAdapter
     private val viewModel: DashboardViewModel by viewModels()
     private val sharedViewModel: MainSharedViewModel by activityViewModels()
+
+    private var currentList: List<ItemTransaction> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,7 +87,7 @@ class DashboardFragment : Fragment() {
                 Navigation.navigateToTransaction(requireContext(), transaction.id)
             },
             onItemSelected = { item ->
-                viewModel.toggleSelect(item)
+                viewModel.toggleSelect(item.id ?: 0L)
 
             }
         )
@@ -105,7 +107,7 @@ class DashboardFragment : Fragment() {
                 startActivity(intent)
             }
             btnBatalkanSelection.setOnClickListener { viewModel.clearSelection() }
-            btnPilihSemuaSelection.setOnClickListener { viewModel.selectAll() }
+            btnPilihSemuaSelection.setOnClickListener { viewModel.selectAll(currentList) }
 
             dashBtnFilterMounth.setOnClickListener { showMonthYearPickers(dashBtnFilterMounth.text.toString()) }
         }
@@ -115,21 +117,48 @@ class DashboardFragment : Fragment() {
         viewModel.apply {
             // header total
             listTransaction.observe(viewLifecycleOwner) { listItem ->
+                currentList = listItem
+
                 val activity = requireActivity() as MainActivity
                 activity.showActionMenu(viewModel.hasSelection(), R.id.navigation_dashboard)
 
-                binding.dashSelectionLayout.isVisible = viewModel.hasSelection()
+                binding.apply {
+                    dashSelectionLayout.isVisible = viewModel.hasSelection()
+                    toolbar.apply {
+                        title =
+                            if (!viewModel.hasSelection()) getString(R.string.transaksi) else null
+                        menu.apply {
+                            findItem(R.id.dash_search)?.isVisible = !viewModel.hasSelection()
+                            findItem(R.id.dash_bookmark)?.isVisible = !viewModel.hasSelection()
+                        }
+                    }
+                }
                 dashoardAdapter.submitList(listItem)
 
-                if (!listItem.isNullOrEmpty()) {
-                    viewModel.setBarCharInMonth(2025, Calendar.DECEMBER)
-                }
-
                 val totalIncome = listItem.sumOf { it.income ?: 0L }
-                binding.dashTvIncomeTotal.text = totalIncome.parseLongToMoney()
+                binding.dashTvIncomeTotal.text = totalIncome.parseLongToMoneyShort()
 
                 binding.dashTvTotalSaldo.text =
-                    requireActivity().getString(R.string.total_balance, totalBalance(listItem).parseLongToMoney())
+                    requireActivity().getString(
+                        R.string.total_balance,
+                        totalBalance(listItem).parseLongToMoneyShort()
+                    )
+            }
+
+            // barchart
+            dailyIncome.observe(viewLifecycleOwner) { dailyTotal ->
+                val dataSet = lineDataSet(dailyTotal)
+                binding.dashChartIncome.apply {
+                    data = LineData(dataSet)
+                    notifyDataSetChanged()
+                    invalidate()
+                }
+
+                totalPercentage.observe(viewLifecycleOwner) { presenteage ->
+                    Log.d(TAG, "observer: total presentage = $presenteage")
+                    val textPresentage = String.format(Locale.getDefault(), "%+.2f%%", presenteage)
+                    binding.dashTotalPresentage.text = textPresentage
+                }
             }
         }
 
@@ -151,45 +180,44 @@ class DashboardFragment : Fragment() {
             }
         }
 
-        // barchart
-        viewModel.displayBarChart.observe(viewLifecycleOwner) { barEntriesList ->
-            val dataSet = LineDataSet(barEntriesList, "Income").apply {
-                setDrawValues(false)
-                // agar melengkung
-                mode = LineDataSet.Mode.CUBIC_BEZIER
-                cubicIntensity = 0.15f
-
-                // agar titik hilang
-                setDrawCircles(false)
-                setDrawFilled(true)
-                val gradient = GradientDrawable(
-                    GradientDrawable.Orientation.TOP_BOTTOM,
-                    intArrayOf(
-                        Color.GREEN,
-                        Color.TRANSPARENT
-                    )
-                )
-                fillDrawable = gradient
-
-//                lineWidth = 2f
-
-                valueFormatter = object : ValueFormatter() {
-                    override fun getFormattedValue(value: Float): String {
-                        return "${value.toInt()} M"
-                    }
-                }
-            }
-            binding.dashChartIncome.apply {
-
-                data = LineData(dataSet)
-//                axisLeft.resetAxisMinimum()
-                notifyDataSetChanged()
-                invalidate()
-            }
-        }
     }
 
-    private fun totalBalance(list: List<ItemTransaction>): Long{
+    private fun lineDataSet(dailyTotal: LongArray): LineDataSet {
+        val entries = dailyTotal.mapIndexed { index, total ->
+            Entry(
+                (index + 1).toFloat(),   // X = hari
+                total.toFloat()          // Y = total income hari itu
+            )
+        }
+        Log.d(TAG, "observer: daily income = $entries")
+        val dataSet = LineDataSet(entries, "Income").apply {
+            setDrawValues(false)
+            // agar melengkung
+            mode = LineDataSet.Mode.CUBIC_BEZIER
+            cubicIntensity = 0.15f
+
+            // agar titik hilang
+            setDrawCircles(false)
+            setDrawFilled(true)
+            val gradient = GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(
+                    Color.GREEN,
+                    Color.TRANSPARENT
+                )
+            )
+            fillDrawable = gradient
+
+            valueFormatter = object : ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return "${value.toInt()} M"
+                }
+            }
+        }
+        return dataSet
+    }
+
+    private fun totalBalance(list: List<ItemTransaction>): Long {
         val totalIncome = list.sumOf { it.income ?: 0L }
         val totalExpense = list.sumOf { it.expense ?: 0L }
 

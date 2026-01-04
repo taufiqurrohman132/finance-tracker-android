@@ -1,11 +1,14 @@
 package com.example.financetrackerapplication.features.settings
 
 import android.util.Log
+import android.util.Printer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.financetrackerapplication.domain.model.UserStatus
+import com.example.financetrackerapplication.domain.repository.SettingsRepository
 import com.example.financetrackerapplication.domain.usecase.GetUserStatusUseCase
 import com.example.financetrackerapplication.domain.usecase.SignInAnonymouslyUseCase
 import com.example.financetrackerapplication.domain.usecase.SignInWithGoogleUseCase
@@ -19,10 +22,17 @@ class SettingsViewModel @Inject constructor(
     private val signInAnonymouslyUseCase: SignInAnonymouslyUseCase,
     private val getUserStatusUseCase: GetUserStatusUseCase,
     private val signOutUseCase: SignOutUseCase,
-    private val signInWithGoogleUseCase: SignInWithGoogleUseCase
+    private val signInWithGoogleUseCase: SignInWithGoogleUseCase,
+    private val settingsRepository: SettingsRepository
 ) : ViewModel() {
     private val _userStatus = MutableLiveData<UserStatus>()
     val userStatus: LiveData<UserStatus> get() = _userStatus
+
+    val themeMode: LiveData<Int> =
+        settingsRepository.themeModeFlow.asLiveData()
+
+    val notificationEnable: LiveData<Boolean> =
+        settingsRepository.notificationEnableFlow.asLiveData()
 
     fun loginGuest() {
         viewModelScope.launch {
@@ -62,6 +72,19 @@ class SettingsViewModel @Inject constructor(
             loadUserStatus()
         }
     }
+
+    fun setThemeMode(mode: Int){
+        viewModelScope.launch {
+            settingsRepository.setThemeMode(mode)
+        }
+    }
+
+    fun setNotificationEnable(enable: Boolean){
+        viewModelScope.launch {
+            settingsRepository.setNotificationEnabled(enable)
+        }
+    }
+
 
 
 }

@@ -11,7 +11,7 @@ import com.example.financetrackerapplication.databinding.ItemAsetBinding
 import com.example.financetrackerapplication.databinding.ItemAsetHeaderBinding
 import com.example.financetrackerapplication.domain.model.GroupAset
 import com.example.financetrackerapplication.utils.BalanceUtils
-import com.example.financetrackerapplication.utils.Extention.parseLongToMoney
+import com.example.financetrackerapplication.utils.Extention.parseLongToMoneyShort
 
 class AsetAdapter(
     private val onExpand: (GroupAset.Parent) -> Unit,
@@ -37,7 +37,14 @@ class AsetAdapter(
                 .sumOf { it.aset.initialBalance }
 
             binding.asetGroupName.text = parent.name
-            binding.asetTotal.text = total.parseLongToMoney()
+            binding.asetTotal.apply {
+                text = itemView.resources.getString(
+                    R.string.total_balance,
+                    total.toString().toLong()
+                        .parseLongToMoneyShort()
+                )
+                setTextColor(BalanceUtils.getBalanceColor(total))
+            }
 
             binding.asetIndicatorExpand.setBackgroundColor(
                 binding.root.context.getColor(
@@ -62,7 +69,11 @@ class AsetAdapter(
         fun bind(child: GroupAset.Child) {
             binding.tvAsetNameItem.text = child.aset.name
             binding.tvJumlahAsetItem.apply {
-                text = child.aset.initialBalance.parseLongToMoney()
+                text = itemView.resources.getString(
+                    R.string.total_balance,
+                    child.aset.initialBalance.toString().toLong()
+                        .parseLongToMoneyShort()
+                )
                 setTextColor(BalanceUtils.getBalanceColor(child.aset.initialBalance))
             }
 

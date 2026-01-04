@@ -17,12 +17,9 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.financetrackerapplication.R
 import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
@@ -38,12 +35,12 @@ import com.example.financetrackerapplication.utils.Extention.clearAllEditTexts
 import com.example.financetrackerapplication.utils.Extention.focusAndHideKeyboard
 import com.example.financetrackerapplication.utils.Extention.hideKeyboard
 import com.example.financetrackerapplication.utils.Extention.parseLongToMoney
+import com.example.financetrackerapplication.utils.Extention.parseLongToMoneyShort
 import com.example.financetrackerapplication.utils.Extention.parseMoneyToLong
 import com.example.financetrackerapplication.utils.Extention.showKeyboard
 import com.example.financetrackerapplication.utils.TimeUtils
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -157,7 +154,7 @@ class TransactionActivity : AppCompatActivity() {
 
         // from tab header home
         val timeFromHeader = intent.getSerializableExtra(TRANS_TIME_MILLIS) as? Long
-        timeFromHeader?.let { dateTimeMillis->
+        timeFromHeader?.let { dateTimeMillis ->
             updateDate(dateTimeMillis)
             updateTime(dateTimeMillis)
         }
@@ -180,13 +177,14 @@ class TransactionActivity : AppCompatActivity() {
                     // show keyboard list on focus
                     if (hasFocus) {
                         showKeyboardOptionsList {
-                            val adapter = OptionsAdapter<CategoryEntity> {
-                                categorySelectedId = it.id
-                                addEtKategori.setText(it.name)
+                            val adapter = OptionsAdapter<CategoryEntity>(
+                                onClickItem = {
+                                    categorySelectedId = it.id
+                                    addEtKategori.setText(it.name)
 
-                                addEtAset.requestFocus()
-
-                            }
+                                    addEtAset.requestFocus()
+                                }
+                            )
                             lifecycleScope.launch {
                                 val data = viewModel.getAllCategory()
                                 adapter.submitList(data)
@@ -255,7 +253,8 @@ class TransactionActivity : AppCompatActivity() {
             }
 
             // setup keyboard
-            keyboardClickListener(
+            DialogUtils.keyboardClickListener(
+                this@TransactionActivity,
                 {
                     // ketiak btn selesai di triger
                     addEtKategori.requestFocus()
@@ -430,9 +429,14 @@ class TransactionActivity : AppCompatActivity() {
                                 updateTime(transaction.dateTimeMillis)
 
                                 val uriIsNotEmpty = transaction.photoDescription.isNotEmpty() &&
-                                        transaction.photoDescription.any { it.toString().isNotBlank() }
+                                        transaction.photoDescription.any {
+                                            it.toString().isNotBlank()
+                                        }
                                 if (uriIsNotEmpty) {
-                                    Log.d(TAG, "observer: photo desc = ${transaction.photoDescription}")
+                                    Log.d(
+                                        TAG,
+                                        "observer: photo desc = ${transaction.photoDescription}"
+                                    )
                                     addGridPhotoTrans.removeAllViews() // bersihkan biar nggk duplikat
                                     transaction.photoDescription.forEach { uri ->
                                         addPhotoDescription(uri)
@@ -550,42 +554,6 @@ class TransactionActivity : AppCompatActivity() {
         // non focus ketika edit
         if (transactionId == null) {
             binding.addEtTotal.focusAndHideKeyboard()
-        }
-    }
-
-    private fun keyboardClickListener(
-        nextFocus: () -> Unit,
-        editText: TextInputEditText,
-        vararg button: AppCompatButton
-    ) {
-        button.forEach { btn ->
-            btn.setOnClickListener {
-                when (btn.id) {
-                    R.id.key_num_delete -> editText.text?.apply {
-                        if (this.isNotBlank()) delete(length - 1, length) // hapus karakter terakhir
-                    }
-
-                    R.id.key_num_minus -> editText.text?.apply {
-                        val minus = btn.text.toString()
-                        if (!this.toString().contains(minus)) insert(0, btn.text.toString())
-                        else delete(0, 1)
-                    }
-
-                    R.id.key_num_koma -> editText.text?.apply {
-                        // di editteks apa ada koma
-                        val comma = btn.text.toString()
-                        if (!this.toString().contains(comma)) insert(this.length, comma)
-                    }
-
-                    R.id.key_num_selesai -> {
-                        nextFocus.invoke()
-                    }
-
-                    else -> editText.append(btn.text.toString())
-                }
-                Log.d(TAG, "keyboardClickListener: input teks = ${btn.text}")
-            }
-
         }
     }
 
