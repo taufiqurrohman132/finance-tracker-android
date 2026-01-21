@@ -18,6 +18,7 @@
     <string name="tentang_aplikasi">Tentang Aplikasi</string>
     <string name="preferensi_aplikasi">Preferensi Aplikasi</string>
     <string name="simpan">Simpan</string>
+    <string name="update">Perbarui</string>
     <string name="aset">Aset</string>
     <string name="grup_aset">Grup Aset</string>
 
@@ -28,7 +29,7 @@
     <string name="total_balance">Rp %1$s</string>
     <string name="hapus">Hapus</string>
 
-<!--    confirmation-->
+    <!--    confirmation-->
     <string name="oke">Ok</string>
     <string name="batal">Batal</string>
     <string name="data_kategori">Data &amp; Kategori</string>
@@ -78,4 +79,51 @@
         <item>Nov</item>
         <item>Des</item>
     </string-array>
+
+    <!-- ===== UMUM ===== -->
+    <string name="help_title">Dukungan &amp; Bantuan</string>
+
+
+    <!-- PEMASUKAN -->
+    <string name="help_income_1">
+Menambahkan pemasukan;Ketuk tombol + di halaman utama FinTrack untuk menambahkan pemasukan baru. Pilih kategori, isi nominal, lalu simpan data.
+    </string>
+
+    <string name="help_income_2">
+Mengatur kategori pemasukan;Gunakan kategori agar pemasukan lebih mudah dipantau dalam laporan bulanan.
+    </string>
+
+    <!-- PENGELUARAN -->
+    <string name="help_expense_1">
+Menambahkan pengeluaran;Ketuk tombol + lalu pilih menu Pengeluaran. Masukkan nominal, kategori, dan catatan bila diperlukan.
+    </string>
+
+    <string name="help_expense_2">
+Memilih kategori pengeluaran;Pilih kategori yang sesuai agar pengeluaran tercatat rapi dan mudah dianalisis.
+    </string>
+
+    <!-- LAPORAN -->
+    <string name="help_report_1">
+Melihat laporan keuangan;Buka menu Laporan untuk melihat ringkasan pemasukan dan pengeluaran berdasarkan periode.
+    </string>
+
+    <string name="help_report_2">
+Filter periode laporan;Gunakan filter bulanan atau rentang tanggal untuk melihat detail keuangan.
+    </string>
+
+    <!-- DATA -->
+    <string name="help_backup">
+Backup dan pemulihan data;Data FinTrack tersimpan secara lokal di perangkat. Lakukan backup berkala untuk menghindari kehilangan data.
+    </string>
+
+    <!-- TENTANG -->
+    <string name="help_about">
+Tentang FinTrack;FinTrack adalah aplikasi pencatatan keuangan pribadi untuk mengelola pemasukan dan pengeluaran secara sederhana.
+    </string>
+
+    <string name="help_contact">
+Kontak dan dukungan;
+        Jika mengalami kendala atau memiliki saran, silakan hubungi developer melalui halaman Tentang Aplikasi.
+    </string>
+
 </resources>

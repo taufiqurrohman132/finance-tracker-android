@@ -22,6 +22,7 @@ import com.example.financetrackerapplication.databinding.FragmentSettingsBinding
 import com.example.financetrackerapplication.databinding.SheetAuthLayoutBinding
 import com.example.financetrackerapplication.domain.model.UserStatus
 import com.example.financetrackerapplication.ui.auth.SignInLinkEmailActivity
+import com.example.financetrackerapplication.ui.settings.category.list.CategoryActivity
 import com.example.financetrackerapplication.utils.Extention.setupStyle
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -83,6 +84,13 @@ class SettingsFragment : Fragment() {
 //            val intent = Intent(requireActivity(), CategoryActivity::class.java)
 //            startActivity(intent)
 //        }
+
+        binding.apply {
+            setKelolaKategori.setOnClickListener {
+                val intent = Intent(requireActivity(), CategoryActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun signInWithGoogle() {
@@ -156,7 +164,7 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        sharedViewModel.themeMode.observe(viewLifecycleOwner){ mode ->
+        sharedViewModel.themeMode.observe(viewLifecycleOwner) { mode ->
 
         }
     }

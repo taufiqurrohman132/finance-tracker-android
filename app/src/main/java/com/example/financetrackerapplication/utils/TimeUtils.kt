@@ -76,7 +76,7 @@ object TimeUtils {
     fun daysInMonth(year: Int, month: Int): Int {
         val cal = Calendar.getInstance()
         cal.set(Calendar.YEAR, year)
-        cal.set(Calendar.MONTH, month)
+        cal.set(Calendar.MONTH, month -1) // kurangi 1 karena Calendar.MONTH 0-indexed
         return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
 

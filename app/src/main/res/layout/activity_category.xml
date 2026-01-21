@@ -1,19 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.settings.categorymanage.list.CategoryActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".ui.aset.list.AsetFragment">
 
+    <!-- AppBar dengan CollapsingToolbar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/white"
+            app:title="Aset"
+            android:paddingBottom="40dp"
+            app:collapsedTitleGravity="center_horizontal"
+            app:collapsedTitleTextAppearance="@style/ToolbarTitleCenter"
+            app:expandedTitleTextAppearance="?attr/textAppearanceHeadline3"
+            app:titleCollapseMode="scale"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <!-- Toolbar -->
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:layout_collapseMode="pin"/>
+
+            <FrameLayout
+                android:id="@+id/selection_layout"
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_collapseMode="pin"
+                android:layout_height="?attr/actionBarSize"
+                >
+                <TextView
+                    android:id="@+id/btn_batalkan_selection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Batalkan"
+                    style="@style/TextCardTitle"
+                    android:layout_marginStart="16dp"
+                    android:layout_gravity="start"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/btn_pilih_semua_selection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Pilih Semua"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="16dp"
+                    style="@style/TextCardTitle"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    />
+            </FrameLayout>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/aset.rv_aset"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab.add_category"
+        android:id="@+id/fab_add_aset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_help_support"
+        android:src="@drawable/ic_add"
+        android:contentDescription="Add Aset"
         android:layout_margin="16dp"
-        android:layout_gravity="end|bottom"
-        />
+        app:layout_anchor="@id/aset.rv_aset"
+        app:layout_anchorGravity="bottom|end"
+        android:backgroundTint="@color/color_primary"
+        app:tint="@color/white"/>
 
-</FrameLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/cat.bottom_nav_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        app:backgroundTint="@color/white_90"
+        app:itemIconTint="@color/color_primary"
+        app:itemTextColor="@color/color_primary"
+        app:itemRippleColor="@color/color_primary_20"
+        app:itemHorizontalTranslationEnabled="true"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/menu_bottom_nav_action" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

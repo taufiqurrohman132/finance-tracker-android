@@ -1,9 +1,12 @@
 package com.example.financetrackerapplication.data.datasource.local.entity
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.financetrackerapplication.domain.model.TransOptions
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "categories")
 data class CategoryEntity (
     @PrimaryKey(autoGenerate = true)
@@ -12,5 +15,4 @@ data class CategoryEntity (
     val categoryType: String, // "INCOME" atau "EXPENSE"
     override val name: String, // "Gaji", "Makanan", "Transportasi"
     override val iconName: String?, // Opsional: nama ikon untuk ditampilkan di UI
-): TransOptions{
-}
+): TransOptions, Parcelable

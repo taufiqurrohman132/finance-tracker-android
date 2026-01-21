@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
@@ -33,26 +34,20 @@ class DashboardViewModel @Inject constructor(
     private val _selectedIds = MutableLiveData<Set<Long>>(emptySet())
     val selectedIds: LiveData<Set<Long>> = _selectedIds
 
-    private val allTransaction = repository.getAllTransaction()
-
     val listTransaction: LiveData<List<ItemTransaction>> =
-        selectedYearMonth.switchMap { (year, month) ->
-            selectedIds.switchMap { ids ->
-                liveData {
-                    allTransaction.collect { list ->
-                        emit(
-                            groupTransactionsUseCase.execute(
-                                list,
-                                Month.of(month),
-                                year
-                            ).map {
-                                it.copy(isSelected = ids.contains(it.id))
-                            }
-                        )
-                    }
-                }
+        combine(
+            selectedYearMonth.asFlow(),
+            selectedIds.asFlow(),
+            repository.getAllTransaction()
+        ){ (year, month), ids, list ->
+            groupTransactionsUseCase.execute(
+                list,
+                Month.of(month),
+                year
+            ).map {
+                it.copy(isSelected = ids.contains(it.id))
             }
-        }
+        }.asLiveData()
 
     val dailyIncome: LiveData<LongArray> =
         selectedYearMonth.switchMap { (year, month) ->
@@ -141,6 +136,7 @@ class DashboardViewModel @Inject constructor(
     private fun setTotalDailyInMonth(year: Int, month: Int, list: List<DailyIncome>): LongArray {
         val daysInMonth = TimeUtils.daysInMonth(year, month)
 
+        Log.d(TAG, "setTotalDailyInMonth: day in month = $daysInMonth, list = ${list.size}")
         val dailyTotal = LongArray(daysInMonth)
 
         list.forEach {

@@ -5,17 +5,130 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
-    tools:context=".ui.settings.categorymanage.add.AddCategoryActivity">
+    tools:context=".ui.settings.category.add.AddCategoryActivity">
 
-    <EditText
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/trans.toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/input_name_category"
-        />
-    <Button
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:backgroundTint="@color/white"
+        android:elevation="1dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="8dp"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="Tambah Category"
+        app:titleTextColor="@android:color/black" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/simpan"
-        android:id="@+id/btn_save_category"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add.category_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:hint="Category"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxStrokeColor="@color/color_primary"
+                app:boxStrokeWidth="1dp"
+                app:hintTextColor="@color/color_primary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add.et_category_name"
+                    style="@style/TextBodyMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/add.btn_camera"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="64dp"-->
+<!--                android:layout_marginEnd="8dp"-->
+<!--                android:paddingStart="34dp"-->
+<!--                android:paddingEnd="0dp"-->
+<!--                app:backgroundTint="@color/grey_trans_10"-->
+<!--                app:icon="@drawable/ic_camera"-->
+<!--                app:iconSize="24dp"-->
+<!--                app:iconTint="@color/black" />-->
+        </LinearLayout>
+
+        <GridLayout
+            android:id="@+id/add.grid_photo_trans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="4dp"
+            android:columnCount="3" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add.btn_update"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="8dp"
+                android:background="@drawable/cograd_purple_to_blue"
+                android:text="Simpan"
+                android:visibility="invisible"
+                app:backgroundTint="@null"
+                app:cornerRadius="16dp" />
+
+            <LinearLayout
+                android:id="@+id/btn_add_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/add.btn_save"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/cograd_purple_to_blue"
+                    android:text="Simpan"
+                    app:backgroundTint="@null"
+                    app:cornerRadius="16dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/add.btn_next_lanjut"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/cograd_stroke_blue_to_purple"
+                    android:text="Lanjut"
+                    android:textColor="@color/color_primary"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null"
+                    app:cornerRadius="16dp" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
 </LinearLayout>
+

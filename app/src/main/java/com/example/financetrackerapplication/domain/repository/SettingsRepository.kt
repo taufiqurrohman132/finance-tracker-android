@@ -13,4 +13,5 @@ interface SettingsRepository {
 
     suspend fun setThemeMode(mode: Int)
     suspend fun setNotificationEnabled(enabled: Boolean)
+
 }

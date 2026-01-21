@@ -77,7 +77,7 @@ class DashboardAdapter(
                         if (itemTransaction.isSelected)
                             R.color.color_primary_gradiant_10
                         else
-                            R.color.white
+                            R.color.grey_light
                     )
                 )
 

@@ -22,6 +22,7 @@ import com.example.financetrackerapplication.databinding.FragmentDashboardBindin
 import com.example.financetrackerapplication.domain.model.ItemTransaction
 import com.example.financetrackerapplication.ui.transaction.TransactionActivity
 import com.example.financetrackerapplication.utils.Extention.parseLongToMoneyShort
+import com.example.financetrackerapplication.utils.LastItemBottomMarginDecoration
 import com.example.financetrackerapplication.utils.Navigation
 import com.example.financetrackerapplication.utils.TimeUtils
 import com.github.mikephil.charting.components.XAxis
@@ -96,6 +97,7 @@ class DashboardFragment : Fragment() {
             adapter = dashoardAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
+            addItemDecoration(LastItemBottomMarginDecoration(112, dashoardAdapter))
         }
     }
 
@@ -126,7 +128,7 @@ class DashboardFragment : Fragment() {
                     dashSelectionLayout.isVisible = viewModel.hasSelection()
                     toolbar.apply {
                         title =
-                            if (!viewModel.hasSelection()) getString(R.string.transaksi) else null
+                            if (!viewModel.hasSelection()) getString(R.string.app_name) else null
                         menu.apply {
                             findItem(R.id.dash_search)?.isVisible = !viewModel.hasSelection()
                             findItem(R.id.dash_bookmark)?.isVisible = !viewModel.hasSelection()
@@ -136,7 +138,11 @@ class DashboardFragment : Fragment() {
                 dashoardAdapter.submitList(listItem)
 
                 val totalIncome = listItem.sumOf { it.income ?: 0L }
-                binding.dashTvIncomeTotal.text = totalIncome.parseLongToMoneyShort()
+                val totalExpanse = listItem.sumOf { it.expense ?: 0L }
+                binding.apply {
+                    dashTvIncomeTotal.text = totalIncome.parseLongToMoneyShort()
+                    dashTvExpanseTotal.text = totalExpanse.parseLongToMoneyShort()
+                }
 
                 binding.dashTvTotalSaldo.text =
                     requireActivity().getString(
@@ -147,18 +153,33 @@ class DashboardFragment : Fragment() {
 
             // barchart
             dailyIncome.observe(viewLifecycleOwner) { dailyTotal ->
-                val dataSet = lineDataSet(dailyTotal)
+                val dataSet = lineDataSet(dailyTotal, Color.GREEN)
                 binding.dashChartIncome.apply {
                     data = LineData(dataSet)
                     notifyDataSetChanged()
                     invalidate()
                 }
 
-                totalPercentage.observe(viewLifecycleOwner) { presenteage ->
-                    Log.d(TAG, "observer: total presentage = $presenteage")
-                    val textPresentage = String.format(Locale.getDefault(), "%+.2f%%", presenteage)
-                    binding.dashTotalPresentage.text = textPresentage
+
+            }
+            dailyExpanse.observe(viewLifecycleOwner) { dailyTotal ->
+                val dataSet = lineDataSet(dailyTotal, Color.RED)
+                binding.dashChartExpanse.apply {
+                    data = LineData(dataSet)
+                    notifyDataSetChanged()
+                    invalidate()
                 }
+
+//                totalPercentage.observe(viewLifecycleOwner) { presenteage ->
+//                    Log.d(TAG, "observer: total presentage = $presenteage")
+//                    val textPresentage = String.format(Locale.getDefault(), "%+.2f%%", presenteage)
+//                    binding.dashTotalPresentage.text = textPresentage
+//                }
+            }
+            totalPercentage.observe(viewLifecycleOwner) { presenteage ->
+                Log.d(TAG, "observer: total presentage = $presenteage")
+                val textPresentage = String.format(Locale.getDefault(), "%+.2f%%", presenteage)
+                binding.dashTotalPresentage.text = textPresentage
             }
         }
 
@@ -182,7 +203,7 @@ class DashboardFragment : Fragment() {
 
     }
 
-    private fun lineDataSet(dailyTotal: LongArray): LineDataSet {
+    private fun lineDataSet(dailyTotal: LongArray, color: Int): LineDataSet {
         val entries = dailyTotal.mapIndexed { index, total ->
             Entry(
                 (index + 1).toFloat(),   // X = hari
@@ -191,6 +212,7 @@ class DashboardFragment : Fragment() {
         }
         Log.d(TAG, "observer: daily income = $entries")
         val dataSet = LineDataSet(entries, "Income").apply {
+            this.color = color
             setDrawValues(false)
             // agar melengkung
             mode = LineDataSet.Mode.CUBIC_BEZIER
@@ -202,7 +224,7 @@ class DashboardFragment : Fragment() {
             val gradient = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(
-                    Color.GREEN,
+                    color,
                     Color.TRANSPARENT
                 )
             )
@@ -225,32 +247,61 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setupChart() {
-        binding.dashChartIncome.apply {
-            description.isEnabled = false
-            legend.isEnabled = false
+        binding.apply {
+            dashChartIncome.apply {
+                description.isEnabled = false
+                legend.isEnabled = false
 
-            isAutoScaleMinMaxEnabled = false
+                isAutoScaleMinMaxEnabled = false
 
-            // MATIKAN semua auto offset
-            setViewPortOffsets(0f, 0f, 0f, 32f)
+                // MATIKAN semua auto offset
+                setViewPortOffsets(0f, 0f, 0f, 32f)
 
-            // Axis
-            axisRight.isEnabled = false
-            axisLeft.apply {
-                isEnabled = false
-                spaceTop = 0f
-                spaceBottom = 0f
+                // Axis
+                axisRight.isEnabled = false
+                axisLeft.apply {
+                    isEnabled = false
+                    spaceTop = 0f
+                    spaceBottom = 0f
+                }
+
+                xAxis.apply {
+                    granularity = 1f
+                    setLabelCount(7, false)
+                    position = XAxis.XAxisPosition.BOTTOM
+                    setDrawGridLines(false)
+                    textColor = Color.WHITE
+                }
+
+                invalidate()
             }
+            dashChartExpanse.apply {
+                description.isEnabled = false
+                legend.isEnabled = false
 
-            xAxis.apply {
-                granularity = 1f
-                setLabelCount(7, false)
-                position = XAxis.XAxisPosition.BOTTOM
-                setDrawGridLines(false)
-                textColor = Color.WHITE
+                isAutoScaleMinMaxEnabled = false
+
+                // MATIKAN semua auto offset
+                setViewPortOffsets(0f, 0f, 0f, 32f)
+
+                // Axis
+                axisRight.isEnabled = false
+                axisLeft.apply {
+                    isEnabled = false
+                    spaceTop = 0f
+                    spaceBottom = 0f
+                }
+
+                xAxis.apply {
+                    granularity = 1f
+                    setLabelCount(7, false)
+                    position = XAxis.XAxisPosition.BOTTOM
+                    setDrawGridLines(false)
+                    textColor = Color.WHITE
+                }
+
+                invalidate()
             }
-
-            invalidate()
         }
     }
 

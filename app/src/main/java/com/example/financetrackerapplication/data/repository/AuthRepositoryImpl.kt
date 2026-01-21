@@ -8,13 +8,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.actionCodeSettings
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-    private val settingsPreferences: SettingsPreferences
+//    private val settingsPreferences: SettingsPreferences
 ) : AuthRepository {
 
     override suspend fun signInAnonymously(): Result<Unit> = try {
@@ -87,33 +88,34 @@ class AuthRepositoryImpl @Inject constructor(
      * Kalau cuma pakai observeAuthState() → kamu mungkin kesulitan saat butuh cek cepat sekali aja (misalnya di Splash).
      */
     override suspend fun getUserStatus(): UserStatus {
-        val lastStatus = settingsPreferences.getAuthState()
-        val user = firebaseAuth.currentUser
-        Log.d("AuthRepository", "getAuthState: user = $user")
-        Log.d("AuthRepository", "getAuthState: last status = $lastStatus")
-
-        val state = when{
-            user != null -> {
-                if (user.isAnonymous) UserStatus.Anonymous else UserStatus.LoggedIn
-            }
-            else -> {
-                if (lastStatus == null){
-                    // pertama kali install
-                    UserStatus.Anonymous
-                }else{
-                    // sudah pernah login/logout sebelumnya
-                    UserStatus.LoggedOut
-                }
-            }
-        }
-        Log.d("AuthRepository", "getAuthState: user status is $state")
-        settingsPreferences.saveAuthState(state.value) // simpan lo local pref
-        return state
+//        val lastStatus = settingsPreferences.getAuthState()
+//        val user = firebaseAuth.currentUser
+//        Log.d("AuthRepository", "getAuthState: user = $user")
+//        Log.d("AuthRepository", "getAuthState: last status = $lastStatus")
+//
+//        val state = when{
+//            user != null -> {
+//                if (user.isAnonymous) UserStatus.Anonymous else UserStatus.LoggedIn
+//            }
+//            else -> {
+//                if (lastStatus == null){
+//                    // pertama kali install
+//                    UserStatus.Anonymous
+//                }else{
+//                    // sudah pernah login/logout sebelumnya
+//                    UserStatus.LoggedOut
+//                }
+//            }
+//        }
+//        Log.d("AuthRepository", "getAuthState: user status is $state")
+//        settingsPreferences.saveAuthState(state.value) // simpan lo local pref
+//        return state
+        return UserStatus.Anonymous
     }
 
     // pantau user status
-    override fun observeAuthState(): Flow<UserStatus> =
-        settingsPreferences.authStateFlow.map { UserStatus.fromString(it) }
+    override fun observeAuthState(): Flow<UserStatus> = flow { UserStatus.Anonymous }
+//        settingsPreferences.authStateFlow.map { UserStatus.fromString(it) }
 
 
     override fun signOut() {

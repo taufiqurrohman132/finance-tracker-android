@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.financetrackerapplication.data.datasource.local.entity.AsetEntity
 import com.example.financetrackerapplication.data.datasource.local.entity.CategoryEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -21,5 +20,8 @@ interface CategoryDao {
     suspend fun deleteCategory(vararg category: CategoryEntity)
 
     @Query("SELECT * FROM categories")
-    fun getCategory(): Flow<List<CategoryEntity>>
+    fun getAllCategory(): Flow<List<CategoryEntity>>
+
+    @Query("SELECT * FROM categories WHERE id = :id")
+    fun getCategory(id: Long): Flow<CategoryEntity>
 }

@@ -9,244 +9,245 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingBottom="24dp"
         tools:context=".ui.settings.SettingsFragment">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:text="Settings &amp; Support"
             style="@style/TextHeadingAppBarTitle"
-            android:layout_margin="16dp"
-            />
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginHorizontal="16dp"-->
-<!--            android:layout_marginVertical="50dp">-->
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical">-->
-<!--                <Button-->
-<!--                    android:id="@+id/btn_signin"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:text="sign in" />-->
-<!--                <Button-->
-<!--                    android:id="@+id/btn_guest"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:text="login guest" />-->
-<!--                <Button-->
-<!--                    android:id="@+id/btn_logout"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:text="log out" />-->
-
-<!--            </LinearLayout>-->
-
-<!--        </androidx.cardview.widget.CardView>-->
-
-        <TextView
-            style="@style/TextBodyMain"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:text="@string/preferensi_aplikasi"
-            android:textColor="@color/black" />
+            android:layout_margin="16dp"
+            android:paddingTop="16dp"
+            android:text="Settings &amp; Support" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="4dp"
-            app:cardCornerRadius="16dp">
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="16dp"-->
+        <!--            android:layout_marginVertical="50dp">-->
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:orientation="vertical">-->
+        <!--                <Button-->
+        <!--                    android:id="@+id/btn_signin"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_gravity="center"-->
+        <!--                    android:text="sign in" />-->
+        <!--                <Button-->
+        <!--                    android:id="@+id/btn_guest"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_gravity="center"-->
+        <!--                    android:text="login guest" />-->
+        <!--                <Button-->
+        <!--                    android:id="@+id/btn_logout"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_gravity="center"-->
+        <!--                    android:text="log out" />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <!--            </LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="4dp">
+        <!--        </androidx.cardview.widget.CardView>-->
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_appearance"
-                        android:tint="@color/black"
-                        app:contentPadding="8dp" />
+        <!--        <TextView-->
+        <!--            style="@style/TextBodyMain"-->
+        <!--            android:textStyle="bold"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="16dp"-->
+        <!--            android:text="@string/preferensi_aplikasi"-->
+        <!--            android:textColor="@color/black" />-->
 
-                    <TextView
-                        style="@style/TextBodyMain"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_weight="1"
-                        android:text="@string/tampilan"
-                        android:textColor="@color/black" />
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="16dp"-->
+        <!--            android:layout_marginTop="4dp"-->
+        <!--            app:cardCornerRadius="16dp">-->
 
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        app:thumbTint="@color/white"
-                        app:trackDecorationTint="@color/color_primary"
-                        app:trackTint="@color/text_detail_alt"/>
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:orientation="vertical">-->
 
-                </LinearLayout>
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:background="?attr/selectableItemBackground"-->
+        <!--                    android:clickable="true"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:paddingHorizontal="16dp"-->
+        <!--                    android:paddingVertical="4dp">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="4dp">
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center_vertical"-->
+        <!--                        android:scaleType="center"-->
+        <!--                        android:src="@drawable/ic_appearance"-->
+        <!--                        android:tint="@color/black"-->
+        <!--                        app:contentPadding="8dp" />-->
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_language"
-                        android:tint="@color/black"
-                        app:contentPadding="8dp" />
+        <!--                    <TextView-->
+        <!--                        style="@style/TextBodyMain"-->
+        <!--                        android:layout_width="0dp"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center_vertical"-->
+        <!--                        android:layout_marginHorizontal="8dp"-->
+        <!--                        android:layout_weight="1"-->
+        <!--                        android:text="@string/tampilan"-->
+        <!--                        android:textColor="@color/black" />-->
 
-                    <TextView
-                        style="@style/TextBodyMain"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_weight="1"
-                        android:text="@string/bahasa"
-                        android:textColor="@color/black" />
+        <!--                    <com.google.android.material.materialswitch.MaterialSwitch-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:checked="false"-->
+        <!--                        app:thumbTint="@color/white"-->
+        <!--                        app:trackDecorationTint="@color/color_primary"-->
+        <!--                        app:trackTint="@color/text_detail_alt"/>-->
 
-                    <ImageView
-                        style="@style/Icon24dp"
-                        android:layout_gravity="center_vertical"
-                        android:contentDescription="@string/next"
-                        android:padding="3dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_next_arrow"
-                        app:tint="@color/text_detail_alt" />
+        <!--                </LinearLayout>-->
 
-                </LinearLayout>
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:background="?attr/selectableItemBackground"-->
+        <!--                    android:clickable="true"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:paddingHorizontal="16dp"-->
+        <!--                    android:paddingVertical="4dp">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="4dp">
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center_vertical"-->
+        <!--                        android:scaleType="center"-->
+        <!--                        android:src="@drawable/ic_language"-->
+        <!--                        android:tint="@color/black"-->
+        <!--                        app:contentPadding="8dp" />-->
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_notification_icon"
-                        android:tint="@color/black"
-                        app:contentPadding="8dp" />
+        <!--                    <TextView-->
+        <!--                        style="@style/TextBodyMain"-->
+        <!--                        android:layout_width="0dp"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center_vertical"-->
+        <!--                        android:layout_marginHorizontal="8dp"-->
+        <!--                        android:layout_weight="1"-->
+        <!--                        android:text="@string/bahasa"-->
+        <!--                        android:textColor="@color/black" />-->
 
-                    <TextView
-                        style="@style/TextBodyMain"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_weight="1"
-                        android:text="@string/notifikasi"
-                        android:textColor="@color/black" />
+        <!--                    <ImageView-->
+        <!--                        style="@style/Icon24dp"-->
+        <!--                        android:layout_gravity="center_vertical"-->
+        <!--                        android:contentDescription="@string/next"-->
+        <!--                        android:padding="3dp"-->
+        <!--                        android:scaleType="centerCrop"-->
+        <!--                        android:src="@drawable/ic_next_arrow"-->
+        <!--                        app:tint="@color/text_detail_alt" />-->
 
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        app:thumbTint="@color/white"
-                        app:trackDecorationTint="@color/color_primary"
-                        app:trackTint="@color/text_detail_alt"/>
+        <!--                </LinearLayout>-->
 
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:background="?attr/selectableItemBackground"-->
+        <!--                    android:clickable="true"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:paddingHorizontal="16dp"-->
+        <!--                    android:paddingVertical="4dp">-->
 
-                </LinearLayout>
+        <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center_vertical"-->
+        <!--                        android:scaleType="center"-->
+        <!--                        android:src="@drawable/ic_notification_icon"-->
+        <!--                        android:tint="@color/black"-->
+        <!--                        app:contentPadding="8dp" />-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="?attr/selectableItemBackground"-->
-<!--                    android:clickable="true"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:paddingHorizontal="16dp"-->
-<!--                    android:paddingVertical="4dp">-->
+        <!--                    <TextView-->
+        <!--                        style="@style/TextBodyMain"-->
+        <!--                        android:layout_width="0dp"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center_vertical"-->
+        <!--                        android:layout_marginHorizontal="8dp"-->
+        <!--                        android:layout_weight="1"-->
+        <!--                        android:text="@string/notifikasi"-->
+        <!--                        android:textColor="@color/black" />-->
 
-<!--                    <com.google.android.material.imageview.ShapeableImageView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:scaleType="center"-->
-<!--                        android:src="@drawable/ic_language"-->
-<!--                        android:tint="@color/black"-->
-<!--                        app:contentPadding="8dp" />-->
-
-<!--                    <TextView-->
-<!--                        style="@style/TextBodyMain"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:layout_marginHorizontal="8dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:text="Format mata uang &amp; tanggal"-->
-<!--                        android:textColor="@color/black" />-->
-
-<!--                    <ImageView-->
-<!--                        style="@style/Icon24dp"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:contentDescription="@string/next"-->
-<!--                        android:padding="3dp"-->
-<!--                        android:scaleType="centerCrop"-->
-<!--                        android:src="@drawable/ic_next_arrow"-->
-<!--                        app:tint="@color/text_detail_alt" />-->
-
-<!--                </LinearLayout>-->
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        <!--                    <com.google.android.material.materialswitch.MaterialSwitch-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:checked="false"-->
+        <!--                        app:thumbTint="@color/white"-->
+        <!--                        app:trackDecorationTint="@color/color_primary"-->
+        <!--                        app:trackTint="@color/text_detail_alt"/>-->
 
 
-        <!--    CARD 2-->
+        <!--                </LinearLayout>-->
+
+        <!--&lt;!&ndash;                <LinearLayout&ndash;&gt;-->
+        <!--&lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;                    android:background="?attr/selectableItemBackground"&ndash;&gt;-->
+        <!--&lt;!&ndash;                    android:clickable="true"&ndash;&gt;-->
+        <!--&lt;!&ndash;                    android:orientation="horizontal"&ndash;&gt;-->
+        <!--&lt;!&ndash;                    android:paddingHorizontal="16dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;                    android:paddingVertical="4dp">&ndash;&gt;-->
+
+        <!--&lt;!&ndash;                    <com.google.android.material.imageview.ShapeableImageView&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:layout_gravity="center_vertical"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:scaleType="center"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:src="@drawable/ic_language"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:tint="@color/black"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        app:contentPadding="8dp" />&ndash;&gt;-->
+
+        <!--&lt;!&ndash;                    <TextView&ndash;&gt;-->
+        <!--&lt;!&ndash;                        style="@style/TextBodyMain"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:layout_width="0dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:layout_gravity="center_vertical"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:layout_marginHorizontal="8dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:text="Format mata uang &amp; tanggal"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:textColor="@color/black" />&ndash;&gt;-->
+
+        <!--&lt;!&ndash;                    <ImageView&ndash;&gt;-->
+        <!--&lt;!&ndash;                        style="@style/Icon24dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:layout_gravity="center_vertical"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:contentDescription="@string/next"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:padding="3dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:scaleType="centerCrop"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        android:src="@drawable/ic_next_arrow"&ndash;&gt;-->
+        <!--&lt;!&ndash;                        app:tint="@color/text_detail_alt" />&ndash;&gt;-->
+
+        <!--&lt;!&ndash;                </LinearLayout>&ndash;&gt;-->
+
+        <!--            </LinearLayout>-->
+        <!--        </androidx.cardview.widget.CardView>-->
+
+
         <!--    CARD 2-->
         <TextView
             style="@style/TextBodyMain"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="12dp"
             android:text="@string/data_kategori"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp"
             android:layout_marginTop="4dp"
             app:cardCornerRadius="16dp">
 
@@ -256,6 +257,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/set.kelola_kategori"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
@@ -294,7 +296,148 @@
 
                 </LinearLayout>
 
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:background="?attr/selectableItemBackground"-->
+                <!--                    android:clickable="true"-->
+                <!--                    android:orientation="horizontal"-->
+                <!--                    android:paddingHorizontal="16dp"-->
+                <!--                    android:paddingVertical="4dp">-->
+
+                <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:scaleType="center"-->
+                <!--                        android:src="@drawable/ic_help_support"-->
+                <!--                        android:tint="@color/black"-->
+                <!--                        app:contentPadding="8dp" />-->
+
+                <!--                    <TextView-->
+                <!--                        style="@style/TextBodyMain"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:layout_marginHorizontal="8dp"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:text="Backup data lokal"-->
+                <!--                        android:textColor="@color/black" />-->
+
+                <!--                    <ImageView-->
+                <!--                        style="@style/Icon24dp"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:contentDescription="@string/next"-->
+                <!--                        android:padding="3dp"-->
+                <!--                        android:scaleType="centerCrop"-->
+                <!--                        android:src="@drawable/ic_next_arrow"-->
+                <!--                        app:tint="@color/text_detail_alt" />-->
+
+                <!--                </LinearLayout>-->
+
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:background="?attr/selectableItemBackground"-->
+                <!--                    android:clickable="true"-->
+                <!--                    android:orientation="horizontal"-->
+                <!--                    android:paddingHorizontal="16dp"-->
+                <!--                    android:paddingVertical="4dp">-->
+
+                <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:scaleType="center"-->
+                <!--                        android:src="@drawable/ic_about"-->
+                <!--                        android:tint="@color/black"-->
+                <!--                        app:contentPadding="8dp" />-->
+
+                <!--                    <TextView-->
+                <!--                        style="@style/TextBodyMain"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:layout_marginHorizontal="8dp"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:text="Restore / Import data"-->
+                <!--                        android:textColor="@color/black" />-->
+
+                <!--                    <ImageView-->
+                <!--                        style="@style/Icon24dp"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:contentDescription="@string/next"-->
+                <!--                        android:padding="3dp"-->
+                <!--                        android:scaleType="centerCrop"-->
+                <!--                        android:src="@drawable/ic_next_arrow"-->
+                <!--                        app:tint="@color/text_detail_alt" />-->
+
+                <!--                </LinearLayout> -->
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:background="?attr/selectableItemBackground"-->
+                <!--                    android:clickable="true"-->
+                <!--                    android:orientation="horizontal"-->
+                <!--                    android:paddingHorizontal="16dp"-->
+                <!--                    android:paddingVertical="4dp">-->
+
+                <!--                    <com.google.android.material.imageview.ShapeableImageView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:scaleType="center"-->
+                <!--                        android:src="@drawable/ic_about"-->
+                <!--                        android:tint="@color/black"-->
+                <!--                        app:contentPadding="8dp" />-->
+
+                <!--                    <TextView-->
+                <!--                        style="@style/TextBodyMain"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:layout_marginHorizontal="8dp"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:text="Ekspor data"-->
+                <!--                        android:textColor="@color/black" />-->
+
+                <!--                    <ImageView-->
+                <!--                        style="@style/Icon24dp"-->
+                <!--                        android:layout_gravity="center_vertical"-->
+                <!--                        android:contentDescription="@string/next"-->
+                <!--                        android:padding="3dp"-->
+                <!--                        android:scaleType="centerCrop"-->
+                <!--                        android:src="@drawable/ic_next_arrow"-->
+                <!--                        app:tint="@color/text_detail_alt" />-->
+
+                <!--                </LinearLayout>  -->
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            style="@style/TextBodyMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/informasi_amp_dukungan"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
 <!--                <LinearLayout-->
+<!--                    android:id="@+id/set.tentang_aplikasi"-->
 <!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:background="?attr/selectableItemBackground"-->
@@ -308,7 +451,7 @@
 <!--                        android:layout_height="wrap_content"-->
 <!--                        android:layout_gravity="center_vertical"-->
 <!--                        android:scaleType="center"-->
-<!--                        android:src="@drawable/ic_help_support"-->
+<!--                        android:src="@drawable/ic_about"-->
 <!--                        android:tint="@color/black"-->
 <!--                        app:contentPadding="8dp" />-->
 
@@ -319,7 +462,7 @@
 <!--                        android:layout_gravity="center_vertical"-->
 <!--                        android:layout_marginHorizontal="8dp"-->
 <!--                        android:layout_weight="1"-->
-<!--                        android:text="Backup data lokal"-->
+<!--                        android:text="Tentang aplikasi"-->
 <!--                        android:textColor="@color/black" />-->
 
 <!--                    <ImageView-->
@@ -333,185 +476,8 @@
 
 <!--                </LinearLayout>-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="?attr/selectableItemBackground"-->
-<!--                    android:clickable="true"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:paddingHorizontal="16dp"-->
-<!--                    android:paddingVertical="4dp">-->
-
-<!--                    <com.google.android.material.imageview.ShapeableImageView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:scaleType="center"-->
-<!--                        android:src="@drawable/ic_about"-->
-<!--                        android:tint="@color/black"-->
-<!--                        app:contentPadding="8dp" />-->
-
-<!--                    <TextView-->
-<!--                        style="@style/TextBodyMain"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:layout_marginHorizontal="8dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:text="Restore / Import data"-->
-<!--                        android:textColor="@color/black" />-->
-
-<!--                    <ImageView-->
-<!--                        style="@style/Icon24dp"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:contentDescription="@string/next"-->
-<!--                        android:padding="3dp"-->
-<!--                        android:scaleType="centerCrop"-->
-<!--                        android:src="@drawable/ic_next_arrow"-->
-<!--                        app:tint="@color/text_detail_alt" />-->
-
-<!--                </LinearLayout> -->
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="?attr/selectableItemBackground"-->
-<!--                    android:clickable="true"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:paddingHorizontal="16dp"-->
-<!--                    android:paddingVertical="4dp">-->
-
-<!--                    <com.google.android.material.imageview.ShapeableImageView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:scaleType="center"-->
-<!--                        android:src="@drawable/ic_about"-->
-<!--                        android:tint="@color/black"-->
-<!--                        app:contentPadding="8dp" />-->
-
-<!--                    <TextView-->
-<!--                        style="@style/TextBodyMain"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:layout_marginHorizontal="8dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:text="Ekspor data"-->
-<!--                        android:textColor="@color/black" />-->
-
-<!--                    <ImageView-->
-<!--                        style="@style/Icon24dp"-->
-<!--                        android:layout_gravity="center_vertical"-->
-<!--                        android:contentDescription="@string/next"-->
-<!--                        android:padding="3dp"-->
-<!--                        android:scaleType="centerCrop"-->
-<!--                        android:src="@drawable/ic_next_arrow"-->
-<!--                        app:tint="@color/text_detail_alt" />-->
-
-<!--                </LinearLayout>  -->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="4dp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_clear_cache"
-                        android:tint="@color/black"
-                        app:contentPadding="8dp" />
-
-                    <TextView
-                        style="@style/TextBodyMain"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_weight="1"
-                        android:text="Reset data"
-                        android:textColor="@color/black" />
-
-                    <ImageView
-                        style="@style/Icon24dp"
-                        android:layout_gravity="center_vertical"
-                        android:contentDescription="@string/next"
-                        android:padding="3dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_next_arrow"
-                        app:tint="@color/text_detail_alt" />
-
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            style="@style/TextBodyMain"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/informasi_amp_dukungan"
-            android:textColor="@color/black" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="4dp"
-            app:cardCornerRadius="16dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="4dp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_about"
-                        android:tint="@color/black"
-                        app:contentPadding="8dp" />
-
-                    <TextView
-                        style="@style/TextBodyMain"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_weight="1"
-                        android:text="Tentang aplikasi"
-                        android:textColor="@color/black" />
-
-                    <ImageView
-                        style="@style/Icon24dp"
-                        android:layout_gravity="center_vertical"
-                        android:contentDescription="@string/next"
-                        android:padding="3dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_next_arrow"
-                        app:tint="@color/text_detail_alt" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                    android:id="@+id/set.bantuan_dukungan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
@@ -550,81 +516,46 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="4dp">
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/set.versi_aplikasi"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="?attr/selectableItemBackground"-->
+<!--                    android:clickable="true"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:paddingHorizontal="16dp"-->
+<!--                    android:paddingVertical="4dp">-->
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_about"
-                        android:tint="@color/black"
-                        app:contentPadding="8dp" />
+<!--                    <com.google.android.material.imageview.ShapeableImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:scaleType="center"-->
+<!--                        android:src="@drawable/ic_about"-->
+<!--                        android:tint="@color/black"-->
+<!--                        app:contentPadding="8dp" />-->
 
-                    <TextView
-                        style="@style/TextBodyMain"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_weight="1"
-                        android:text="Versi aplikasi"
-                        android:textColor="@color/black" />
+<!--                    <TextView-->
+<!--                        style="@style/TextBodyMain"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:layout_marginHorizontal="8dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Versi aplikasi"-->
+<!--                        android:textColor="@color/black" />-->
 
-                    <ImageView
-                        style="@style/Icon24dp"
-                        android:layout_gravity="center_vertical"
-                        android:contentDescription="@string/next"
-                        android:padding="3dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_next_arrow"
-                        app:tint="@color/text_detail_alt" />
+<!--                    <ImageView-->
+<!--                        style="@style/Icon24dp"-->
+<!--                        android:layout_gravity="center_vertical"-->
+<!--                        android:contentDescription="@string/next"-->
+<!--                        android:padding="3dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/ic_next_arrow"-->
+<!--                        app:tint="@color/text_detail_alt" />-->
 
-                </LinearLayout>  <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="4dp">
+<!--                </LinearLayout>-->
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_clear_cache"
-                        android:tint="@color/black"
-                        app:contentPadding="8dp" />
-
-                    <TextView
-                        style="@style/TextBodyMain"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="8dp"
-                        android:layout_weight="1"
-                        android:text="Hapus cache"
-                        android:textColor="@color/black" />
-
-                    <ImageView
-                        style="@style/Icon24dp"
-                        android:layout_gravity="center_vertical"
-                        android:contentDescription="@string/next"
-                        android:padding="3dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_next_arrow"
-                        app:tint="@color/text_detail_alt" />
-
-                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

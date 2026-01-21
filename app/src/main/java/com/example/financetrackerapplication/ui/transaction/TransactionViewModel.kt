@@ -93,6 +93,6 @@ class TransactionViewModel @Inject constructor(
         repoAset.getAset().first()
 
     suspend fun getAllCategory(): List<CategoryEntity> =
-        repoCategory.getCategory().first()
+        repoCategory.getAllCategory().first()
 
 }
