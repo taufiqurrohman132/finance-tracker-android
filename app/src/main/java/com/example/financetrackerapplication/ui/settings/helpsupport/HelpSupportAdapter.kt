@@ -8,16 +8,20 @@ import com.example.financetrackerapplication.databinding.ItemCategoryBinding
 import com.example.financetrackerapplication.utils.BaseDiffCallback
 
 class HelpSupportAdapter(
-    private val onClickItem: (String) -> Unit,
-) : ListAdapter<String, HelpSupportAdapter.ItemViewHolder>(BaseDiffCallback { it }) {
+    private val onClickItem: (Int) -> Unit,
+) : ListAdapter<Int, HelpSupportAdapter.ItemViewHolder>(BaseDiffCallback { it }) {
     inner class ItemViewHolder(
         private val binding: ItemCategoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(titleName: String) {
-            binding.tvCategoryNameItem.text = titleName
+        fun bind(titleNameResId: Int) {
+            val content= itemView.resources.getString(titleNameResId)
+            val part = content.split(";", limit = 2)
+            val title = part.first()
+
+            binding.tvCategoryNameItem.text = title
             itemView.setOnClickListener {
-                onClickItem(titleName)
+                onClickItem(titleNameResId)
             }
         }
     }
@@ -37,6 +41,8 @@ class HelpSupportAdapter(
         val item = getItem(position)
         holder.bind(item)
     }
+
+
 
     companion object {
         private val TAG = HelpSupportAdapter::class.java.simpleName

@@ -23,6 +23,7 @@ import com.example.financetrackerapplication.databinding.SheetAuthLayoutBinding
 import com.example.financetrackerapplication.domain.model.UserStatus
 import com.example.financetrackerapplication.ui.auth.SignInLinkEmailActivity
 import com.example.financetrackerapplication.ui.settings.category.list.CategoryActivity
+import com.example.financetrackerapplication.ui.settings.helpsupport.HelpSupportActivity
 import com.example.financetrackerapplication.utils.Extention.setupStyle
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -88,6 +89,10 @@ class SettingsFragment : Fragment() {
         binding.apply {
             setKelolaKategori.setOnClickListener {
                 val intent = Intent(requireActivity(), CategoryActivity::class.java)
+                startActivity(intent)
+            }
+            setBantuanDukungan.setOnClickListener {
+                val intent = Intent(requireActivity(), HelpSupportActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -160,6 +165,7 @@ class SettingsFragment : Fragment() {
                     UserStatus.LoggedIn -> {
                         Log.d("SettingsActivity", "UI update: Logged-in")
                     }
+                    else ->{}
                 }
             }
         }

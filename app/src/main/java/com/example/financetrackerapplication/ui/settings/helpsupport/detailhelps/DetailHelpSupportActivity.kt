@@ -25,6 +25,11 @@ class DetailHelpSupportActivity : AppCompatActivity() {
         binding = ActivityDetailHelpSupportBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val textResId = intent.getIntExtra(EXTRA_HELP_RES_ID, -1)
+        binding.tv.text = resources.getString(textResId)
+    }
 
+    companion object{
+        const val EXTRA_HELP_RES_ID= "help_res_id"
     }
 }
